@@ -23,6 +23,150 @@
 	],
 	"Wallpapers": [
 		{
+			"name": "Echoes Of",
+			"author": "Zoltan Tasi",
+			"url": "https://i.imgur.com/OVKso33.png",
+			"thumbnail": "https://i.imgur.com/OVKso33l.jpg",
+			"downloadable": true,
+			"copyright": "CC0",
+			"collections": "abstract"
+		},
+		{
+			"name": "Gradient #4B",
+			"author": "Luke Chesser",
+			"url": "https://i.imgur.com/iFrJbfE.png",
+			"thumbnail": "https://i.imgur.com/iFrJbfEl.jpg",
+			"downloadable": true,
+			"copyright": "CC0",
+			"collections": "abstract"
+		},
+		{
+			"name": "Orthogonal",
+			"author": "Etienne Beauregard",
+			"url": "https://i.imgur.com/cFyjq7V.png",
+			"thumbnail": "https://i.imgur.com/cFyjq7Vl.jpg",
+			"downloadable": true,
+			"copyright": "CC0",
+			"collections": "architecture"
+		},
+		{
+			"name": "Filters Through",
+			"author": "Martin Adams",
+			"url": "https://i.imgur.com/r7MFJxM.png",
+			"thumbnail": "https://i.imgur.com/r7MFJxMl.jpg",
+			"downloadable": true,
+			"copyright": "CC0",
+			"collections": "abstract"
+		},
+		{
+			"name": "Gehry",
+			"author": "Sascha Yeryomin",
+			"url": "https://i.imgur.com/jf5NX7F.png",
+			"thumbnail": "https://i.imgur.com/jf5NX7Fl.jpg",
+			"downloadable": true,
+			"copyright": "CC0",
+			"collections": "architecture"
+		},
+		{
+			"name": "The Benevolent Corp.",
+			"author": "Alex Iby",
+			"url": "https://i.imgur.com/SrgJtef.png",
+			"thumbnail": "https://i.imgur.com/SrgJtefl.jpg",
+			"downloadable": true,
+			"copyright": "CC0",
+			"collections": "architecture"
+		},
+		{
+			"name": "Bokehd",
+			"author": "Kristaps Solims",
+			"url": "https://i.imgur.com/HzU9KSK.png",
+			"thumbnail": "https://i.imgur.com/HzU9KSKl.jpg",
+			"downloadable": true,
+			"copyright": "CC0",
+			"collections": "abstract"
+		},
+		{
+			"name": "Confluence",
+			"author": "Ash Edmonds",
+			"url": "https://i.imgur.com/HWwYY1t.png",
+			"thumbnail": "https://i.imgur.com/HWwYY1tl.jpg",
+			"downloadable": true,
+			"copyright": "CC0",
+			"collections": "abstract"
+		},
+		{
+			"name": "What Lies Beyond",
+			"author": "Cheng Feng",
+			"url": "https://i.imgur.com/BjdQkxh.png",
+			"thumbnail": "https://i.imgur.com/BjdQkxhl.jpg",
+			"downloadable": true,
+			"copyright": "CC0",
+			"collections": "landscape"
+		},
+		{
+			"name": "Stairstep",
+			"author": "Dawid Sokolowski",
+			"url": "https://i.imgur.com/VXzW2tV.png",
+			"thumbnail": "https://i.imgur.com/VXzW2tVl.jpg",
+			"downloadable": true,
+			"copyright": "CC0",
+			"collections": "abstract"
+		},
+		{
+			"name": "Bluesmoke",
+			"author": "Albert Bleeker",
+			"url": "https://i.imgur.com/mrltonO.png",
+			"thumbnail": "https://i.imgur.com/mrltonOl.jpg",
+			"downloadable": true,
+			"copyright": "CC0",
+			"collections": "abstract"
+		},
+		{
+			"name": "Tensegrity",
+			"author": "Luca Bravo",
+			"url": "https://i.imgur.com/N69Gk81.png",
+			"thumbnail": "https://i.imgur.com/N69Gk81l.jpg",
+			"downloadable": true,
+			"copyright": "CC0",
+			"collections": "architecture"
+		},
+		{
+			"name": "Vertical Integration",
+			"author": "Pawl Czerwinski",
+			"url": "https://i.imgur.com/rWVitPA.png",
+			"thumbnail": "https://i.imgur.com/rWVitPAl.jpg",
+			"downloadable": true,
+			"copyright": "CC0",
+			"collections": "abstract"
+		},
+		{
+			"name": "T",
+			"author": "Joshua Rivera",
+			"url": "https://i.imgur.com/84O8dFa.png",
+			"thumbnail": "https://i.imgur.com/84O8dFal.jpg",
+			"downloadable": true,
+			"copyright": "CC0",
+			"collections": "abstract"
+		},
+		{
+			"name": "Ripples",
+			"author": "Julian Bock",
+			"url": "https://i.imgur.com/T7PwRnh.png",
+			"thumbnail": "https://i.imgur.com/T7PwRnhl.jpg",
+			"downloadable": true,
+			"copyright": "CC0",
+			"collections": "abstract"
+		},
+		{
+			"name": "Light Speed",
+			"author": "Adrien Olichon",
+			"url": "https://i.imgur.com/cprtb1M.png",
+			"thumbnail": "https://i.imgur.com/cprtb1Ml.jpg",
+			"downloadable": true,
+			"copyright": "CC0",
+			"collections": "abstract"
+		},
+		{
 			"name": "Dunes at Dusk",
 			"author": "Jeremy Bishop",
 			"url": "https://i.imgur.com/EEBaeFE.png",
@@ -40,186 +184,7 @@
 			"copyright": "CC0",
 			"collections": "landscape"
 		},
-		{
-			"name": "Disappearing Coastline",
-			"author": "Chris Coe",
-			"url": "https://i.imgur.com/hq4aENh.png",
-			"thumbnail": "https://i.imgur.com/hq4aENhl.jpg",
-			"downloadable": true,
-			"copyright": "CC0",
-			"collections": "minimal,landscape"
-		},
-		{
-			"name": "Dark Tides",
-			"author": "Mike Yukhtenko",
-			"url": "https://i.imgur.com/XSIIUAQ.png",
-			"thumbnail": "https://i.imgur.com/XSIIUAQl.jpg",
-			"downloadable": true,
-			"copyright": "CC0",
-			"collections": "landscape"
-		},
-		{
-			"name": "Rogue Wave",
-			"author": "Jack B",
-			"url": "https://i.imgur.com/YVHtCTT.png",
-			"thumbnail": "https://i.imgur.com/YVHtCTTl.jpg",
-			"downloadable": true,
-			"copyright": "CC0",
-			"collections": "landscape"
-		},
-		{
-			"name": "Call for Help",
-			"author": "Ian Espinosa",
-			"url": "https://i.imgur.com/g11GnrL.png",
-			"thumbnail": "https://i.imgur.com/g11GnrLl.jpg",
-			"downloadable": true,
-			"copyright": "CC0",
-			"collections": "landscape"
-		},
-		{
-			"name": "Condolences",
-			"author": "Annie Spratt",
-			"url": "https://i.imgur.com/peX5qVO.png",
-			"thumbnail": "https://i.imgur.com/peX5qVOl.jpg",
-			"downloadable": true,
-			"copyright": "CC0",
-			"collections": "minimal"
-		},
-		{
-			"name": "Ferns",
-			"author": "Andras Vas",
-			"url": "https://i.imgur.com/wXvAISN.png",
-			"thumbnail": "https://i.imgur.com/wXvAISNl.jpg",
-			"downloadable": true,
-			"copyright": "CC0",
-			"collections": "minimal"
-		},
-		{
-			"name": "Blades of Grass",
-			"author": "Claudio Testa",
-			"url": "https://i.imgur.com/0QOoq8R.png",
-			"thumbnail": "https://i.imgur.com/0QOoq8Rl.jpg",
-			"downloadable": true,
-			"copyright": "CC0",
-			"collections": "minimal"
-		},
-		{
-			"name": "Lush",
-			"author": "Ian Espinosa",
-			"url": "https://i.imgur.com/AumRAb4.png",
-			"thumbnail": "https://i.imgur.com/AumRAb4l.jpg",
-			"downloadable": true,
-			"copyright": "CC0",
-			"collections": "minimal"
-		},
-		{
-			"name": "Fronds",
-			"author": "Vishal Banik",
-			"url": "https://i.imgur.com/MYZoEdu.png",
-			"thumbnail": "https://i.imgur.com/MYZoEdul.jpg",
-			"downloadable": true,
-			"copyright": "CC0",
-			"collections": "minimal"
-		},
-		{
-			"name": "Undergrowth",
-			"author": "Annie Spratt",
-			"url": "https://i.imgur.com/3ZHMdRi.png",
-			"thumbnail": "https://i.imgur.com/3ZHMdRil.jpg",
-			"downloadable": true,
-			"copyright": "CC0",
-			"collections": "minimal"
-		},
-		{
-			"name": "Carbon",
-			"author": "David Jorre",
-			"url": "https://i.imgur.com/hkN3ioi.png",
-			"thumbnail": "https://i.imgur.com/hkN3ioil.jpg",
-			"downloadable": true,
-			"copyright": "CC0",
-			"collections": "abstract,minimal"
-		},
-		{
-			"name": "Charred Remains",
-			"author": "Brian Patrick Tagalog",
-			"url": "https://i.imgur.com/SbyCpR2.png",
-			"thumbnail": "https://i.imgur.com/SbyCpR2l.jpg",
-			"downloadable": true,
-			"copyright": "CC0",
-			"collections": "abstract,minimal"
-		},
-		{
-			"name": "Make a Wish",
-			"author": "Wil Stewart",
-			"url": "https://i.imgur.com/VeuzvUA.png",
-			"thumbnail": "https://i.imgur.com/VeuzvUAl.jpg",
-			"downloadable": true,
-			"copyright": "CC0",
-			"collections": "landscape"
-		},
-		{
-			"name": "Resonance",
-			"author": "Luke Stackpoole",
-			"url": "https://i.imgur.com/94SjlPi.png",
-			"thumbnail": "https://i.imgur.com/94SjlPil.jpg",
-			"downloadable": true,
-			"copyright": "CC0",
-			"collections": "landscape"
-		},
-		{
-			"name": "At Water's Edge",
-			"author": "Yoal Desurmont",
-			"url": "https://i.imgur.com/Qkng6Dm.png",
-			"thumbnail": "https://i.imgur.com/Qkng6Dml.jpg",
-			"downloadable": true,
-			"copyright": "CC0",
-			"collections": "landscape"
-		},
-		{
-			"name": "Elevation",
-			"author": "Manuel Will",
-			"url": "https://i.imgur.com/yQMGOAb.png",
-			"thumbnail": "https://i.imgur.com/yQMGOAbl.jpg",
-			"downloadable": true,
-			"copyright": "CC0",
-			"collections": "landscape"
-		},
-		{
-			"name": "Water Fountain",
-			"author": "Quin Stevenson",
-			"url": "https://i.imgur.com/Bz5u4HA.png",
-			"thumbnail": "https://i.imgur.com/Bz5u4HAl.jpg",
-			"downloadable": true,
-			"copyright": "CC0",
-			"collections": "minimal"
-		},
-		{
-			"name": "Rock Show",
-			"author": "Raphael Schaller",
-			"url": "https://i.imgur.com/DMi6ffB.png",
-			"thumbnail": "https://i.imgur.com/DMi6ffBl.jpg",
-			"downloadable": true,
-			"copyright": "CC0",
-			"collections": "minimal"
-		},
-		{
-			"name": "Motes",
-			"author": "Samuel Zeller",
-			"url": "https://i.imgur.com/kOIWSNJ.png",
-			"thumbnail": "https://i.imgur.com/kOIWSNJl.jpg",
-			"downloadable": true,
-			"copyright": "CC0",
-			"collections": "landscape"
-		},
-		{
-			"name": "Birds on a Wire",
-			"author": "Adrian Kirkegaard",
-			"url": "https://i.imgur.com/M3dlKS4.png",
-			"thumbnail": "https://i.imgur.com/M3dlKS4l.jpg",
-			"downloadable": true,
-			"copyright": "CC0",
-			"collections": "landscape"
-		},
+
 		{
 			"name": "Interleaved",
 			"author": "Ron Whitaker",
@@ -238,122 +203,5 @@
 			"copyright": "CC0",
 			"collections": "abstract,architecture"
 		},
-		{
-			"name": "Convergence",
-			"author": "Josh Rose",
-			"url": "https://i.imgur.com/uqBhWYH.png",
-			"thumbnail": "https://i.imgur.com/uqBhWYHl.jpg",
-			"downloadable": true,
-			"copyright": "CC0",
-			"collections": "abstract,architecture"
-		},
-		{
-			"name": "Baffles",
-			"author": "Elena Saharova",
-			"url": "https://i.imgur.com/l2L6u1E.png",
-			"thumbnail": "https://i.imgur.com/l2L6u1El.jpg",
-			"downloadable": true,
-			"copyright": "CC0",
-			"collections": "architecture,minimal"
-		},
-		{
-			"name": "Polygonal",
-			"author": "Carrie Yang",
-			"url": "https://i.imgur.com/pdV0KQ1.png",
-			"thumbnail": "https://i.imgur.com/pdV0KQ1l.jpg",
-			"downloadable": true,
-			"copyright": "CC0",
-			"collections": "abstract,architecture"
-		},
-		{
-			"name": "S-Curve",
-			"author": "Tobias van Schneider",
-			"url": "https://i.imgur.com/Y1A9GTi.png",
-			"thumbnail": "https://i.imgur.com/Y1A9GTil.jpg",
-			"downloadable": true,
-			"copyright": "CC0",
-			"collections": "abstract,architecture"
-		},
-		{
-			"name": "Galaxy Swirls",
-			"author": "Pawel Czerwinski",
-			"url": "https://i.imgur.com/KrxLGxy.png",
-			"thumbnail": "https://i.imgur.com/KrxLGxyl.jpg",
-			"downloadable": true,
-			"copyright": "CC0",
-			"collections": "abstract"
-		},
-		{
-			"name": "Down the Drain",
-			"author": "Joel Filipe",
-			"url": "https://i.imgur.com/sMOQWdx.png",
-			"thumbnail": "https://i.imgur.com/sMOQWdxl.jpg",
-			"downloadable": true,
-			"copyright": "CC0",
-			"collections": "abstract"
-		},
-		{
-			"name": "Slot Canyon",
-			"author": "Meric Dagli",
-			"url": "https://i.imgur.com/hB90xvB.png",
-			"thumbnail": "https://i.imgur.com/hB90xvBl.jpg",
-			"downloadable": true,
-			"copyright": "CC0",
-			"collections": "landscape"
-		},
-		{
-			"name": "Crescent Moonrise",
-			"author": "Val Vesa",
-			"url": "https://i.imgur.com/nfoPdRd.png",
-			"thumbnail": "https://i.imgur.com/nfoPdRdl.jpg",
-			"downloadable": true,
-			"copyright": "CC0",
-			"collections": "landscape"
-		},
-		{
-			"name": "Eye of the Storm",
-			"author": "Breno Machado",
-			"url": "https://i.imgur.com/BliGpTl.png",
-			"thumbnail": "https://i.imgur.com/BliGpTll.jpg",
-			"downloadable": true,
-			"copyright": "CC0",
-			"collections": "landscape"
-		},
-		{
-			"name": "Thundercloud",
-			"author": "Bryan Minear",
-			"url": "https://i.imgur.com/mK8JE0t.png",
-			"thumbnail": "https://i.imgur.com/mK8JE0tl.jpg",
-			"downloadable": true,
-			"copyright": "CC0",
-			"collections": "landscape"
-		},
-		{
-			"name": "Departmental Security",
-			"author": "Bartosz Wanot",
-			"url": "https://i.imgur.com/wRN7lDd.png",
-			"thumbnail": "https://i.imgur.com/wRN7lDdl.jpg",
-			"downloadable": true,
-			"copyright": "CC0",
-			"collections": "architecture"
-		},
-		{
-			"name": "Hello",
-			"author": "Behzad Ghaffarian",
-			"url": "https://i.imgur.com/ck7XgrA.png",
-			"thumbnail": "https://i.imgur.com/ck7XgrAl.jpg",
-			"downloadable": true,
-			"copyright": "CC0",
-			"collections": "minimal"
-		},
-		{
-			"name": "Neon Serif",
-			"author": "Zuzanna Adamcyzk",
-			"url": "https://i.imgur.com/3edF6DE.png",
-			"thumbnail": "https://i.imgur.com/3edF6DEl.jpg",
-			"downloadable": true,
-			"copyright": "CC0",
-			"collections": "minimal"
-		}
 	]
 }
