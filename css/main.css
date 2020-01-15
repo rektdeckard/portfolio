@@ -10962,6 +10962,14 @@ p.is-caption {
   background-size: cover;
 }
 
+.phosphor h2 a {
+  color: black;
+}
+
+.phosphor h2 a:hover {
+  color: #F92672;;
+}
+
 .cockpit {
   color: white;
   background-color: black;
@@ -10973,12 +10981,14 @@ p.is-caption {
 }
 
 .huebert {
-  background-color: #1E213F;
+  /* background-color: #1E213F; */
+  background-color: #080808;
   color: white;
 }
 
 .huebert a {
-  color: #36DDAC;
+  /* color: #36DDAC; */
+  color: #EE8822;
 }
 
 .huebert h2 a {
@@ -10986,7 +10996,8 @@ p.is-caption {
 }
 
 .huebert h2 a:hover {
-  color: #36DDAC;
+  /* color: #36DDAC; */
+  color: #EE8822;
 }
 
 element.style {
