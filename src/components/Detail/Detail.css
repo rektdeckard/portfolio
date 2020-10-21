@@ -1,0 +1,56 @@
+.detail {
+  position: absolute;
+  top: 0;
+  left: 0;
+  width: 100vw;
+  height: 100vh;
+  display: flex;
+  flex-direction: row;
+}
+
+.detail h1 {
+  font-size: 48px;
+}
+
+.large-text {
+  font-size: 24px;
+}
+
+.content-container {
+  flex: 1;
+}
+
+.link {
+  display: flex;
+  align-items: center;
+  color: inherit;
+  text-decoration: none;
+}
+
+a.link:hover {
+  text-decoration: underline;
+}
+
+.link svg {
+ margin-left: 8px;
+}
+
+.card-content-container {
+  flex: 1;
+  padding: 64px;
+  height: 100%;
+  box-sizing: border-box;
+  overflow-y: auto;
+}
+
+.card-content {
+  height: 100%;
+  display: flex;
+  flex-direction: column;
+  align-items: flex-start;
+  justify-content: flex-start;
+}
+
+.title-container {
+  margin-top: 128px;
+}

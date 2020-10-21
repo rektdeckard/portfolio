@@ -1,0 +1,48 @@
+.card {
+  position: absolute;
+  bottom: -50%;
+  left: -50%;
+  width: 280px;
+  height: 280px;
+  padding: 20px;
+  border: 2px solid black;
+  background-color: white;
+  cursor: grab;
+  display: flex;
+  flex-direction: column;
+  align-items: flex-start;
+  border-radius: 4px;
+}
+
+.card a {
+  color: inherit;
+  text-decoration: none;
+  -webkit-user-drag: none;
+  -khtml-user-drag: none;
+  -moz-user-drag: none;
+  -o-user-drag: none;
+}
+
+.card a:hover {
+  text-decoration: underline;
+}
+
+.card > h2,
+p {
+  margin-bottom: 0;
+}
+
+/* button.icon-button {
+  background: none;
+  border: none;
+  color: inherit;
+  padding: 0;
+  cursor: pointer;
+} */
+
+/* @media screen and (max-width: 720px) {
+  .card {
+    width: 240px;
+    height: 240px;
+  }
+} */

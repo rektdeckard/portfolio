@@ -1,24 +1,35 @@
-import React from 'react';
-import './App.css';
+import React, { useRef } from "react";
+import { BrowserRouter as Router, Route } from "react-router-dom";
+import { AnimateSharedLayout } from "framer-motion";
 
-function App() {
+import Header from "../Header/Header";
+import Card from "../Card/Card";
+import Detail from "../Detail/Detail";
+import Copyright from "../Copyright/Copyright";
+import { projects } from "../../data";
+import "./App.css";
+
+const App: React.FC<{}> = () => {
+  const ref = useRef<HTMLDivElement>(null);
+
   return (
-    <div className="App">
-      <header className="App-header">
-        <p>
-          Edit <code>src/App.tsx</code> and save to reload.
-        </p>
-        <a
-          className="App-link"
-          href="https://reactjs.org"
-          target="_blank"
-          rel="noopener noreferrer"
-        >
-          Learn React
-        </a>
-      </header>
+    <div className="container" ref={ref}>
+      <AnimateSharedLayout type="crossfade">
+        <Router>
+          <Route exact path={["/"]}>
+            <Header />
+            {projects.map((project) => (
+              <Card key={project.id} {...project} ref={ref} />
+            ))}
+            <Copyright />
+          </Route>
+          <Route path="/:id">
+            <Detail />
+          </Route>
+        </Router>
+      </AnimateSharedLayout>
     </div>
   );
-}
+};
 
 export default App;
