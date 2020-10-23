@@ -30,9 +30,27 @@ body {
   overflow: hidden;
 }
 
+h1 {
+  font-size: 48px;
+}
+
+figure {
+  margin: 0;
+}
+
+figcaption {
+  font-size: 12px;
+  text-align: end;
+}
+
 ::selection {
   color: white;
   background-color: black;
+}
+
+.inverse::selection {
+  color: black;
+  background-color: #b1ffec;
 }
 
 .container {
