@@ -22,14 +22,14 @@ const Card = forwardRef<HTMLDivElement, Project>(
     },
     ref
   ) => {
-    const variants: Variants = useMemo(
-      () => ({
-        start: { bottom: "-50%", left: "50%" },
+    const variants: Variants = useMemo(() => {
+      return {
+        start: { bottom: "-50%", left: "50%", zIndex: 1 },
         end: {
           bottom: `${Math.floor(Math.random() * 40)}%`,
           left: `${Math.floor(Math.random() * 80)}%`,
-          transform: `rotate(${(Math.random() - 0.5) * 30}deg)`,
-          transition: { duration: 0.5, delay: Math.random() / 2 },
+          rotate: (Math.random() - 0.5) * 30,
+          transition: { duration: 0.4, delay: Math.random() / 3 },
         },
         hover: {
           color,
@@ -44,9 +44,8 @@ const Card = forwardRef<HTMLDivElement, Project>(
           zIndex: 2,
           transition: { duration: 0.05 },
         },
-      }),
-      [color, accent]
-    );
+      };
+    }, [color, accent]);
 
     return (
       <motion.div
