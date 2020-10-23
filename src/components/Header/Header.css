@@ -1,11 +1,11 @@
 header {
-  max-width: 722px;
-  margin: 160px 0 0 160px;
+  max-width: 900px;
+  margin: 160px;
 }
 
 .highlight {
-  background-color: black;
   color: white;
+  background-color: black;
 }
 
 .links {
