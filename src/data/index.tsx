@@ -63,14 +63,7 @@ export const projects: ReadonlyArray<Project> = [
           eget mauris. Id nibh tortor id aliquet lectus. Et malesuada fames ac
           turpis.
         </p>
-        <Prism
-          language="typescript"
-          style={a11yDark}
-          customStyle={{ borderRadius: 4 }}
-          // showLineNumbers
-          // wrapLines
-          wrapLongLines
-        >
+        <Snippet>
           {`\
 /**
  * Dijkstra's Algorithm implementation.
@@ -117,7 +110,7 @@ function shortestPath(source, target) {
   }
 };
 `}
-        </Prism>
+        </Snippet>
         <p>
           Venenatis tellus in metus vulputate. Quis hendrerit dolor magna eget
           est lorem. Sed sed risus pretium quam. Amet venenatis urna cursus eget
@@ -247,6 +240,7 @@ function shortestPath(source, target) {
           laziness, as are all my programming endeavors, and it is my hope that
           it allows you to be just as lazy as I am.
         </p>
+        <SliderCard />
       </>
     ),
   },
@@ -312,12 +306,7 @@ function shortestPath(source, target) {
         </p>
         <p></p>
         {/* <img src={phosphorHero} width="100%" /> */}
-        <Prism
-          language="typescript"
-          style={a11yDark}
-          customStyle={{ borderRadius: 4 }}
-          wrapLongLines
-        >
+        <Snippet caption="Using React Context to apply default icon styles">
           {`\
 import React from "react";
 import ReactDOM from "react-dom";
@@ -344,7 +333,7 @@ const App = () => {
 
 ReactDOM.render(<App />, document.getElementById("root"));
 `}
-        </Prism>
+        </Snippet>
       </>
     ),
   },
