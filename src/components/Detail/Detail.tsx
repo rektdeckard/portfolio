@@ -5,7 +5,6 @@ import { ArrowBendUpLeft, ArrowUpRight } from "phosphor-react";
 
 import { projects } from "../../data";
 import "./Detail.css";
-import Copyright from "../Copyright/Copyright";
 
 const variants: Variants = {
   start: { opacity: 0 },
@@ -19,13 +18,14 @@ interface DetailProps {}
 const Detail: React.FC<DetailProps> = () => {
   const { id } = useParams<{ id: string }>();
   const {
-    title = "Sorry, that doesn't exist!",
-    subtitle,
+    title,
+    description = "Sorry, that doesn't exist!",
     url,
     year,
     color = "#000000",
     accent = "#FFD171",
     content,
+    theme,
   } = projects.find((p) => p.id === id.toLowerCase()) || {};
 
   return (
@@ -51,34 +51,32 @@ const Detail: React.FC<DetailProps> = () => {
           />
           <div className="detail">
             <div
-              className="card-content-container open"
+              className="panel"
               style={{ color, backgroundColor: accent, flex: 1 }}
             >
               <motion.div
-                className="card-content"
-                layoutId={`card-container-${id}`}
+                className="panel-content"
+                layoutId={`panel-content-${id}`}
               >
-                <Link to="/" style={{ color: "inherit" }}>
+                <Link to="/" style={{ color: "inherit" }} title="Go back">
                   <ArrowBendUpLeft size={64} />
                 </Link>
-                <motion.div
-                  className="title-container"
-                  layoutId={`title-container-${id}`}
-                >
-                  <h1>{title}</h1>
+                <motion.div className="title" layoutId={`title-${id}`}>
+                  <h1 className={theme}>{description}</h1>
                 </motion.div>
-                <motion.div className="content-container" animate>
-                  <a href={url} className="large-text link">
-                    {subtitle} <ArrowUpRight size={32} />
-                  </a>
-                </motion.div>
+                {title && (
+                  <motion.div className="content-container" animate>
+                    <a href={url} className={`large-text link ${theme}`}>
+                      {title} <ArrowUpRight size={32} />
+                    </a>
+                  </motion.div>
+                )}
                 <motion.div animate>
-                  <span className="large-text">{year}</span>
+                  <span className={`large-text ${theme}`}>{year}</span>
                 </motion.div>
               </motion.div>
             </div>
-            <div className="card-content-container">
-              <h1>{subtitle}</h1>
+            <div className="panel">
               {content}
             </div>
           </div>
