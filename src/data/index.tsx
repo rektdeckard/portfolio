@@ -256,26 +256,154 @@ function shortestPath(source, target) {
     Icon: NewspaperClipping,
     content: (
       <>
+        <h2>The brief</h2>
         <p>
-          90's stumptown disrupt, gluten-free blog fingerstache polaroid hashtag
-          wolf master cleanse. 3 wolf moon readymade kombucha authentic freegan
-          letterpress succulents artisan ugh pabst banh mi truffaut poke. Put a
-          bird on it bicycle rights selvage authentic bespoke pour-over,
-          heirloom four loko pinterest. Helvetica disrupt glossier, franzen
-          locavore flannel you probably haven't heard of them sriracha lo-fi
-          polaroid kickstarter.
+          My partner Helena and I both have a soft spot for the early days of
+          the internet, when sites were unique, experimental, performant. We
+          wanted to build her a portfolio that was all of these things — but
+          with modern web conventions at the core: responsive design, lazy
+          loading, interactions that felt dynamic and tactile.
         </p>
         <p>
-          Blue bottle slow-carb health goth vape lomo whatever waistcoat green
-          juice chillwave disrupt direct trade la croix fingerstache. Paleo
-          tacos ugh, mixtape beard pork belly skateboard pabst actually. Banh mi
-          pork belly man bun dreamcatcher truffaut. Occupy intelligentsia squid,
-          scenester meditation subway tile jianbing copper mug edison bulb pork
-          belly biodiesel semiotics coloring book. Typewriter cloud bread
-          crucifix aesthetic craft beer chillwave. Wolf austin small batch
-          butcher, literally vexillologist kogi four dollar toast pitchfork
-          blog. Bicycle rights raclette iPhone vape, flexitarian pok pok blog
-          franzen humblebrag lumbersexual.
+          The design was inspired by newspapers, with dense columns of content
+          and explicit hierarchies of information. We mixed in references to
+          broadcast TV and other analog media to make an experience that felt
+          simultaneously nostalgic and modern.
+        </p>
+        <p>
+          I knew that using a popular framework like React or Vue.js went
+          against the vibe for the site. It had to load fast, in mere kilobytes,
+          and degrade gracefully in cases of poor bandwidth or lack of
+          JavaScript — none of which are possible with typical SPAs today. This
+          would be a regular old HTML/CSS/JS site. But since it's not 2003 any
+          more, it needed to have some panache, too.
+        </p>
+        <h2>Laying the foundation</h2>
+        <p></p>
+        <h2>Making some noise</h2>
+        <figure>
+          <StaticField />
+          <figcaption>TV static effect used in the portfolio site</figcaption>
+        </figure>
+        <p>
+          I wrote a white noise generator that spit TV-static-like noise onto a{" "}
+          <code>&lt;canvas&gt;</code> element, to great nostalgic effect. The
+          first, naïve pass used the Canvas API methods <code>fillRect()</code>{" "}
+          and <code>clearRect()</code>, looping through the canvas coordinates
+          and painting 1x1 'pixels' randomly in black or white. Since painting
+          on a canvas is additive, each frame had to clear the canvas before
+          painting into it again. It was terribly slow.
+        </p>
+        <p>
+          With some research into optimal data structures in JavaScript, and
+          some performance testing of my own, I came up with a solution that
+          didn't require clearing the canvas, and only needed one paint call per
+          frame (instead of one per pixel!). Using a <code>Uint32Array</code> as
+          a shared buffer for both the white noise values and the{" "}
+          <code>ImageData</code> itself, we would fill the array with 32-bit
+          integers representing transparent black (all <code>0</code> bits) or
+          solid white (all <code>1</code> bits) at random, then paint this{" "}
+          <code>ImageData</code> in one go with <code>putImageData()</code>. The
+          canvas itself was given a black background that peeked through the
+          transparent pixels.
+        </p>
+        <Snippet caption="Generating white noise performantly">
+          {`\
+// static.js
+const canvas = document.getElementById("static");
+
+if (canvas) {
+  const context = canvas.getContext("2d");
+  const { offsetHeight, offsetWidth } = canvas;
+  canvas.width = offsetWidth;
+  canvas.height = offsetHeight;
+
+  const idata = context.createImageData(offsetWidth, offsetHeight);
+  const buffer = new Uint32Array(idata.data.buffer);
+
+  function noise(context) {
+    let len = buffer.length - 1;
+    while (len--) buffer[len] = Math.random() < 0.5 ? 0 : -1 >> 0;
+    context.putImageData(idata, 0, 0);
+  };
+
+  (function loop() {
+      noise(context);
+      requestAnimationFrame(loop);
+  })();
+};
+`}
+        </Snippet>
+        <p>
+          There are certainly less CPU-intensive ways to create the visual
+          effect of TV static — precomputing more noise than needed and chosing
+          a random index into the noise to start painting from each frame, or
+          even just finding a GIF somewhere. But the fact that this
+          implementation is truly (pseudo)random each frame and still manages to
+          maintain 60 FPS is pretty cool, in my opinion.
+        </p>
+        <h2>Arguing semantics</h2>
+        <p>
+          An unspoken requirement of the portfolio site was that is should be
+          simple enough for Helena (a designer by trade) to update herself with
+          new content and projects. This meant relying heavily on HTML5 Semantic
+          Elements to make the code extremely legible, even for non-coders. No{" "}
+          <code>&lt;div&gt;</code> soup for you!
+        </p>
+        <Snippet
+          language="html"
+          caption="Semantic HTML can improve readability and accessibility"
+        >
+          {`\
+<!-- index.html -->
+<!DOCTYPE html>
+<html lang="en">
+  <head>...</head>
+  <body>
+    <header class="is-centered">
+      <h1>Hello, world!...</h1>
+      ...
+      <nav>...</nav>
+    </header>
+    <main>
+      <section id="articles">
+        <h2>Articles</h2>
+        <article>...</article>
+        <article>...</article>
+        <article>...</article>
+      </section>
+      <section id="design">
+        <h2>Design</h2>
+        <article>...</article>
+        <article>...</article>
+        <article>...</article>
+        <article>...</article>
+      </section>
+      <section id="dribbble">
+        <h2>Dribbble</h2>
+        <figure>...</figure>
+        <figure>...</figure>
+        <figure>...</figure>
+      </section>
+      ...
+    </main>
+    <footer class="is-centered">...</footer>
+    <canvas id="static"></canvas>
+  </body>
+  <script src="/js/static.js"></script>
+  <script src="/js/quote.js"></script>
+</html>          
+`}
+        </Snippet>
+        <p>
+          Perhaps the two greatest benefits to this approach are the massive
+          gains to accessibility (screen readers and assistive devices have a
+          much easier time of parsing this type of document), and the boost it
+          gives to webpage SEO and indexing.
+        </p>
+        <p>
+          And did I mention we brought this thing from sketches to production in
+          one week flat?
         </p>
       </>
     ),
