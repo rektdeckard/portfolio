@@ -417,6 +417,7 @@ if (canvas) {
     Icon: PhosphorLogo,
     content: (
       <>
+        <h2>On obsession</h2>
         <p>
           When my partner <a href="https://helenazhang.com">Helena Zhang</a> and
           I set out to create the icons we always wanted to use, I knew that its
