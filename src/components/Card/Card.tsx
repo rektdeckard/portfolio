@@ -14,7 +14,7 @@ const Card = forwardRef<HTMLDivElement, Project>(
     {
       id,
       title,
-      subtitle,
+      description,
       year,
       color = "#000000",
       accent = "#FFD171",
@@ -51,6 +51,7 @@ const Card = forwardRef<HTMLDivElement, Project>(
     return (
       <motion.div
         className="card"
+        layout
         variants={variants}
         initial="start"
         animate="end"
@@ -62,9 +63,9 @@ const Card = forwardRef<HTMLDivElement, Project>(
       >
         <Icon size={32} />
         <Link to={`${id}`}>
-          <h2>{title}</h2>
+          <h2>{description}</h2>
         </Link>
-        <p style={{ flex: 1 }}>{subtitle}</p>
+        <p style={{ flex: 1 }}>{title}</p>
         <p>{year}</p>
       </motion.div>
     );

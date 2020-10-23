@@ -8,21 +8,21 @@ import {
   NewspaperClipping,
   PhosphorLogo,
 } from "phosphor-react";
-import { Prism } from "react-syntax-highlighter";
-import { a11yDark } from "react-syntax-highlighter/dist/esm/styles/prism";
 
 import cockpitTeal from "../assets/cockpit-frame.png";
-import cockpitAmber from "../assets/cockpit-frame-amber.png";
-import phosphorHero from "../assets/phosphor-product-hunt-1.png";
+import Snippet from "../components/Snippet/Snippet";
+import StaticField from "../components/Demos/StaticField";
+import SliderCard from "../components/Demos/SliderCard";
 
 export interface Project {
   id: string;
   title: string;
-  subtitle: string;
+  description: string;
   year: number;
   url: string;
   color?: string;
   accent?: string;
+  theme?: string;
   Icon?: Icon;
   content?: React.ReactNode;
 }
@@ -30,9 +30,9 @@ export interface Project {
 export const projects: ReadonlyArray<Project> = [
   {
     id: "qmind",
-    title:
-      "A research tool mapping intersections between language and intelligence",
-    subtitle: "qMind",
+    title: "qMind",
+    description:
+      "A research tool to map intersections between language and intelligence",
     url: "https://qmind.io",
     year: 2020,
     color: "#FFFFFF",
@@ -146,8 +146,8 @@ function shortestPath(source, target) {
   },
   {
     id: "heyyou",
-    title: "A subtle reminder to call your loved ones",
-    subtitle: "Hey You",
+    title: "Hey You",
+    description: "A subtle reminder to call your loved ones",
     url: "https://github.com/Hey-You-Fullstack/hey-you-frontend",
     year: 2020,
     color: "#FFFFFF",
@@ -188,13 +188,14 @@ function shortestPath(source, target) {
   },
   {
     id: "cockpit",
-    title: "An immersive, techy dashboard for Android",
-    subtitle: "Cockpit",
+    title: "Cockpit",
+    description: "An immersive, techy dashboard for Android",
     url:
       "https://drive.google.com/drive/folders/1-0a62_LKvpX1713hEUAV4s-360yzdqwe?usp=sharing",
     year: 2018,
     color: "#6FD2B9",
     accent: "#000000",
+    theme: "inverse",
     Icon: DeviceMobile,
     content: (
       <>
@@ -216,24 +217,30 @@ function shortestPath(source, target) {
           succulents schlitz. Meh chillwave tbh bushwick. Vice stumptown
           coloring book semiotics, helvetica blue bottle lyft thundercats.
         </p>
-        <div style={{ display: "flex", alignItems: "center", justifyContent: "space-around" }}>
-        <img src={cockpitTeal} style={{ width: "50%" }} />
-        {/* <img src={cockpitAmber} style={{ flex: 1, width: "50%" }} /> */}
+        <div
+          style={{
+            display: "flex",
+            alignItems: "center",
+            justifyContent: "space-around",
+          }}
+        >
+          <img src={cockpitTeal} style={{ width: "50%" }} />
+          {/* <img src={cockpitAmber} style={{ flex: 1, width: "50%" }} /> */}
         </div>
       </>
     ),
   },
   {
     id: "huebert",
-    title: "A desktop dashboard to control your Philips Hue",
-    subtitle: "Huebert",
+    title: "Huebert",
+    description: "A desktop dashboard to control your Philips Hue",
     url: "https://rektdeckard.github.io/huebert",
     year: 2019,
-    // accent: "#EE8868",
     accent: "#BC8AF4",
     Icon: Lightbulb,
     content: (
       <>
+        <h2>The inspiration</h2>
         <p>
           Huebert is a web and desktop client for Philips Hue lighting and home
           automation, built in Electron and React. It was born out of pure
@@ -245,11 +252,12 @@ function shortestPath(source, target) {
   },
   {
     id: "helenazhang",
-    title: "A portfolio website inspired by newspaper design",
-    subtitle: "Helena Zhang",
+    title: "Helena Zhang",
+    description: "A portfolio website inspired by newspaper design",
     url: "https://helenazhang.com",
     year: 2020,
     color: "#FFFFFF",
+    theme: "inverse",
     accent: "#000000",
     Icon: NewspaperClipping,
     content: (
@@ -280,8 +288,8 @@ function shortestPath(source, target) {
   },
   {
     id: "phosphoricons",
-    title: "An open source icon library for React, Vue, and vanilla JS",
-    subtitle: "Phosphor Icons",
+    title: "Phosphor Icons",
+    description: "An open source icon library for React, Vue, and vanilla JS",
     url: "https://phosphoricons.com",
     year: 2020,
     Icon: PhosphorLogo,
