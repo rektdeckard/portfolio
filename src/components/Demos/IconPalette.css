@@ -1,0 +1,174 @@
+.icon-palette {
+  margin: 0.5em 0;
+  background-color: #1d1f21;
+  border-radius: 6px;
+}
+
+.icons {
+  display: flex;
+  align-items: center;
+  justify-content: space-around;
+  height: 96px;
+  padding: 24px;
+}
+
+.icon-controls {
+  display: flex;
+  flex-wrap: wrap;
+  align-items: center;
+  justify-content: space-between;
+  padding: 8px;
+  gap: 8px;
+}
+
+.react-dropdown-select {
+  min-width: 176px !important;
+  min-height: 48px !important;
+  justify-content: flex-start;
+  padding: 0 24px !important;
+  color: white;
+  border-radius: 6px !important;
+  background-color: rgba(255, 255, 255, 0.05);
+  font-size: 16px;
+  border: none !important;
+  /* margin-right: 8px; */
+}
+
+.react-dropdown-select-content {
+  display: flex;
+  align-items: center;
+  justify-content: flex-start;
+}
+
+.react-dropdown-select-content svg {
+  margin: 0 12px 0 0;
+}
+
+.react-dropdown-select:focus-within {
+  background-color: white;
+  color: black;
+  outline: none !important;
+  box-shadow: none !important;
+}
+
+.react-dropdown-select-item {
+  color: #333;
+  height: 40px !important;
+  display: flex;
+  align-items: center;
+}
+
+.react-dropdown-select-item svg {
+  margin: 0 12px 0 24px;
+}
+
+.react-dropdown-select-input {
+  color: #fff;
+}
+.react-dropdown-select-dropdown {
+  position: absolute;
+  left: 0;
+  border: none;
+  width: 500px;
+  padding: 0;
+  display: flex;
+  flex-direction: column;
+  border-radius: 6px !important;
+  max-height: 300px;
+  overflow: auto;
+  z-index: 9;
+  /* background: rgb(29, 20, 20) !important; */
+  box-shadow: none;
+}
+.react-dropdown-select-item {
+  color: black;
+}
+.react-dropdown-select-item:hover {
+  background-color: #ffd171 !important;
+}
+
+.react-dropdown-select-item.react-dropdown-select-item-selected,
+.react-dropdown-select-item.react-dropdown-select-item-active {
+  color: black !important;
+  background-color: #ffd171 !important;
+}
+
+.react-dropdown-select-item:focus {
+  color: black !important;
+  background-color: #ffd171 !important;
+}
+
+.react-dropdown-select-item.react-dropdown-select-item-disabled {
+  background: #777;
+  color: #ccc;
+}
+
+.size-bar {
+  position: relative;
+  display: flex;
+  flex: 2;
+  align-items: center;
+  height: 48px;
+  padding: 0 24px;
+  color: white;
+  border-radius: 6px;
+  background-color: rgba(255, 255, 255, 0.05);
+  font-family: "Manrope", sans-serif;
+  font-size: 16px;
+}
+
+.size-bar label {
+  width: 40px;
+}
+
+.size-bar:focus-within {
+  outline: none;
+}
+
+.size-bar input {
+  flex: 1;
+  border: none;
+  margin: 0 0 0 12px;
+  -webkit-appearance: none; /* Override default CSS styles */
+  appearance: none;
+  height: 1px; /* Specified height */
+  background: rgba(255, 255, 255, 0.3);
+  outline: none; /* Remove outline */
+}
+
+.size-bar input::-webkit-slider-thumb {
+  -webkit-appearance: none; /* Override default look */
+  appearance: none;
+  width: 16px; /* Set a specific slider handle width */
+  height: 16px; /* Slider handle height */
+  padding: 6px;
+  border-radius: 50%;
+  background: white; /* Green background */
+  cursor: pointer; /* Cursor on hover */
+  transition: height 0.1s, width 0.1s;
+}
+
+.size-bar input::-moz-range-thumb {
+  appearance: none;
+  width: 16px; /* Set a specific slider handle width */
+  height: 16px; /* Slider handle height */
+  padding: 6px;
+  border-radius: 50%;
+  background: white; /* Green background */
+  cursor: pointer; /* Cursor on hover */
+  transition: height 0.1s, width 0.1s;
+}
+
+.size-bar input:focus::-moz-range-thumb {
+  outline: none;
+  width: 24px; /* Set a specific slider handle width */
+  height: 24px; /* Slider handle height */
+  box-shadow: 0 0 0 6px rgba(255, 255, 255, 0.2);
+}
+
+.size-bar input:focus::-webkit-slider-thumb {
+  outline: none;
+  width: 24px; /* Set a specific slider handle width */
+  height: 24px; /* Slider handle height */
+  box-shadow: 0 0 0 6px rgba(255, 255, 255, 0.2);
+}

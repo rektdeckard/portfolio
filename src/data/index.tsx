@@ -1,18 +1,30 @@
 import React from "react";
+import { Link } from "react-router-dom";
 import {
   Icon,
   HandPointing,
   Translate,
-  DeviceMobile,
   Lightbulb,
   NewspaperClipping,
   PhosphorLogo,
+  DeviceMobileSpeaker,
 } from "phosphor-react";
 
-import cockpitTeal from "../assets/cockpit-frame.png";
 import Snippet from "../components/Snippet/Snippet";
 import StaticField from "../components/Demos/StaticField";
 import SliderCard from "../components/Demos/SliderCard";
+import IconPalette from "../components/Demos/IconPalette";
+
+import cert_warning_png from "../assets/cert-warning.png";
+import cert_warning_webp from "../assets/cert-warning.webp";
+import cockpit_webp from "../assets/cockpit.webp";
+import cockpit_png from "../assets/cockpit.png";
+import helena_spec_webp from "../assets/helenazhang-spec.webp";
+import helena_spec_png from "../assets/helenazhang-spec.png";
+import huebert_controls_svg from "../assets/huebert-controls.svg";
+import ChatBubbles from "../components/Demos/ChatBubbles";
+import NetworkGraph from "../components/Demos/NetworkGraph";
+import ErrorBoundary from "../components/ErrorBoundary/ErrorBoundary";
 
 export interface Project {
   id: string;
@@ -418,6 +430,22 @@ if (canvas) {
     content: (
       <>
         <h2>On obsession</h2>
+        <p>
+          A few years ago I made the switch from iPhone to Android. I wanted to
+          escape Apple's walled garden and start using technology that permitted
+          me to modify and customize it to my liking, to make my own. I got
+          familiar with{" "}
+          <a href="https://play.google.com/store/apps/dev?id=5300483087872269403&hl=en_US&gl=US">
+            Kustom Industries
+          </a>{" "}
+          and made a <Link to="/cockpit">techy dashboard</Link> for my phone,
+          with design help from my partner.
+        </p>
+        <p></p>
+        <figure>
+          <IconPalette />
+          <figcaption>Try out the icons!</figcaption>
+        </figure>
         <p>
           When my partner <a href="https://helenazhang.com">Helena Zhang</a> and
           I set out to create the icons we always wanted to use, I knew that its
