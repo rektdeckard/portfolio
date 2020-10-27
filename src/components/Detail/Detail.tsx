@@ -1,17 +1,28 @@
 import React from "react";
 import { Link, useParams } from "react-router-dom";
-import { motion, Variants, AnimatePresence, Transition } from "framer-motion";
-import { ArrowBendUpLeft, ArrowUpRight } from "phosphor-react";
+import { motion, Variants, Transition } from "framer-motion";
+import { ArrowBendUpLeft, ArrowUpRight, SmileyXEyes } from "phosphor-react";
 
 import { projects } from "../../data";
 import "./Detail.css";
 
 const variants: Variants = {
   start: { opacity: 0 },
-  end: { opacity: 1, transition: { duration: 0.15 } },
+  end: { opacity: 1, transition: { duration: 0.2 } },
 };
 
 const transition: Transition = { duration: 0.2, delay: 0.15 };
+
+const fallback = (
+  <div className="error-container simple">
+    <SmileyXEyes size={128} weight="duotone" />
+    <p>
+      Oops, how'd you end up here?
+      <br />
+      The Princess is in another castle.
+    </p>
+  </div>
+);
 
 interface DetailProps {}
 
@@ -29,7 +40,7 @@ const Detail: React.FC<DetailProps> = () => {
   } = projects.find((p) => p.id === id.toLowerCase()) || {};
 
   return (
-    <AnimatePresence>
+    <>
       {id && (
         <motion.div
           key={id}
@@ -38,7 +49,7 @@ const Detail: React.FC<DetailProps> = () => {
           animate="end"
           exit="start"
           transition={transition}
-          style={{ pointerEvents: "auto" }}
+          // style={{ pointerEvents: "auto" }}
         >
           <motion.div
             variants={variants}
@@ -46,13 +57,13 @@ const Detail: React.FC<DetailProps> = () => {
             animate="end"
             exit="start"
             transition={transition}
-            style={{ pointerEvents: "auto" }}
+            // style={{ pointerEvents: "auto" }}
             className="overlay"
           />
           <div className="detail">
             <div
-              className="panel"
-              style={{ color, backgroundColor: accent, flex: 1 }}
+              className="panel left"
+              style={{ color, backgroundColor: accent }}
             >
               <motion.div
                 className="panel-content"
@@ -76,13 +87,11 @@ const Detail: React.FC<DetailProps> = () => {
                 </motion.div>
               </motion.div>
             </div>
-            <div className="panel">
-              {content}
-            </div>
+            <div className="panel">{content ?? fallback}</div>
           </div>
         </motion.div>
       )}
-    </AnimatePresence>
+    </>
   );
 };
 
