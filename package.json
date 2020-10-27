@@ -21,7 +21,8 @@
     "react-scripts": "3.4.3",
     "react-syntax-highlighter": "^15.2.1",
     "recoil": "^0.0.13",
-    "typescript": "~3.7.2"
+    "typescript": "~3.7.2",
+    "use-is-in-viewport": "^1.0.9"
   },
   "scripts": {
     "analyze": "source-map-explorer 'build/static/js/*.js'",
