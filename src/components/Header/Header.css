@@ -23,3 +23,9 @@ header {
 .links a:hover {
   text-decoration: underline;
 }
+
+@media screen and (max-width: 1023px) {
+  header {
+    margin: 32px;
+  }
+}
