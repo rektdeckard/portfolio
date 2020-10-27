@@ -1,0 +1,13 @@
+.callout {
+  display: flex;
+  margin: 0;
+}
+
+.callout-bar {
+  width: 4px;
+  margin: 7px 16px 7px 0;
+}
+
+.callout-content {
+  flex: 1;
+}
