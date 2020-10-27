@@ -1,5 +1,5 @@
 import React, { useRef } from "react";
-import { BrowserRouter as Router, Route } from "react-router-dom";
+import { BrowserRouter as Router, Redirect, Route, Switch } from "react-router-dom";
 import { AnimateSharedLayout } from "framer-motion";
 
 import Header from "../Header/Header";
@@ -16,16 +16,17 @@ const App: React.FC<{}> = () => {
     <div className="container" ref={ref}>
       <AnimateSharedLayout type="crossfade">
         <Router>
-          <Route exact path={["/"]}>
-            <Header />
-            {projects.map((project) => (
-              <Card key={project.id} {...project} ref={ref} />
-            ))}
-            <Copyright />
-          </Route>
-          <Route path="/:id">
-            <Detail />
-          </Route>
+          <Switch>
+            <Route exact path="/">
+              <Header />
+              {projects.map((project) => (
+                <Card key={project.id} {...project} ref={ref} />
+              ))}
+              {/* <Copyright /> */}
+            </Route>
+            <Route path="/:id" component={Detail} />
+            <Redirect to="/" />
+          </Switch>
         </Router>
       </AnimateSharedLayout>
     </div>
