@@ -70,6 +70,10 @@ ul {
   list-style-type: square;
 }
 
+li > ul {
+  list-style-type: circle;
+}
+
 ::selection {
   color: white;
   background-color: rgba(0, 0, 0, 1);

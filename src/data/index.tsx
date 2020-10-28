@@ -15,6 +15,9 @@ import Callout from "../components/Callout/Callout";
 import StaticField from "../components/Demos/StaticField";
 import SliderCard from "../components/Demos/SliderCard";
 import IconPalette from "../components/Demos/IconPalette";
+import ChatBubbles from "../components/Demos/ChatBubbles";
+import NetworkGraph from "../components/Demos/NetworkGraph";
+import ErrorBoundary from "../components/ErrorBoundary/ErrorBoundary";
 
 import cert_warning_png from "../assets/cert-warning.png";
 import cert_warning_webp from "../assets/cert-warning.webp";
@@ -23,9 +26,8 @@ import cockpit_png from "../assets/cockpit.png";
 import helena_spec_webp from "../assets/helenazhang-spec.webp";
 import helena_spec_png from "../assets/helenazhang-spec.png";
 import huebert_controls_svg from "../assets/huebert-controls.svg";
-import ChatBubbles from "../components/Demos/ChatBubbles";
-import NetworkGraph from "../components/Demos/NetworkGraph";
-import ErrorBoundary from "../components/ErrorBoundary/ErrorBoundary";
+import phosphor_site_png from "../assets/phosphor-site.png";
+import phosphor_site_webp from "../assets/phosphor-site.webp";
 
 export interface Project {
   id: string;
@@ -53,6 +55,7 @@ export const projects: ReadonlyArray<Project> = [
     Icon: Translate,
     content: (
       <>
+        <h2>What is it?</h2>
         <p>
           Venenatis tellus in metus vulputate. Quis hendrerit dolor magna eget
           est lorem. Sed sed risus pretium quam. Amet venenatis urna cursus eget
@@ -178,13 +181,6 @@ function shortestPath(source, target) {
           an incentivized reminder to stay in touch with the people who mean the
           most.
         </p>
-        <p>
-          When you make a commitment with Hey You, we'll send you a reminder
-          once a month, at the time and date of your choice, to call that
-          person. If you have to cancel, or don't feel like it, you donate $5 to
-          one of our charity partners working to combat loneliness, social
-          isolation, and depression.
-        </p>
         <figure>
           <ChatBubbles
             messages={[
@@ -216,12 +212,61 @@ function shortestPath(source, target) {
           />
           <figcaption>A chat component built for Hey You</figcaption>
         </figure>
+        <p>
+          When you make a commitment with Hey You, we'll send you a reminder
+          once a month, at the time and date of your choice, to call that
+          person. If you have to cancel, or don't feel like it, you donate $5 to
+          one of our charity partners working to combat loneliness, social
+          isolation, and depression.
+        </p>
+
         <h2>Requirements</h2>
         <p>
-          We needed a site that would allow users to register their commitment,
-          choose a charity, and make the handoff to a Twilio flow to finish the
-          process via SMS.
+          We needed a site that would serve as the face for Hey You, and would
+          allow users to make a commitment, and get info about the project and
+          partner charities. We needed a means to send reminders, and hold
+          people to their commitments. And we wanted the experience to seem
+          light and unintrusive, with no app to download or account creation.
         </p>
+        <p>
+          SMS seemed an obvious choice for the main means of communication —
+          everyone has it, and there's nothing to download! Once a user had
+          initiated a commitment, we would hand off the process to a Twilio flow
+          to finish the sign-up, and all further interaction would be through
+          this channel.
+        </p>
+        <ul>
+          <li>
+            Website
+            <ul>
+              <li>Allow users to make a call commitment</li>
+              <li>Allow choosing a preferred charity</li>
+              <li>Provide Contact and FAQ</li>
+            </ul>
+          </li>
+          <li>
+            Twilio
+            <ul>
+              <li>Receive a hand-off to finishing the sign-up process</li>
+              <li>Send reminders at the requisite time and date</li>
+              <li>
+                Confirm a call was made{" "}
+                <span role="img" aria-label="waving hand emoji">
+                  👋🏽
+                </span>
+              </li>
+              <li>
+                Send a donation link if you didn't{" "}
+                <span role="img" aria-label="man juggling emoji">
+                  🤹🏽‍♂️
+                </span>
+              </li>
+              <li>Allow editing existing commitments</li>
+            </ul>
+          </li>
+        </ul>
+
+        <p></p>
       </>
     ),
   },
@@ -494,7 +539,7 @@ fetch("http://<BRIDGE_IP>/api/groups/<GROUP_NUMBER>", options)
               alt="Website design spec with sizes and metrics"
             />
           </picture>
-          <figcaption>A mockup of the site</figcaption>
+          <figcaption>A wireframe of the site</figcaption>
         </figure>
         <h2>Laying the foundation</h2>
         <p>
@@ -678,6 +723,13 @@ if (canvas) {
           with design help from my partner.
         </p>
         <p></p>
+        {/* <figure>
+          <picture>
+            <source srcSet={phosphor_site_webp} type="image/webp" />
+            <img src={phosphor_site_png} alt="" />
+          </picture>
+          <figcaption>A rendering of the Phosphor Icons homepage</figcaption>
+        </figure> */}
         <figure>
           <IconPalette />
           <figcaption>Try out the icons!</figcaption>
