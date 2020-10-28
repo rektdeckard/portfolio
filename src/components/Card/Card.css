@@ -1,0 +1,51 @@
+.card {
+  position: absolute;
+  width: 280px;
+  height: 280px;
+  padding: 20px;
+  border: 2px solid black;
+  background-color: white;
+  cursor: grab;
+  display: flex;
+  flex-direction: column;
+  align-items: flex-start;
+  border-radius: 6px;
+  z-index: 1;
+}
+
+.card a {
+  color: inherit;
+  text-decoration: none;
+  -webkit-user-drag: none;
+  -khtml-user-drag: none;
+  -moz-user-drag: none;
+  -o-user-drag: none;
+}
+
+.card a:hover {
+  text-decoration: underline;
+}
+
+.card * {
+  margin-bottom: 0;
+}
+
+@media screen and (max-width: 1023px) {
+  .card {
+    height: 140px;
+    width: 140px;
+  }
+
+  .card h2 {
+    font-size: 14px;
+  }
+
+  .card p {
+    font-size: 10px;
+  }
+
+  .card svg {
+    height: 16px;
+    width: 16px;
+  }
+}
