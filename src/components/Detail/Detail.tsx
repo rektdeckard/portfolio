@@ -65,29 +65,33 @@ const Detail: React.FC<DetailProps> = () => {
               className="panel left"
               style={{ color, backgroundColor: accent }}
             >
+              <Link to="/" className="back-arrow" title="Go back">
+                <ArrowBendUpLeft />
+              </Link>
               <motion.div
-                className="panel-content"
-                layoutId={`panel-content-${id}`}
+                className="title-content"
+                layoutId={`title-content-${id}`}
               >
-                <Link to="/" style={{ color: "inherit" }} title="Go back">
-                  <ArrowBendUpLeft size={64} />
-                </Link>
-                <motion.div className="title" layoutId={`title-${id}`}>
-                  <h1 className={theme}>{description}</h1>
-                </motion.div>
-                {title && (
-                  <motion.div className="content-container" animate>
-                    <a href={url} className={`large-text link ${theme}`}>
-                      {title} <ArrowUpRight size={32} />
-                    </a>
+                <div className="title">
+                  <motion.div layoutId={`title-${id}`}>
+                    <h1 className={theme}>{description}</h1>
                   </motion.div>
-                )}
-                <motion.div animate>
-                  <span className={`large-text ${theme}`}>{year}</span>
-                </motion.div>
+                  {title && (
+                   <div style={{ flex: 1 }}>
+                      <a href={url} className={`large-text link ${theme}`}>
+                        {title} <ArrowUpRight size={24} />
+                      </a>
+                   </div>
+                  )}
+                  <motion.div animate>
+                    <span className={`large-text ${theme}`}>{year}</span>
+                  </motion.div>
+                </div>
               </motion.div>
             </div>
-            <div className="panel">{content ?? fallback}</div>
+            <div className="panel">
+              <div className="panel-content">{content ?? fallback}</div>
+            </div>
           </div>
         </motion.div>
       )}

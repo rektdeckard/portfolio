@@ -11,7 +11,7 @@ const variants = {
 const Header: React.FC<{}> = () => {
   return (
     <motion.header variants={variants} initial="start" animate="end">
-      <h1 className="title">
+      <h1 className="intro">
         <span className="highlight inverse">Tobias Fried</span> is a full-stack
         engineer and maker of digital tools and toys. He's looking for a new
         opportunity.

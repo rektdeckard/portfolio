@@ -8,17 +8,21 @@
   flex-direction: row;
 }
 
-.large-text {
-  font-size: 24px;
+.panel {
+  flex: 1;
+  height: 100%;
+  box-sizing: border-box;
+  overflow-y: auto;
+  background-color: white;
 }
 
-.content-container {
-  flex: 1;
+.left {
+  display: flex;
 }
 
 .link {
-  display: flex;
-  align-items: center;
+  display: inline-flex;
+  align-items: flex-start;
   color: inherit;
   text-decoration: none;
 }
@@ -28,24 +32,52 @@ a.link:hover {
 }
 
 .link svg {
- margin-left: 8px;
+  margin-left: 8px;
 }
 
-.panel {
-  flex: 1;
-  padding: 64px;
-  height: 100%;
-  box-sizing: border-box;
-  overflow-y: auto;
-  background-color: white;
+a.back-arrow {
+  position: absolute;
+  color: inherit;
+  top: 40px;
+  left: 40px;
 }
 
+.back-arrow svg {
+  height: 48px;
+  width: 48px;
+}
+
+.title-content,
 .panel-content {
-  height: 100%;
+  padding: 80px;
+}
+
+.title-content {
+  display: flex;
+}
+
+.title {
+  margin-top: 256px;
+  flex: 1;
   display: flex;
   flex-direction: column;
-  align-items: flex-start;
-  justify-content: flex-start;
+}
+
+.title h1 {
+  margin-top: 0;
+  margin-bottom: 24px;
+}
+
+.large-text {
+  font-size: 24px;
+}
+
+.link svg {
+  width: 32px;
+  height: 32px;
+}
+
+@media screen and (min-width: 1024px) {
 }
 
 @media screen and (max-width: 1023px) {
@@ -57,7 +89,12 @@ a.link:hover {
 
   .panel {
     height: unset;
-    padding: 16px;
+    /* padding: 16px; */
+  }
+
+  .title-content,
+  .panel-content {
+    padding: 64px;
   }
 
   .left {
@@ -67,20 +104,50 @@ a.link:hover {
   }
 
   .left .title {
-    margin: 32px 0 8px;
+    margin: 128px 0 8px;
   }
 
   .left .title h1 {
-    font-size: 32px;
+    font-size: 28px;
     /* max-width: 80%; */
-    margin: 0;
-  }
-
-  .left .content-container {
-    margin-bottom: 32px;
   }
 
   .left .large-text {
     font-size: 16px;
+  }
+
+  a.back-arrow {
+    position: absolute;
+    color: inherit;
+    top: 24px;
+    left: 24px;
+  }
+
+  .link {
+    margin-bottom: 128px;
+  }
+}
+
+@media screen and (min-width: 561px) and (max-width: 1023px) {
+}
+
+@media screen and (max-width: 560px) {
+  .title-content,
+  .panel-content {
+    padding: 24px;
+  }
+
+  .back-arrow svg {
+    height: 32px;
+    width: 32px;
+  }
+
+  .link {
+    margin-bottom: 74px;
+  }
+
+  .link svg {
+    width: 24px;
+    height: 24px;
   }
 }
