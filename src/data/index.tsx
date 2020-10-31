@@ -23,6 +23,8 @@ import cert_warning_png from "../assets/cert-warning.png";
 import cert_warning_webp from "../assets/cert-warning.webp";
 import cockpit_webp from "../assets/cockpit.webp";
 import cockpit_png from "../assets/cockpit.png";
+import cockpit_gauges_webp from "../assets/cockpit-gauges.webp";
+import cockpit_gauges_png from "../assets/cockpit-gauges.png";
 import helena_spec_webp from "../assets/helenazhang-spec.webp";
 import helena_spec_png from "../assets/helenazhang-spec.png";
 import huebert_controls_svg from "../assets/huebert-controls.svg";
@@ -72,7 +74,7 @@ export const projects: ReadonlyArray<Project> = [
         <ErrorBoundary>
           <figure>
             <NetworkGraph />
-            <figcaption>Try dragging or clicking a node or element!</figcaption>
+            <figcaption>Interactive force-directed graph component</figcaption>
           </figure>
         </ErrorBoundary>
         <p>
@@ -85,16 +87,8 @@ export const projects: ReadonlyArray<Project> = [
           eget mauris. Id nibh tortor id aliquet lectus. Et malesuada fames ac
           turpis.
         </p>
-        <Snippet>
+        <Snippet language="javascript" caption="Implementing Dijkstra's Algorithm for graph traversal">
           {`\
-/**
- * Dijkstra's Algorithm implementation.
- * Calculates the shortest path between two nodes in the graph.
- *
- * @param {string} source - Starting node value
- * @param {string} target - Destination node value
- * @return {string[]} - Ordered nodelist from source to target
- */
 function shortestPath(source, target) {
   if (!source || !target) return [];
   if (source === target) return [source];
@@ -164,7 +158,6 @@ function shortestPath(source, target) {
     title: "Hey You",
     description: "A subtle reminder to call your loved ones",
     url: "https://hey-you-fullstack.github.io/hey-you-frontend/",
-    // url: "https://github.com/Hey-You-Fullstack/hey-you-frontend",
     year: 2020,
     color: "#FFFFFF",
     accent: "#CD5C5C",
@@ -219,17 +212,17 @@ function shortestPath(source, target) {
           one of our charity partners working to combat loneliness, social
           isolation, and depression.
         </p>
-
         <h2>Requirements</h2>
         <p>
-          We needed a site that would serve as the face for Hey You, and would
-          allow users to make a commitment, and get info about the project and
-          partner charities. We needed a means to send reminders, and hold
-          people to their commitments. And we wanted the experience to seem
-          light and unintrusive, with no app to download or account creation.
+          I was hired to build a site that would serve as the face for Hey You,
+          and would allow users to make a commitment, and get info about the
+          project and partner charities. We needed a means to send reminders,
+          and hold people to their commitments. And we wanted the experience to
+          seem light and unintrusive, with no app to download or account to
+          create.
         </p>
         <p>
-          SMS seemed an obvious choice for the main means of communication —
+          SMS seemed an obvious choice to keep communication lightweight —
           everyone has it, and there's nothing to download! Once a user had
           initiated a commitment, we would hand off the process to a Twilio flow
           to finish the sign-up, and all further interaction would be through
@@ -313,6 +306,17 @@ function shortestPath(source, target) {
             <figcaption>Shots of the dashboard in action</figcaption>
           </figure>
         </div>
+        <h2>Information density</h2>
+        <figure>
+          <picture>
+            <source srcSet={cockpit_gauges_webp} type="image/webp" />
+            <img
+              src={cockpit_gauges_png}
+              alt="Indicator dials for disk, CPU, and network usage"
+            />
+          </picture>
+          <figcaption>Close-ups of gauges and indicators</figcaption>
+        </figure>
       </>
     ),
   },
@@ -749,8 +753,8 @@ if (canvas) {
           </a>
           , but also exposing an intuitive API, and
         </p>
+        <h2>Good DX</h2>
         <p></p>
-        {/* <img src={phosphorHero} width="100%" /> */}
         <Snippet caption="Using React Context to apply default icon styles">
           {`\
 import React from "react";
@@ -779,6 +783,16 @@ const App = () => {
 ReactDOM.render(<App />, document.getElementById("root"));
 `}
         </Snippet>
+        <h2>Automating the Fragile Stuff</h2>
+        <p>
+          When working with large component libraries, it's important to factor
+          out sources of human error. Copy/paste mistakes, manual data entry all
+          crop up inevitably at scale, and with over 3,500 icons and their 
+        </p>
+        <p></p>
+        <h2>Giving Phosphor a home</h2>
+        <p></p>
+        {/* <img src={phosphorHero} width="100%" /> */}
       </>
     ),
   },
