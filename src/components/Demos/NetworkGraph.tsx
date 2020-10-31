@@ -8,8 +8,8 @@ const Graphin = React.lazy(() => import("@antv/graphin"));
 
 const NetworkGraph: React.FC<{}> = () => {
   return (
-    <Suspense fallback={<div></div>}>
-      <div style={{ width: "100%" }}>
+    <Suspense fallback={<div className="graph" />}>
+      <div className="graph">
         <Graphin
           data={data}
           layout={{
@@ -27,7 +27,7 @@ const NetworkGraph: React.FC<{}> = () => {
           }}
           options={{
             wheelSensitivity: 4,
-            disablePan: true,
+            // disablePan: true,
             // disableDrag: true,
             disableZoom: true,
           }}
