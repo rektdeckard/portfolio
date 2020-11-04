@@ -45,7 +45,7 @@ const SliderCard: React.FC<{}> = () => {
             onChange={({ target: { value } }) => setBrightness(+value)}
           />
         </div>
-        <span className="ui fitted right floated toggle checkbox">
+        <span className="ui toggle checkbox" >
           <input
             type="checkbox"
             checked={checked}
