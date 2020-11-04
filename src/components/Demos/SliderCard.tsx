@@ -2,40 +2,20 @@ import React, { useState } from "react";
 import "./SliderCard.css";
 
 const SliderCard: React.FC<{}> = () => {
-  const [checked, setChecked] = useState<boolean>(true);
+  const [powerState, setPowerState] = useState<boolean>(true);
   const [brightness, setBrightness] = useState<number>(220);
+  const alpha = +powerState && brightness / 255;
 
   return (
     <div
+      className="slider-card"
       style={{
-        borderRadius: 6,
-        backgroundColor: "black",
-        backgroundImage: `linear-gradient(to right, rgba(84, 98, 176, ${
-          +checked && brightness / 255
-        }), rgba(188, 138, 244, ${+checked && brightness / 255})`,
+        backgroundImage: `linear-gradient(to right, rgba(84, 98, 176, ${alpha}), rgba(188, 138, 244, ${alpha})`,
       }}
     >
-      <div>
-        <div
-          style={{
-            padding: 16,
-            color: "white",
-            opacity: 0.7,
-            userSelect: "none",
-          }}
-        >
-          Living Room Lights
-        </div>
-      </div>
-      <div
-        style={{
-          display: "flex",
-          padding: 16,
-          paddingBottom: 24,
-          backgroundColor: "rgba(255, 255, 255, 0.282)",
-        }}
-      >
-        <div className="slidecontainer">
+      <div className="slide-header">Living Room Lights</div>
+      <div className="slide-body">
+        <div className="slide-container">
           <input
             className="slide"
             type="range"
@@ -45,11 +25,11 @@ const SliderCard: React.FC<{}> = () => {
             onChange={({ target: { value } }) => setBrightness(+value)}
           />
         </div>
-        <span className="ui toggle checkbox" >
+        <span className="ui toggle checkbox">
           <input
             type="checkbox"
-            checked={checked}
-            onChange={() => setChecked((c) => !c)}
+            checked={powerState}
+            onChange={() => setPowerState((c) => !c)}
           />
           <label></label>
         </span>
