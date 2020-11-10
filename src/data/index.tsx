@@ -28,8 +28,8 @@ import cockpit_gauges_png from "../assets/cockpit-gauges.png";
 import helena_spec_webp from "../assets/helenazhang-spec.webp";
 import helena_spec_png from "../assets/helenazhang-spec.png";
 import huebert_controls_svg from "../assets/huebert-controls.svg";
-import phosphor_site_png from "../assets/phosphor-site.png";
-import phosphor_site_webp from "../assets/phosphor-site.webp";
+import phosphor_site_png from "../assets/phosphor-css-nectar.png";
+import phosphor_site_webp from "../assets/phosphor-css-nectar.webp";
 
 export interface Project {
   id: string;
@@ -59,17 +59,20 @@ export const projects: ReadonlyArray<Project> = [
       <>
         <h2>What is it?</h2>
         <p>
-          Venenatis tellus in metus vulputate. Quis hendrerit dolor magna eget
-          est lorem. Sed sed risus pretium quam. Amet venenatis urna cursus eget
-          nunc scelerisque viverra. Viverra aliquet eget sit amet tellus cras
-          adipiscing enim eu. Lorem ipsum dolor sit amet consectetur adipiscing
-          elit ut aliquam. Tellus mauris a diam maecenas sed enim ut. Dictum at
-          tempor commodo ullamcorper a lacus vestibulum. Interdum velit euismod
-          in pellentesque massa placerat duis. Orci nulla pellentesque dignissim
-          enim sit amet venenatis urna. At imperdiet dui accumsan sit amet nulla
-          facilisi morbi tempus. Parturient montes nascetur ridiculus mus mauris
-          vitae. Nisl nunc mi ipsum faucibus vitae aliquet nec. Congue mauris
-          rhoncus aenean vel elit scelerisque mauris.
+          qMind is a research platform for building a more individual model of
+          intelligence and mental fitness via language. The core concept is
+          ideas are defined in relation to one another; words can only be
+          defined in terms of other words, therefore our understanding can be
+          represented by a directed graph of word meanings. By asking people to
+          define different phrases in their own terms, we build a weighted
+          network of meaning and word association.
+        </p>
+        <p>
+          Current language models are based on statistical prediction methods,
+          whereby vast amounts of text are analyzed in advance to form a
+          weighted graph of their likelihood to appear near each other in a
+          sentence. These transformers have an incredible capacity to imitate
+          complex and intelligent behavior.
         </p>
         <ErrorBoundary>
           <figure>
@@ -87,7 +90,23 @@ export const projects: ReadonlyArray<Project> = [
           eget mauris. Id nibh tortor id aliquet lectus. Et malesuada fames ac
           turpis.
         </p>
-        <Snippet language="javascript" caption="Implementing Dijkstra's Algorithm for graph traversal">
+        <h2>Building realtime tools</h2>
+        <p>
+          One of the requirements was that the protal be not only a means for
+          collecting data, but also serve as an exploration tool for both
+          participants and researchers to look deeply into the data. This meant
+          having interactive data visualizations, search, sort, filter and
+          transforms of the underlying data, and realtime analysis on it.
+        </p>
+        <p>
+          I implemented algorithms and related visualizations for common graph
+          analysis tools: breadth- and depth-first search, shortest path (first
+          Dijkstra's, then A*),
+        </p>
+        <Snippet
+          language="javascript"
+          caption="Implementing Dijkstra's Algorithm for graph traversal"
+        >
           {`\
 function shortestPath(source, target) {
   if (!source || !target) return [];
@@ -127,19 +146,7 @@ function shortestPath(source, target) {
 };
 `}
         </Snippet>
-        <p>
-          Venenatis tellus in metus vulputate. Quis hendrerit dolor magna eget
-          est lorem. Sed sed risus pretium quam. Amet venenatis urna cursus eget
-          nunc scelerisque viverra. Viverra aliquet eget sit amet tellus cras
-          adipiscing enim eu. Lorem ipsum dolor sit amet consectetur adipiscing
-          elit ut aliquam. Tellus mauris a diam maecenas sed enim ut. Dictum at
-          tempor commodo ullamcorper a lacus vestibulum. Interdum velit euismod
-          in pellentesque massa placerat duis. Orci nulla pellentesque dignissim
-          enim sit amet venenatis urna. At imperdiet dui accumsan sit amet nulla
-          facilisi morbi tempus. Parturient montes nascetur ridiculus mus mauris
-          vitae. Nisl nunc mi ipsum faucibus vitae aliquet nec. Congue mauris
-          rhoncus aenean vel elit scelerisque mauris.
-        </p>
+        <p>Providing these slices of information on-the-fly</p>
         <p>
           Neque aliquam vestibulum morbi blandit cursus risus at. Rutrum quisque
           non tellus orci ac auctor augue. At imperdiet dui accumsan sit amet.
@@ -170,9 +177,8 @@ function shortestPath(source, target) {
           loved ones, it's harder and harder to do it. The importance of having
           a strong support network and regular social interaction is underscored
           especially now in the time of COVID-19 and work-from-home. That's why
-          my friends <a href="#">David &amp; Johan</a> decided to make Hey You,
-          an incentivized reminder to stay in touch with the people who mean the
-          most.
+          my friends David &amp; Johan decided to make Hey You, an incentivized
+          reminder to stay in touch with the people who mean the most.
         </p>
         <figure>
           <ChatBubbles
@@ -187,7 +193,9 @@ function shortestPath(source, target) {
                 content: (
                   <>
                     Yeah...I'm a bad friend{" "}
-                    <span aria-label="woman facepalming emoji">🤦🏾‍♀️</span>
+                    <span role="img" aria-label="woman facepalming emoji">
+                      🤦🏾‍♀️
+                    </span>
                   </>
                 ),
               },
@@ -276,6 +284,21 @@ function shortestPath(source, target) {
     Icon: DeviceMobileSpeaker,
     content: (
       <>
+        <h2>Heads up</h2>
+        <p>
+          Cockpit is a data-rich homescreen replacement for Android phones
+          inspired by (surprise) aircraft cockpit design. The HUD style
+          interface surfaces useful information like recent messages, nearby
+          transit and weather, and device resource utilization to keep you in
+          the know.
+        </p>
+        <figure>
+          <picture>
+            <source srcSet={cockpit_webp} type="image/webp" />
+            <img src={cockpit_png} alt="" />
+          </picture>
+          <figcaption>Shots of the dashboard in action</figcaption>
+        </figure>
         <h2>On obsession</h2>
         <p>
           A few years ago I made the switch from iPhone to Android. I wanted to
@@ -288,32 +311,11 @@ function shortestPath(source, target) {
           and made a <Link to="/cockpit">techy dashboard</Link> for my phone,
           with design help from my partner.
         </p>
-        <div
-          style={{
-            display: "flex",
-            alignItems: "center",
-            justifyContent: "space-around",
-          }}
-        >
-          <figure>
-            <picture>
-              <source srcSet={cockpit_webp} type="image/webp" />
-              <img
-                src={cockpit_png}
-                alt="A techy Android dashboard with green gauges and dials"
-              />
-            </picture>
-            <figcaption>Shots of the dashboard in action</figcaption>
-          </figure>
-        </div>
         <h2>Information density</h2>
         <figure>
           <picture>
             <source srcSet={cockpit_gauges_webp} type="image/webp" />
-            <img
-              src={cockpit_gauges_png}
-              alt="Indicator dials for disk, CPU, and network usage"
-            />
+            <img src={cockpit_gauges_png} alt="" />
           </picture>
           <figcaption>Close-ups of gauges and indicators</figcaption>
         </figure>
@@ -326,7 +328,9 @@ function shortestPath(source, target) {
     description: "A desktop dashboard to control your Philips Hue",
     url: "https://rektdeckard.github.io/huebert",
     year: 2019,
-    accent: "#BC8AF4",
+    accent: "#B688F0",
+    // accent: "#BC8AF4",
+    // accent: "linear-gradient(to bottom right, blue, pink)",
     Icon: Lightbulb,
     content: (
       <>
@@ -337,10 +341,7 @@ function shortestPath(source, target) {
           lightweight interface to adjust your lights directly from the browser.
         </p>
         <figure>
-          <img
-            src={huebert_controls_svg}
-            alt="Colorful dashboard for controlling connected lights"
-          />
+          <img src={huebert_controls_svg} alt="" />
           <figcaption>A rendering of the Huebert dashboard</figcaption>
         </figure>
         <h2>Motivation</h2>
@@ -361,8 +362,11 @@ function shortestPath(source, target) {
           was...across the room.
         </p>
         <Callout accent="#BC8AF4">
-          <p>I started wondering, could they be controlled from a web app?</p>
-          <p>TL;DR: Yes. Sort of.</p>
+          <p>
+            <strong>TL;DR:</strong> I started wondering, could my smart lights
+            and sensors be controlled from a web app?
+          </p>
+          <p>The answer was Yes. Sort of.</p>
         </Callout>
         <h2>Getting to know Hue</h2>
         <p>
@@ -462,10 +466,7 @@ fetch("http://<BRIDGE_IP>/api/groups/<GROUP_NUMBER>", options)
         <figure>
           <picture>
             <source srcSet={cert_warning_webp} type="image/webp" />
-            <img
-              src={cert_warning_png}
-              alt="Chrome warning that a site's certificate is not trusted"
-            />
+            <img src={cert_warning_png} alt="" />
           </picture>
           <figcaption>
             Scary Chrome warning that a site's certificate is not trusted
@@ -538,10 +539,7 @@ fetch("http://<BRIDGE_IP>/api/groups/<GROUP_NUMBER>", options)
         <figure>
           <picture>
             <source srcSet={helena_spec_webp} type="image/webp" />
-            <img
-              src={helena_spec_png}
-              alt="Website design spec with sizes and metrics"
-            />
+            <img src={helena_spec_png} alt="" />
           </picture>
           <figcaption>A wireframe of the site</figcaption>
         </figure>
@@ -641,7 +639,10 @@ fetch("http://<BRIDGE_IP>/api/groups/<GROUP_NUMBER>", options)
           . The canvas itself was given a black background that peeked through
           the transparent pixels.
         </p>
-        <Snippet caption="Generating white noise performantly">
+        <Snippet
+          language="javascript"
+          caption="Generating white noise performantly"
+        >
           {`\
 // static.js
 const canvas = document.getElementById("static");
@@ -680,7 +681,7 @@ if (canvas) {
         </p>
         <Callout>
           <p>
-            Caveat emptor: requesting more than 65,536 bits at a time from{" "}
+            <strong>NB:</strong> requesting more than 65,536 bits at a time from{" "}
             <code>window.crypto.getRandomValues()</code> will throw a{" "}
             <code>QuotaExceededError</code>, due to minimum guaranteed entropy
             of seed values. If more bits are needed, the buffer can be filled,
@@ -718,22 +719,20 @@ if (canvas) {
         <p>
           A few years ago I made the switch from iPhone to Android. I wanted to
           escape Apple's walled garden and start using technology that permitted
-          me to modify and customize it to my liking, to make my own. I got
-          familiar with{" "}
-          <a href="https://play.google.com/store/apps/dev?id=5300483087872269403&hl=en_US&gl=US">
-            Kustom Industries
-          </a>{" "}
-          and made a <Link to="/cockpit">techy dashboard</Link> for my phone,
-          with design help from my partner.
+          me to modify and customize it to my liking, to make my own. I made a{" "}
+          <Link to="/cockpit">techy dashboard</Link> for my phone, with design
+          help from my partner. She made around 40 custom, minimal icons to
+          replace my phone, email, and browser app icons and fit in with the
+          hacker aesthetic.
         </p>
-        <p></p>
-        {/* <figure>
-          <picture>
-            <source srcSet={phosphor_site_webp} type="image/webp" />
-            <img src={phosphor_site_png} alt="" />
-          </picture>
-          <figcaption>A rendering of the Phosphor Icons homepage</figcaption>
-        </figure> */}
+        <p>
+          That seed grew over time, eventually becoming a{" "}
+          <a href="https://play.google.com/store/apps/details?id=com.tobiasfried.phosphor.mercury">
+            complete set of icons
+          </a>{" "}
+          for Android home screens, replacing icons for over 800 of the most
+          common apps with clean, minimalistic, monochromatic glyphs.
+        </p>
         <figure>
           <IconPalette />
           <figcaption>Try out the icons!</figcaption>
@@ -751,10 +750,22 @@ if (canvas) {
           <a href="http://github.com/phosphor-icons/phosphor-icons">
             vanilla JS
           </a>
-          , but also exposing an intuitive API, and
+          , but also exposing an intuitive API, writing great documentation, and
+          having a kickass website.
         </p>
-        <h2>Good DX</h2>
-        <p></p>
+        <h2>Developer Experience</h2>
+        <p>
+          Ease-of-use was a priority when it came to designing the library API
+          and choosing methods of distribution. I initially built out the React
+          library as a set of thin wrapper components around the SVGs.
+        </p>
+        <Callout accent="#FFD171">
+          <p>
+            We wanted to make an icon library that was as easy to learn as it
+            was to use, covered the vast majority of platforms, and just worked.
+          </p>
+        </Callout>
+        <p>Lorem Ipsumsdsd</p>
         <Snippet caption="Using React Context to apply default icon styles">
           {`\
 import React from "react";
@@ -783,16 +794,75 @@ const App = () => {
 ReactDOM.render(<App />, document.getElementById("root"));
 `}
         </Snippet>
-        <h2>Automating the Fragile Stuff</h2>
+        <h2>Automate the fragile stuff, test everything</h2>
         <p>
           When working with large component libraries, it's important to factor
-          out sources of human error. Copy/paste mistakes, manual data entry all
-          crop up inevitably at scale, and with over 3,500 icons and their 
+          out sources of human error. Copy/paste mistakes and absentmindedness
+          crop up inevitably at scale, and with over 3,500 icons and their
+          corresponding implementations — packages in 3 javascript frameworks, a
+          Figma plugin and library, and other things I'm forgetting — we had a
+          lot of complexity to manage by hand. This led me to build custom
+          internal tooling to support our efforts from the design process all
+          the way through to production, including:
         </p>
-        <p></p>
+        <ul>
+          <li>
+            An{" "}
+            <a href="https://phosphor-icons.github.io/phosphor-testbed">
+              icon testbed and live SVG editor
+            </a>{" "}
+            to check visual size and consistency of new icons against known
+            controls
+          </li>
+          <li>A custom SVG sanitizer to slim down our asset sizes</li>
+          <li>Codegen for 99.5% of our framework-specific library code</li>
+          <li>
+            Macro tools for Figma that handle some assembly of the design
+            resources
+          </li>
+          <li>Build scripts to tie it all together</li>
+        </ul>
+        <p>
+          A small battery of unit and integration tests ensured that our
+          automated approach wouldn't propagate subtle bugs throughout the
+          system. And at the end of it all, we generated example apps to allow
+          thorough inspection of every icon with the good ol'{" "}
+          <i title="A.K.A. looking at it.">Mark I Eyeball™</i>. This usually
+          consisted of large contact-sheets multiple instances of each icon in
+          its many variants and sizes, arranged to visually highlight
+          inconsistencies.
+        </p>
+        <Callout accent="#FFD171">
+          <p>
+            Aside from reducing carpal tunnel risks for my partner and me, the
+            automation and testing processes gave us a confidence we couldn't
+            get doing all of this manually.
+          </p>
+        </Callout>
         <h2>Giving Phosphor a home</h2>
-        <p></p>
-        {/* <img src={phosphorHero} width="100%" /> */}
+        <p>
+          Naturally, we needed a fun and functional site to house the project.
+          We wanted a searchable interface for the icon library that showcased
+          each icon variant, along with code snippets for their use. React is my
+          go-to these days, and I took it as an opportunity to try out some new
+          libraries in the ecosystem. <a href="https://recoiljs.org/">Recoil</a>{" "}
+          is a new experimental state management library from Facebook that
+          flips the Redux paradigm on its head. We implemented a smart,
+          client-size fuzzy search with help from the awesome{" "}
+          <a href="https://fusejs.io/">Fuse.js</a> library.
+        </p>
+        <figure>
+          <picture>
+            <source srcSet={phosphor_site_webp} type="image/webp" />
+            <img
+              src={phosphor_site_png}
+              alt="Screenshot of the Phosphor Icons homepage"
+            />
+          </picture>
+          <figcaption>
+            <a href="https://phosphoricons.com">phosphoricons.com</a>
+          </figcaption>
+        </figure>
       </>
     ),
   },
