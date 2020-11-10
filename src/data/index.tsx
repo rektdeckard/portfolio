@@ -721,29 +721,39 @@ if (canvas) {
           escape Apple's walled garden and start using technology that permitted
           me to modify and customize it to my liking, to make my own. I made a{" "}
           <Link to="/cockpit">techy dashboard</Link> for my phone, with design
-          help from my partner. She made around 40 custom, minimal icons to
-          replace my phone, email, and browser app icons and fit in with the
-          hacker aesthetic.
+          help from my partner{" "}
+          <a href="https://helenazhang.com">Helena Zhang</a>. She designed
+          around 40 custom, minimal icons to replace the common utility app
+          icons and fit in with the hacker aesthetic.
         </p>
         <p>
-          That seed grew over time, eventually becoming a{" "}
+          Over time that seed grew, eventually becoming a{" "}
           <a href="https://play.google.com/store/apps/details?id=com.tobiasfried.phosphor.mercury">
             complete set of icons
           </a>{" "}
           for Android home screens, replacing icons for over 800 of the most
-          common apps with clean, minimalistic, monochromatic glyphs.
+          common apps with clean, minimalistic, monochromatic glyphs. We
+          released different colorways, took icon suggestions, got involved in
+          the small but active community of phone customizers. We were eating,
+          breathing, and sleeping icons.
         </p>
         <figure>
           <IconPalette />
-          <figcaption>Try out the icons!</figcaption>
+          <figcaption>Live demo of Phosphor Icons!</figcaption>
         </figure>
         <p>
-          When my partner <a href="https://helenazhang.com">Helena Zhang</a> and
-          I set out to create the icons we always wanted to use, I knew that its
-          success would not come down to the design of the icons alone. We
-          needed to provide a top-tier developer experience to those using the
-          icons. This meant not only supporting the most common use-cases by
-          providing libraries for{" "}
+          Eventually we realized that all this effort could serve a much larger
+          audience of digital designers and engineers of all walks, not just the
+          Android enthusiasts. We decided to create a library of general-purpose
+          user interface icons for modern web, desktop, and mobile platforms —
+          and <a href="https://phosphoricons.com">Phosphor Icons</a> was born.
+        </p>
+        <h2>Providing great DX</h2>
+        <p>
+          I knew that its success would not come down to the design of the icons
+          alone. We needed to provide a top-tier developer experience to those
+          using the icons. This meant not only supporting the most common
+          use-cases by providing libraries for{" "}
           <a href="http://github.com/phosphor-icons/phosphor-react">React</a>,{" "}
           <a href="http://github.com/phosphor-icons/phosphor-vue">Vue.js</a>,
           and{" "}
@@ -753,19 +763,30 @@ if (canvas) {
           , but also exposing an intuitive API, writing great documentation, and
           having a kickass website.
         </p>
-        <h2>Developer Experience</h2>
-        <p>
-          Ease-of-use was a priority when it came to designing the library API
-          and choosing methods of distribution. I initially built out the React
-          library as a set of thin wrapper components around the SVGs.
-        </p>
         <Callout accent="#FFD171">
           <p>
             We wanted to make an icon library that was as easy to learn as it
             was to use, covered the vast majority of platforms, and just worked.
           </p>
         </Callout>
-        <p>Lorem Ipsumsdsd</p>
+        <p>
+          <del>
+            A lot of UI Toolkits out there enforce their own design system
+            guidelines on the library user; components can have one of six color
+            variants, one of four size variants, and so on. The problem with
+            this approach is that most applications call for their own colors,
+            sizes, and other variants, and changing these defaults inevitably
+            requires mucking around in CSS preprocesser variables or worse — the
+            dreaded <code>!important</code> directive.
+          </del>
+        </p>
+        <p>
+          Taking advantage of React's <code>Context API</code> and Vue's{" "}
+          <code>provide/inject</code> feature, I brought stateful local and
+          global styling to the icon components. You could set the appearance of
+          all icons in a subtree from one place, but unlike CSS it could be
+          dynamic and manipulated programmatically.
+        </p>
         <Snippet caption="Using React Context to apply default icon styles">
           {`\
 import React from "react";
@@ -843,13 +864,20 @@ ReactDOM.render(<App />, document.getElementById("root"));
         <p>
           Naturally, we needed a fun and functional site to house the project.
           We wanted a searchable interface for the icon library that showcased
-          each icon variant, along with code snippets for their use. React is my
-          go-to these days, and I took it as an opportunity to try out some new
-          libraries in the ecosystem. <a href="https://recoiljs.org/">Recoil</a>{" "}
-          is a new experimental state management library from Facebook that
-          flips the Redux paradigm on its head. We implemented a smart,
-          client-size fuzzy search with help from the awesome{" "}
-          <a href="https://fusejs.io/">Fuse.js</a> library.
+          each icon variant, along with code snippets for developers to quickly
+          reference. Sleek and snappy animations. Strong visual demonstrations
+          of the icons in use.
+        </p>
+        <p>
+          React is my go-to for web development these days, and I took it as an
+          opportunity to try out some new libraries in the ecosystem. TypeScript
+          formed the foundation for less buggy code with more compile-time
+          guarantees. I used <a href="https://recoiljs.org/">Recoil</a>, a new
+          experimental state management library from Facebook. It is an absolute
+          joy to work with, and eliminates hundreds of lines of Redux
+          boilerplate. I implemented a smart client-size fuzzy search with help
+          from the awesome <a href="https://fusejs.io/">Fuse.js</a> library,
+          making searching for icons much more forgiving.
         </p>
         <figure>
           <picture>
@@ -860,9 +888,42 @@ ReactDOM.render(<App />, document.getElementById("root"));
             />
           </picture>
           <figcaption>
-            <a href="https://phosphoricons.com">phosphoricons.com</a>
+            The final <a href="https://phosphoricons.com">phosphoricons.com</a>
           </figcaption>
         </figure>
+        <p>
+          Ultimatley, we managed to pack a ton of ergonomic features into a
+          simple and straightforward one-page site, and even received some
+          accolades from sites like:{" "}
+        </p>
+        <ul>
+          <li>
+            <a href="https://www.admiretheweb.com/inspiration/phosphor-icons/">
+              Admire the Web
+            </a>
+          </li>
+          <li>
+            <a href="https://cssnectar.com/css-gallery-inspiration/phosphor-icons/">
+              CSS Nectar
+            </a>
+          </li>
+          <li>
+            <a href="https://twitter.com/smashingmag/status/1323575426501980166">
+              Smashing Magazine
+            </a>
+          </li>
+          <li>
+            <a href="https://www.uxdatabase.io/issue-26">
+              User Experience Database
+            </a>
+          </li>
+          <li>
+            <a href="https://onepagelove.com/phosphor-icons">One Page Love</a>
+          </li>
+        </ul>
+        <p></p>
+        <h2>Looking ahead</h2>
+        <p></p>
       </>
     ),
   },
