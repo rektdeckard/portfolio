@@ -22,7 +22,7 @@ const App: React.FC<{}> = () => {
               {projects.map((project) => (
                 <Card key={project.id} {...project} ref={ref} />
               ))}
-              {/* <Copyright /> */}
+              <Copyright />
             </Route>
             <Route path="/:id" component={Detail} />
             <Redirect to="/" />
