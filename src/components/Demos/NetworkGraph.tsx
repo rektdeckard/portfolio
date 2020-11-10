@@ -8,8 +8,8 @@ const Graphin = React.lazy(() => import("@antv/graphin"));
 
 const NetworkGraph: React.FC<{}> = () => {
   return (
-    <Suspense fallback={<div className="graph" />}>
-      <div className="graph">
+    <div className="graph">
+      <Suspense fallback={null}>
         <Graphin
           data={data}
           layout={{
@@ -31,56 +31,9 @@ const NetworkGraph: React.FC<{}> = () => {
             // disableDrag: true,
             disableZoom: true,
           }}
-          // extend={{
-          //   nodeShape: (node) => [
-          //     {
-          //       name: "TestShape",
-          //       render: (node: any) => ({
-          //         // shape: string,
-          //         // shapeComponents: [
-          //         //   {
-          //         //     shape: G.ShapeType;
-          //         //     attrs: {
-          //         //     /** 这个shape图形的ID，用户自定义，保证不重复即可 */
-          //         //       id: string;
-          //         //       [key: string]: any;
-          //         //     };
-          //         //     isKeyShape?: boolean;
-          //         //     noReset?: boolean;
-          //         //   }
-          //         // ],
-          //         // state: {
-          //         //   [stateName: string]: {
-          //         //       [id: string]: {
-          //         //           [attr: string]: any;
-          //         //       };
-          //         //   };
-          //         // },
-          //         shape: "TestShape",
-          //         shapeComponents: [
-          //           {
-          //             shape: "circle",
-          //             attrs: {
-          //               id: node.id,
-          //               r: node.data.radius,
-          //               fill: node.data.color,
-          //             },
-          //             isKeyShape: true,
-          //             noReset: true,
-          //           },
-          //         ],
-          //       }),
-          //     },
-          //   ],
-          // }}
-          // register={{
-          //   nodeShape: (g6: any) => [
-          //     { name: "TestShape", register: (g6) => {} },
-          //   ],
-          // }}
         />
-      </div>
-    </Suspense>
+      </Suspense>
+    </div>
   );
 };
 
