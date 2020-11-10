@@ -1,0 +1,26 @@
+body {
+  padding: 32;
+  background-color: #141414;
+  color: lightblue;
+  font-family: monospace;
+}
+main {
+  max-width: 640px;
+  margin: auto;
+}
+a {
+  color: lightcyan;
+}
+ul {
+  list-style: square;
+}
+ 
+article {
+  margin: 8px 0;
+  padding: 0 16px;
+  background-color: #202020;
+  border: 1px dashed;
+}
+small {
+  float: right;
+}
