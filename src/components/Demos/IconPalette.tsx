@@ -65,7 +65,12 @@ const IconPalette: React.FC<{}> = () => {
     <div className="icon-palette">
       <div className="icons">
         <IconContext.Provider
-          value={{ size, color: "white", weight, mirrored: false }}
+          // value={{ size, color: "white", weight, mirrored: false }}
+          // value={{ size, color: "#FFD171", weight, mirrored: false }} // Yellow
+          // value={{ size, color: "#A8FF60", weight, mirrored: false }} // Green
+          // value={{ size, color: "#96CBFE", weight, mirrored: false }} // Blue
+          value={{ size, color: "#C6C5FE", weight, mirrored: false }} // Lavender
+          // value={{ size, color: "#FF73FD", weight, mirrored: false }} // Magenta
         >
           <RocketLaunch />
           <GameController />
