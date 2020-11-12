@@ -1,0 +1,14 @@
+.anchor-link {
+  position: relative;
+  top: 4px;
+  left: 4px;
+}
+
+h2 > a {
+  opacity: 0;
+}
+
+h2:hover > a,
+h2:focus-within > a {
+  opacity: 1;
+}
