@@ -49,7 +49,8 @@
   }
 
   .card svg {
-    height: 16px;
-    width: 16px;
+    display: none;
+    /* height: 16px;
+    width: 16px; */
   }
 }
