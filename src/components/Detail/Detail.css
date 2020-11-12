@@ -20,6 +20,11 @@
   display: flex;
 }
 
+.left .title h1 {
+  font-size: 48px;
+  /* max-width: 80%; */
+}
+
 .link {
   display: inline-flex;
   align-items: flex-start;
@@ -107,14 +112,13 @@ a.back-arrow {
     margin: 128px 0 8px;
   }
 
-  .left .title h1 {
-    font-size: 28px;
-    /* max-width: 80%; */
-  }
-
   .left .large-text {
     font-size: 16px;
   }
+
+  /* .left .title h1 {
+    max-width: 80%;
+  } */
 
   a.back-arrow {
     position: absolute;
@@ -125,6 +129,16 @@ a.back-arrow {
 
   .link {
     margin-bottom: 128px;
+  }
+
+  .link svg {
+    width: 24px;
+    height: 24px;
+  }
+
+  .back-arrow svg {
+    height: 32px;
+    width: 32px;
   }
 }
 
@@ -137,17 +151,11 @@ a.back-arrow {
     padding: 24px;
   }
 
-  .back-arrow svg {
-    height: 32px;
-    width: 32px;
-  }
-
   .link {
     margin-bottom: 74px;
   }
 
-  .link svg {
-    width: 24px;
-    height: 24px;
+  .left .title h1 {
+    font-size: 28px;
   }
 }
