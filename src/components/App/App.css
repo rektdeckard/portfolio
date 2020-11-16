@@ -44,6 +44,10 @@ a {
   color: inherit;
 }
 
+abbr {
+  text-decoration: none;
+}
+
 code {
   font-family: Inconsolata, Monaco, Consolas, "Courier New", Courier, monospace;
 }
@@ -81,7 +85,7 @@ li > ul {
 
 pre ::selection {
   color: inherit;
-  background-color:rgba(169, 171, 173, 1);;
+  background-color: rgba(169, 171, 173, 1);
 }
 
 .inverse::selection {
