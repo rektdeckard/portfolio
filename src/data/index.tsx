@@ -10,6 +10,7 @@ import {
   DeviceMobileSpeaker,
 } from "phosphor-react";
 
+import Heading from "../components/Heading/Heading";
 import Snippet from "../components/Snippet/Snippet";
 import Callout from "../components/Callout/Callout";
 import StaticField from "../components/Demos/StaticField";
@@ -57,7 +58,7 @@ export const projects: ReadonlyArray<Project> = [
     Icon: Translate,
     content: (
       <>
-        <h2>What is it?</h2>
+        <Heading id="what-is-it">What is it?</Heading>
         <p>
           qMind is a research platform for building a more individual model of
           intelligence and mental fitness via language. The core concept is
@@ -90,7 +91,7 @@ export const projects: ReadonlyArray<Project> = [
           eget mauris. Id nibh tortor id aliquet lectus. Et malesuada fames ac
           turpis.
         </p>
-        <h2>Building realtime tools</h2>
+        <Heading id="building-realtime-tools">Building realtime tools</Heading>
         <p>
           One of the requirements was that the protal be not only a means for
           collecting data, but also serve as an exploration tool for both
@@ -171,7 +172,7 @@ function shortestPath(source, target) {
     Icon: HandPointing,
     content: (
       <>
-        <h2>The problem these days...</h2>
+        <Heading id="the-problem-these-days">The problem these days</Heading>
         <p>
           ...is that despite the million ways to communicate with friends and
           loved ones, it's harder and harder to do it. The importance of having
@@ -220,14 +221,13 @@ function shortestPath(source, target) {
           one of our charity partners working to combat loneliness, social
           isolation, and depression.
         </p>
-        <h2>Requirements</h2>
+        <Heading id="requirements">Requirements</Heading>
         <p>
-          I was hired to build a site that would serve as the face for Hey You,
-          and would allow users to make a commitment, and get info about the
-          project and partner charities. We needed a means to send reminders,
-          and hold people to their commitments. And we wanted the experience to
-          seem light and unintrusive, with no app to download or account to
-          create.
+          We needed a site to serve as the face for Hey You, which would allow
+          users to make a commitment and get info about the project and partner
+          charities. We needed a means to send reminders, and hold people to
+          their commitments. And we wanted the experience to seem light and
+          unintrusive, with no app to download or account to create.
         </p>
         <p>
           SMS seemed an obvious choice to keep communication lightweight —
@@ -236,38 +236,45 @@ function shortestPath(source, target) {
           to finish the sign-up, and all further interaction would be through
           this channel.
         </p>
+        <Heading id="the-site">The site</Heading>
+        <p>
+          I built a streamlined, mobile-first frontend application in React to
+          handle the signup process and provide contact and FAQ about our
+          partner charities. Particular joy was had in adding polished
+          animations via{" "}
+          <a href="https://www.framer.com/api/motion">Framer Motion</a> and
+          smart forms with the flexible{" "}
+          <a href="https://react-hook-form.com/">React Hook Form</a> library.
+        </p>
+        <Heading id="meat-and-potatoes">Meat and potatoes</Heading>
+        <p>
+          We designed and implemented a robust microservice-based backend on
+          Firebase that orchestrated registering users (in a Firestore DB),
+          scheduling reminders (via Cloud Functions) and handoffs to the Twilio
+          SMS flow.
+        </p>
         <ul>
+          <li>Receive a hand-off to finishing the sign-up process</li>
+          <li>Send reminders at the requisite time and date</li>
           <li>
-            Website
-            <ul>
-              <li>Allow users to make a call commitment</li>
-              <li>Allow choosing a preferred charity</li>
-              <li>Provide Contact and FAQ</li>
-            </ul>
+            Confirm a call was made{" "}
+            <span role="img" aria-label="waving hand emoji">
+              👋🏽
+            </span>
           </li>
           <li>
-            Twilio
-            <ul>
-              <li>Receive a hand-off to finishing the sign-up process</li>
-              <li>Send reminders at the requisite time and date</li>
-              <li>
-                Confirm a call was made{" "}
-                <span role="img" aria-label="waving hand emoji">
-                  👋🏽
-                </span>
-              </li>
-              <li>
-                Send a donation link if you didn't{" "}
-                <span role="img" aria-label="man juggling emoji">
-                  🤹🏽‍♂️
-                </span>
-              </li>
-              <li>Allow editing existing commitments</li>
-            </ul>
+            Send a donation link if you didn't{" "}
+            <span role="img" aria-label="man juggling emoji">
+              🤹🏽‍♂️
+            </span>
           </li>
+          <li>Allow editing existing commitments</li>
         </ul>
-
-        <p></p>
+        <Heading id="whats-left">What's left</Heading>
+        <p>
+          While yet to launch, Hey You is securing some funding to finish
+          development and QA and get us to a public release.
+        </p>
       </>
     ),
   },
@@ -278,19 +285,31 @@ function shortestPath(source, target) {
     url:
       "https://drive.google.com/drive/folders/1-0a62_LKvpX1713hEUAV4s-360yzdqwe?usp=sharing",
     year: 2018,
-    color: "#6FD2B9",
+    // color: "#6FD2B9",
+    color: "#60F0C4",
     accent: "#000000",
     theme: "inverse",
     Icon: DeviceMobileSpeaker,
     content: (
       <>
-        <h2>Heads up</h2>
+        <Heading id="digital-detox">Digital detox...lite</Heading>
+        <p>
+          Our phones are basically digital heroin. Colorful app icons, badges
+          and notifications vying for our attention at every minute. It's tough
+          to resist, and I'd be the first to admit I have a problem. So when I
+          discovered that with an Android phone and some special tools I could
+          entirely replace the addictive homescreen paradigm with whatever I
+          could dream up, I decided to make something that would, hopefully,
+          help institute some harm-reduction with in phone habits. And maybe
+          look kinda cool in the process.
+        </p>
+        <Heading id="heads-up">Heads up</Heading>
         <p>
           Cockpit is a data-rich homescreen replacement for Android phones
           inspired by (surprise) aircraft cockpit design. The HUD style
           interface surfaces useful information like recent messages, nearby
           transit and weather, and device resource utilization to keep you in
-          the know.
+          the know without hijacking your attention.
         </p>
         <figure>
           <picture>
@@ -299,26 +318,126 @@ function shortestPath(source, target) {
           </picture>
           <figcaption>Shots of the dashboard in action</figcaption>
         </figure>
-        <h2>On obsession</h2>
         <p>
-          A few years ago I made the switch from iPhone to Android. I wanted to
-          escape Apple's walled garden and start using technology that permitted
-          me to modify and customize it to my liking, to make my own. I got
-          familiar with{" "}
+          Built using <abbr title="Kustom Live Wallpaper">KLWP</abbr> by{" "}
           <a href="https://play.google.com/store/apps/dev?id=5300483087872269403&hl=en_US&gl=US">
             Kustom Industries
-          </a>{" "}
-          and made a <Link to="/cockpit">techy dashboard</Link> for my phone,
-          with design help from my partner.
+          </a>
+          , Cockpit replaces the typical grid of apps and eschews the
+          ever-present notification shade in favor of four content areas:
         </p>
-        <h2>Information density</h2>
+        <ol>
+          <li>
+            A <em>status</em> section with a clock, local weather, map view, and
+            realtime nearby transit stations.
+          </li>
+          <li>
+            A <em>notice</em> section with a customizable quick view into the
+            three messaging or communication apps you need the most.
+          </li>
+          <li>
+            A <em>vitals</em> section with like CPU and network usage.
+          </li>
+          <li>
+            A <em>dock</em> section containing commonly-used apps, each with a
+            custom icon treatment designed by{" "}
+            <a href="https://helenazhang.com">my better half</a>.
+          </li>
+        </ol>
+        <Callout accent="#60F0C4">
+          <p>
+            I found that this interface significantly reduced the amount of time
+            I spent mindlessly browsing my phone.
+          </p>
+        </Callout>
+        <Heading id="functional-bits">Functional bits</Heading>
+        <p>
+          While the framework API exposes some device vitals and notifications,
+          generating the map view and nearby transit visualizations was a bit
+          more of a challenge. I relied on Google's{" "}
+          <a href="https://developers.google.com/maps/documentation/maps-static/overview">
+            Static Maps
+          </a>{" "}
+          and{" "}
+          <a href="https://developers.google.com/transit/gtfs-realtime/">
+            GTFS Realtime
+          </a>{" "}
+          REST APIs to put it all together. For the map, we would construct a
+          complex query using device GPS coordinates and user-set variables like
+          the current dashboard theme and map zoom level, request a static map
+          image with the appropriate style parameters, then apply
+          post-processing and layer it into the dashboard UI.
+        </p>
+        <Snippet
+          language="javascript"
+          caption="Tediously assembling URL parameters to style the map"
+        >
+          {`\
+let mapQueryUrl = \`https://maps.googleapis.com/maps/api/staticmap?\` +
+  \`center=\${lat},\${lon}\` +
+  \`&maptype=\${mapType}\` +
+  \`&size=\${Math.round(height)}&scale=\${scale}&zoom=\${zoom}\` +
+  \`&style=feature:all|element:labels|visibility\${
+    labels ? "simplified" : "off"
+  }\` +
+  \`&style=feature:administrative|element:labels|visibility\${
+    labels && cityLabels ? "simplified" : "off"
+  }|color:\${labelColor}\` +
+  \`&style=feature:road.highway|element:geometry.fill|color:\${highwayColor}\` +
+  // ...About 40 more repetitive style parameters... 
+  \`&key\${API_KEY}\`;
+`}
+        </Snippet>
+        <p>
+          The transit stations would be a bit simpler, requiring just a simple
+          API query and some parsing of the response, before displaying the
+          transit modes on screen. Both the map and transit components could be
+          customized to deep-link into the preferred navigation app with some of
+          the navigation context pre-filled.
+        </p>
+        <p>
+          At the time, I was on a less-than-ideal phone plan with exhorbitant
+          data costs, and I was paranoid of going over my caps — which I did
+          constantly anyway. I figured that placing this quota right on the home
+          screen would keep me honest about my consumption in more ways than
+          one. It turned out to work beautifully!
+        </p>
         <figure>
           <picture>
             <source srcSet={cockpit_gauges_webp} type="image/webp" />
             <img src={cockpit_gauges_png} alt="" />
           </picture>
-          <figcaption>Close-ups of gauges and indicators</figcaption>
+          <figcaption>
+            Close-up of indicators in the <em>vitals</em> section
+          </figcaption>
         </figure>
+        <p>
+          I found that this interface significantly reduced the amount of time I
+          spent mindlessly browsing my phone; native notifications were silenced
+          by default with this setup, and the loud, colorful icons and badges
+          were no longer calling to be checked constantly. My data and usage was
+          in check. And it made my feel like a character in Westword when I used
+          it.
+        </p>
+        <Heading id="variations-on-a-theme">Variations on a theme</Heading>
+        <p>
+          Over time that seed that was planted with Cockpit grew, and the custom
+          app icons became a complete set of icons{" "}
+          <a href="https://play.google.com/store/apps/details?id=com.tobiasfried.phosphor.mercury">
+            for Android home screens
+          </a>
+          , and ultimately an{" "}
+          <Link to="/phosphoricons">open-source resource</Link> for designers
+          and developers of all kinds. My partner Helena even wrote{" "}
+          <a href="https://medium.com/@minoraxis">several articles</a> on the
+          subject of icon design and history.
+        </p>
+        <p>
+          Cockpit got a number of new color schemes, underwent several revisions
+          to adapt to breaking API changes and new OS limitations, but is still
+          alive and well today. I stopped using it on my primary mobile phone,
+          but I know I'll come back to it one day.
+        </p>
       </>
     ),
   },
@@ -328,23 +447,12 @@ function shortestPath(source, target) {
     description: "A desktop dashboard to control your Philips Hue",
     url: "https://rektdeckard.github.io/huebert",
     year: 2019,
-    accent: "#B688F0",
-    // accent: "#BC8AF4",
+    accent: "#BC8AF4",
     // accent: "linear-gradient(to bottom right, blue, pink)",
     Icon: Lightbulb,
     content: (
       <>
-        <h2>Hello, Huebert</h2>
-        <p>
-          Huebert is a web and desktop client for Philips Hue lighting and home
-          automation, built in React and Electron. It provides a clean and
-          lightweight interface to adjust your lights directly from the browser.
-        </p>
-        <figure>
-          <img src={huebert_controls_svg} alt="" />
-          <figcaption>A rendering of the Huebert dashboard</figcaption>
-        </figure>
-        <h2>Motivation</h2>
+        <Heading id="motivation">Motivation</Heading>
         <p>
           Smart home lighting is pretty great. The ability to set the mood for a
           horror movie, gaming session, or party is a new level of immersion.
@@ -353,37 +461,52 @@ function shortestPath(source, target) {
         </p>
         <p>
           <i>Controlling</i> your smart lights, however, is another story. When
-          I installed Philips Hue bulbs in my apartment, my initial reaction of
-          awe was followed shortly by the unfortunate realization I could never
-          touch the physical light switches ever again, if I wanted things to
-          work as expected. It always felt like a <i>process</i> to simply dim
-          the lights as I sat at the computer, working later into the evening.
-          The desktop apps for managing them were bloated, and my phone
-          was...across the room.
+          I installed Philips Hue bulbs in my apartment, my initial awe was
+          followed shortly by the realization that 'smart' is a relative term. I
+          couldn't touch the wall switches if I wanted the bulbs to stay
+          connected. It always felt like a <i>process</i> to simply dim the
+          lights as I worked late into the evening. The desktop apps for
+          managing them were bloated, and my phone was...across the room. I
+          started wondering, could my smart lights and sensors be controlled
+          from a web app? The answer was Yes. Sort of.
+        </p>
+        <figure>
+          <img src={huebert_controls_svg} alt="" />
+          <figcaption>A rendering of the Huebert dashboard</figcaption>
+        </figure>
+        <Heading id="hello-huebert">Hello, Huebert</Heading>
+        <p>
+          Enter stage right, Huebert, my idea for a web and desktop client for
+          Philips Hue lighting and home automation. It would provide a clean and
+          lightweight interface to adjust your lights directly from the browser.
+          As far as I knew, it would be the only browser-based app of its kind.
+          As it would turn out, there may be a reason for that.
         </p>
         <Callout accent="#BC8AF4">
           <p>
-            <strong>TL;DR:</strong> I started wondering, could my smart lights
-            and sensors be controlled from a web app?
+            I started wondering, could my smart lights and sensors be controlled
+            from a web app?
           </p>
-          <p>The answer was Yes. Sort of.</p>
+          <p>
+            <strong>TL;DR:</strong> Yes. Sort of.
+          </p>
         </Callout>
-        <h2>Getting to know Hue</h2>
+        <Heading id="getting-to-know-hue">Getting to know Hue</Heading>
         <p>
           Philips Hue's{" "}
           <a href="https://developers.meethue.com/">API documentation</a>{" "}
           (account creation required) is thorough and flush with specifications
           and examples, and shows Philips' deep commitment to making an
           ecosystem of hackable and open products. They actively welcome
-          development of third-party hardware and software. They even have a
-          lengthy section on light and color theory (too heady for me).
+          development of third-party hardware and software, and even have a
+          lengthy section on light and color theory in the developer pages.
         </p>
         <p>
-          The Hue Bridge itself operates a local webserver on your WiFi network
-          that listens to requests at several endpoints, providing control of
+          The Hue Bridge operates a local webserver on your WiFi network that
+          listens to requests at several endpoints, providing control of
           everything from individual lights to scheduling lighting changes to
           customizing the behavior and triggers of connected switches and
-          sensors. Commands use a declarative language that allows you to
+          sensors. Commands use a declarative language that allow you to
           describe the state a light or element should be in, and the Bridge
           handles transitioning to that state.
         </p>
@@ -411,16 +534,18 @@ fetch("http://<BRIDGE_IP>/api/groups/<GROUP_NUMBER>", options)
   .then((res) => updateLights(res));
 `}
         </Snippet>
-        <h2>Building the dang thing</h2>
+        <Heading id="deceptively-simple">
+          A deceptively simple implementation
+        </Heading>
         <p>
           I chose to scaffold out a web application in React, since the
           declarative nature of the framework seemed a good fit for the API.
           Talking to the Bridge via the RESTful interface was a breeze, and
-          building an interface around such inherently colorful data was a joy{" "}
-          <span role="img" aria-label="rainbow emoji">
+          building an interface around such inherently colorful data was a joy.{" "}
+          {/* <span role="img" aria-label="rainbow emoji">
             🌈
-          </span>
-          . To move fast, I leanded on the{" "}
+          </span> */}
+          To move fast, I leaned on the{" "}
           <a href="https://react.semantic-ui.com/">Semantic UI</a> toolkit for
           basic interface components. Other components were custom-made to fit
           the context. A working prototype came together in a matter of days.
@@ -430,12 +555,12 @@ fetch("http://<BRIDGE_IP>/api/groups/<GROUP_NUMBER>", options)
           <figcaption>Demo of a control component used in Huebert</figcaption>
         </figure>
         <p>
-          Since I was on a roll, I thought that porting the project to a
-          multiplatform Electron app would be a swell idea. No internet access?
-          No problem! A desktop app could talk to your lights without leaving
-          the local network.
+          Since I was on a roll, I figured why not port the project to a
+          multiplatform Electron app as well. No internet access? No problem! A
+          desktop app could talk to your lights without leaving the local
+          network.
         </p>
-        <h2>Pitfalls</h2>
+        <Heading id="pitfalls">Pitfalls</Heading>
         <p>
           The first working web-app build was deployed after a week or two via
           GitHub Pages. Difficulties arose when I realized that:
@@ -487,7 +612,7 @@ fetch("http://<BRIDGE_IP>/api/groups/<GROUP_NUMBER>", options)
           using the Remote API and requiring a more complicated setup on the
           user's part.
         </p>
-        <h2>Learnings</h2>
+        <Heading id="hard-truths">Hard truths</Heading>
         <p>
           Browsers protect us from the vast majority of malicious actors out
           there, as well as much of our own unsafe behavior. Though working
@@ -505,7 +630,8 @@ fetch("http://<BRIDGE_IP>/api/groups/<GROUP_NUMBER>", options)
         </p>
         <p>
           Ultimately I was able to provide myself, as well as a creative
-          community of enthusiasts, a much-needed tool.
+          community of enthusiasts, a much-needed tool. Even if it's a little
+          rough around the edges.
         </p>
       </>
     ),
@@ -522,28 +648,28 @@ fetch("http://<BRIDGE_IP>/api/groups/<GROUP_NUMBER>", options)
     Icon: NewspaperClipping,
     content: (
       <>
-        <h2>The brief</h2>
+        <Heading id="the-brief">The brief</Heading>
         <p>
-          My partner Helena and I both have a soft spot for the early days of
-          the internet, when sites were unique, experimental, performant. We
+          My partner Helena and I have a soft spot for the early days of the
+          internet, when sites were unique, experimental, and performant. We
           wanted to build her a portfolio that was all of these things — but
           with modern web conventions at the core: responsive design, lazy
           loading, interactions that felt dynamic and tactile.
         </p>
         <p>
-          The design was inspired by newspapers, with dense columns of content
-          and explicit hierarchies of information. We mixed in references to
-          broadcast TV and other analog media to make an experience that felt
-          simultaneously nostalgic and modern.
+          Helena put together a design by newspapers, with dense columns of
+          content and explicit hierarchies of information. We mixed in
+          references to broadcast TV and other analog media to make an
+          experience that felt simultaneously nostalgic and modern.
         </p>
         <figure>
           <picture>
             <source srcSet={helena_spec_webp} type="image/webp" />
             <img src={helena_spec_png} alt="" />
           </picture>
-          <figcaption>A wireframe of the site</figcaption>
+          <figcaption>Site specifications</figcaption>
         </figure>
-        <h2>Laying the foundation</h2>
+        <Heading id="laying-the-foundation">Laying the foundation</Heading>
         <p>
           I knew that using a popular framework like React or Vue.js went
           against the vibe for the site. It had to load fast, in mere kilobytes,
@@ -554,27 +680,26 @@ fetch("http://<BRIDGE_IP>/api/groups/<GROUP_NUMBER>", options)
         </p>
         <p>
           Since most of the content would follow a grid-like pattern, I first
-          laid out a scaffolding using CSS <code>grid</code> layouts. After some
+          laid out a scaffold using CSS <code>grid</code> layouts. After some
           experimentation with different breakpoints (mobile in particular), I
-          decided to pivot to a <code>flexbox</code> based layout to take
-          advantage of <code>flex-flow</code> to simplify things. I borrowed
-          some ideas (and code) from the <a href="https://bulma.io/">Bulma</a>{" "}
-          CSS framework to achieve good reusability on the column components.
+          pivoted to a <code>flexbox</code> based layout to simplify things. I
+          borrowed some ideas (and code) from the{" "}
+          <a href="https://bulma.io/">Bulma</a> CSS framework to achieve good
+          reusability on the column components.
         </p>
-        <h2>Arguing semantics</h2>
+        <Heading id="arguing-semantics">Arguing semantics</Heading>
         <p>
-          An unspoken requirement of the portfolio site was that is should be
-          simple enough for Helena (a designer by trade) to update herself with
-          new content and projects. HTML5 Semantic Elements helped make the
-          markup read like an outline, and massively aided comprehension, even
-          for a non-coder. No <code>&lt;div&gt;</code> soup for you!
+          A requirement of the portfolio site was that is should be simple
+          enough for Helena to update herself with new content and projects.
+          HTML5 Semantic Elements helped make the markup read like an outline,
+          and massively aided comprehension. No <code>&lt;div&gt;</code> soup
+          for you!
         </p>
         <Snippet
           language="html"
           caption="Semantic HTML can improve accessibility and code readability"
         >
           {`\
-<!-- index.html -->
 <!DOCTYPE html>
 <html lang="en">
   <head>...</head>
@@ -612,13 +737,16 @@ fetch("http://<BRIDGE_IP>/api/groups/<GROUP_NUMBER>", options)
           much easier time of parsing this type of document), and the boost it
           gives to webpage SEO and indexing.
         </p>
-        <h2>Making some noise</h2>
+        <Heading id="making-some-noise">Making some noise</Heading>
         <figure>
           <StaticField />
-          <figcaption>TV static effect used in the portfolio site</figcaption>
+          <figcaption>TV static effect used in the footer</figcaption>
         </figure>
         <p>
-          I wrote a white noise generator that spit TV static onto a{" "}
+          The design included a small block of TV static at the foot of the
+          page; a purely aesthetic element that was originally intended to be a
+          simple image. For fun, I decided to make it dynamic and wrote a white
+          noise generator and spit the results onto a{" "}
           <code>&lt;canvas&gt;</code> element, to great nostalgic effect. The
           first, naïve pass used the Canvas API methods <code>fillRect()</code>{" "}
           and <code>clearRect()</code>, looping through the canvas coordinates
@@ -670,8 +798,11 @@ if (canvas) {
 `}
         </Snippet>
         <p>
-          As a further optimization, I turned to the browser's built-in Crypto
-          API to get random bits even faster, with less overhead. The{" "}
+          As a further optimization, I turned to the browser's built-in{" "}
+          <a href="https://developer.mozilla.org/en-US/docs/Web/API/Crypto">
+            Crypto API{" "}
+          </a>
+          to get random bits even faster, with less overhead. The{" "}
           <code>window.crypto</code> object exposes a single method,{" "}
           <code>getRandomValues(typedArray)</code>, which will fill a passed{" "}
           <code>TypedArray</code> with cryptographically strong random bits via
@@ -690,18 +821,22 @@ if (canvas) {
         </Callout>
         <p>
           There are certainly less CPU-intensive ways to create the visual
-          effect of TV static — precomputing more noise than needed and chosing
+          effect of TV static: precomputing more noise than needed and choosing
           a random index into the noise to start painting from each frame, or
           even just using a GIF. But the fact that this implementation is truly
           (pseudo)random each frame and still manages to maintain 60 FPS is
-          pretty cool, in my opinion.
+          pretty unique.
         </p>
-        <h2>Summing up</h2>
+        <Heading id="looking-further-afield">Looking further afield</Heading>
         <p>
-          We built a highly performant static portfolio site that ticked all the
-          boxes with respect to modern conventions and accessibility. We threw
-          in some deceptively clever Easter eggs. And we brought this thing from
-          a sketch to production in one week flat.
+          When I sat down to build this, I was expecting a familiar exercise in
+          static site development. Through the process of playing around with a
+          seemingly mundane aethetic element, though, I discovered quite a bit
+          about browser APIs, and learned to look for solutions in unexpected
+          places. And by architecting the site for future modification and code
+          readability, we got some excellent side-benefits. The end result was
+          exactly the type of experience we wanted to create at the start. And
+          we brought this thing from a sketch to production in one week flat.
         </p>
       </>
     ),
@@ -715,7 +850,7 @@ if (canvas) {
     Icon: PhosphorLogo,
     content: (
       <>
-        <h2>On obsession</h2>
+        <Heading id="an-obsession">An obsession</Heading>
         <p>
           A few years ago I made the switch from iPhone to Android. I wanted to
           escape Apple's walled garden and start using technology that permitted
@@ -727,15 +862,17 @@ if (canvas) {
           icons and fit in with the hacker aesthetic.
         </p>
         <p>
-          Over time that seed grew, eventually becoming a{" "}
+          Over time that seed grew, eventually becoming a complete set of icons{" "}
           <a href="https://play.google.com/store/apps/details?id=com.tobiasfried.phosphor.mercury">
-            complete set of icons
-          </a>{" "}
-          for Android home screens, replacing icons for over 800 of the most
-          common apps with clean, minimalistic, monochromatic glyphs. We
-          released different colorways, took icon suggestions, got involved in
-          the small but active community of phone customizers. We were eating,
-          breathing, and sleeping icons.
+            for Android home screens
+          </a>
+          , replacing icons for over 800 of the most common apps with clean,
+          minimalistic, monochromatic glyphs. We released different colorways,
+          took icon suggestions, got involved in the small but active community
+          of phone customizers. Helena even wrote{" "}
+          <a href="https://medium.com/@minoraxis">several articles</a> on the
+          subject of icon design and history. We were eating, breathing, and
+          sleeping icons.
         </p>
         <figure>
           <IconPalette />
@@ -748,20 +885,21 @@ if (canvas) {
           user interface icons for modern web, desktop, and mobile platforms —
           and <a href="https://phosphoricons.com">Phosphor Icons</a> was born.
         </p>
-        <h2>Providing great DX</h2>
+        <Heading id="providing-great-dx">Providing great DX</Heading>
         <p>
           I knew that its success would not come down to the design of the icons
-          alone. We needed to provide a top-tier developer experience to those
+          alone. We wanted to make an icon library that was as easy to learn as
+          it was to use, covered the vast majority of platforms, and just
+          worked. We needed to provide a top-tier developer experience to those
           using the icons. This meant not only supporting the most common
-          use-cases by providing libraries for{" "}
+          frameworks, with packages for{" "}
           <a href="http://github.com/phosphor-icons/phosphor-react">React</a>,{" "}
           <a href="http://github.com/phosphor-icons/phosphor-vue">Vue.js</a>,
           and{" "}
           <a href="http://github.com/phosphor-icons/phosphor-icons">
             vanilla JS
           </a>
-          , but also exposing an intuitive API, writing great documentation, and
-          having a kickass website.
+          , but also exposing an intuitive API and writing great documentation.
         </p>
         <Callout accent="#FFD171">
           <p>
@@ -815,16 +953,18 @@ const App = () => {
 ReactDOM.render(<App />, document.getElementById("root"));
 `}
         </Snippet>
-        <h2>Automate the fragile stuff, test everything</h2>
+        <Heading id="automate-the-fragile-stuff">
+          Automate the fragile stuff, test everything
+        </Heading>
         <p>
           When working with large component libraries, it's important to factor
-          out sources of human error. Copy/paste mistakes and absentmindedness
-          crop up inevitably at scale, and with over 3,500 icons and their
-          corresponding implementations — packages in 3 javascript frameworks, a
-          Figma plugin and library, and other things I'm forgetting — we had a
-          lot of complexity to manage by hand. This led me to build custom
-          internal tooling to support our efforts from the design process all
-          the way through to production, including:
+          out sources of human error. Mistakes crop up inevitably at scale, and
+          with over 3,500 icons and their corresponding implementations —
+          packages in 3 javascript frameworks, a Figma plugin and library, and
+          other things I'm forgetting — we had a lot of complexity to manage by
+          hand. This led me to build custom internal tooling to support our
+          efforts from the design process all the way through to production,
+          including:
         </p>
         <ul>
           <li>
@@ -841,7 +981,7 @@ ReactDOM.render(<App />, document.getElementById("root"));
             Macro tools for Figma that handle some assembly of the design
             resources
           </li>
-          <li>Build scripts to tie it all together</li>
+          <li>Build-scripts to tie it all together</li>
         </ul>
         <p>
           A small battery of unit and integration tests ensured that our
@@ -849,35 +989,35 @@ ReactDOM.render(<App />, document.getElementById("root"));
           system. And at the end of it all, we generated example apps to allow
           thorough inspection of every icon with the good ol'{" "}
           <i title="A.K.A. looking at it.">Mark I Eyeball™</i>. This usually
-          consisted of large contact-sheets multiple instances of each icon in
-          its many variants and sizes, arranged to visually highlight
+          consisted of large contact-sheets with multiple instances of each icon
+          in its many variants and sizes, arranged to visually highlight
           inconsistencies.
         </p>
         <Callout accent="#FFD171">
           <p>
-            Aside from reducing carpal tunnel risks for my partner and me, the
-            automation and testing processes gave us a confidence we couldn't
-            get doing all of this manually.
+            Aside from reducing carpal tunnel risks for my partner and myself,
+            the automation and testing processes gave us a confidence we
+            couldn't get doing all of this manually.
           </p>
         </Callout>
-        <h2>Giving Phosphor a home</h2>
+        <Heading id="giving-phosphor-a-home">Giving Phosphor a home</Heading>
         <p>
           Naturally, we needed a fun and functional site to house the project.
           We wanted a searchable interface for the icon library that showcased
           each icon variant, along with code snippets for developers to quickly
-          reference. Sleek and snappy animations. Strong visual demonstrations
-          of the icons in use.
+          reference. And to show off a bit with sleek, snappy animations and
+          strong visual demonstrations of the icons in use.
         </p>
         <p>
-          React is my go-to for web development these days, and I took it as an
-          opportunity to try out some new libraries in the ecosystem. TypeScript
-          formed the foundation for less buggy code with more compile-time
-          guarantees. I used <a href="https://recoiljs.org/">Recoil</a>, a new
-          experimental state management library from Facebook. It is an absolute
-          joy to work with, and eliminates hundreds of lines of Redux
-          boilerplate. I implemented a smart client-size fuzzy search with help
-          from the awesome <a href="https://fusejs.io/">Fuse.js</a> library,
-          making searching for icons much more forgiving.
+          I took it as an opportunity to try out some new tools in the React
+          ecosystem. TypeScript formed the foundation for less buggy code with
+          more compile-time guarantees. I used{" "}
+          <a href="https://recoiljs.org/">Recoil</a>, a new experimental state
+          management library from Facebook. It is an absolute joy to work with,
+          and eliminates hundreds of lines of Redux boilerplate. I implemented a
+          smart client-size fuzzy search with help from the awesome{" "}
+          <a href="https://fusejs.io/">Fuse.js</a> library, making searching for
+          icons much more forgiving.
         </p>
         <figure>
           <picture>
@@ -888,11 +1028,11 @@ ReactDOM.render(<App />, document.getElementById("root"));
             />
           </picture>
           <figcaption>
-            The final <a href="https://phosphoricons.com">phosphoricons.com</a>
+            <a href="https://phosphoricons.com">phosphoricons.com</a>
           </figcaption>
         </figure>
         <p>
-          Ultimatley, we managed to pack a ton of ergonomic features into a
+          Ultimately, we managed to pack a ton of ergonomic features into a
           simple and straightforward one-page site, and even received some
           accolades from sites like:{" "}
         </p>
@@ -921,9 +1061,17 @@ ReactDOM.render(<App />, document.getElementById("root"));
             <a href="https://onepagelove.com/phosphor-icons">One Page Love</a>
           </li>
         </ul>
-        <p></p>
-        <h2>Looking ahead</h2>
-        <p></p>
+        <Heading id="looking-ahead">Looking ahead</Heading>
+        <p>
+          We continue to grow the library, using analytics and feedback from the
+          community to add the most-needed icons first. We hope to expand to
+          support more use-cases for developers and designers alike. A{" "}
+          <a href="https://github.com/phosphor-icons/phosphor-flutter">
+            Flutter library
+          </a>{" "}
+          is already on the way, and we are planning Sketch support via a
+          library and/or plugin down the road.
+        </p>
       </>
     ),
   },
