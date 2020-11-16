@@ -27,7 +27,7 @@
 
 .link {
   display: inline-flex;
-  align-items: flex-start;
+  align-items: center;
   color: inherit;
   text-decoration: none;
 }
@@ -82,10 +82,10 @@ a.back-arrow {
   height: 32px;
 }
 
-@media screen and (min-width: 1024px) {
+@media screen and (min-width: 1025px) {
 }
 
-@media screen and (max-width: 1023px) {
+@media screen and (max-width: 1024px) {
   .detail {
     display: unset;
     overflow-y: auto;
@@ -142,7 +142,7 @@ a.back-arrow {
   }
 }
 
-@media screen and (min-width: 561px) and (max-width: 1023px) {
+@media screen and (min-width: 561px) and (max-width: 1024px) {
 }
 
 @media screen and (max-width: 560px) {
