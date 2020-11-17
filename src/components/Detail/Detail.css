@@ -55,6 +55,7 @@ a.back-arrow {
 .title-content,
 .panel-content {
   padding: 80px;
+  max-width: 720px;
 }
 
 .title-content {
@@ -83,6 +84,9 @@ a.back-arrow {
 }
 
 @media screen and (min-width: 1025px) {
+  .left {
+    max-width: 800px;
+  }
 }
 
 @media screen and (max-width: 1024px) {
