@@ -94,8 +94,6 @@ pre ::selection {
   }
 
   .container {
-    /* height: 200vh; */
-    /* overflow-x: hidden;
-    overflow-y: auto; */
+    position: relative;
   }
 }
