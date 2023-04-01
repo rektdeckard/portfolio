@@ -5,7 +5,7 @@ import {
   GlobeHemisphereWest,
   PencilLine,
   IconContext,
-} from "phosphor-react";
+} from "@phosphor-icons/react";
 import Select from "react-dropdown-select";
 
 import "./IconPalette.css";
@@ -69,7 +69,8 @@ const IconPalette: React.FC<{}> = () => {
           // value={{ size, color: "#FFD171", weight, mirrored: false }} // Yellow
           // value={{ size, color: "#A8FF60", weight, mirrored: false }} // Green
           // value={{ size, color: "#96CBFE", weight, mirrored: false }} // Blue
-          value={{ size, color: "#C6C5FE", weight, mirrored: false }} // Lavender
+          // value={{ size, color: "#C6C5FE", weight, mirrored: false }} // Lavender
+          value={{ size, color: "#c4e456", weight, mirrored: false }} // Acid
           // value={{ size, color: "#FF73FD", weight, mirrored: false }} // Magenta
         >
           <RocketLaunch />

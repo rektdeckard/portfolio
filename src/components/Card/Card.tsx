@@ -2,7 +2,7 @@ import React, { useMemo, forwardRef } from "react";
 import { Link } from "react-router-dom";
 import { motion, Variants } from "framer-motion";
 import { InertiaOptions } from "framer-motion/types/gestures/drag/types";
-import { ArrowsOutSimple } from "phosphor-react";
+import { ArrowsOutSimple } from "@phosphor-icons/react";
 
 import "./Card.css";
 import { Project } from "../../data";

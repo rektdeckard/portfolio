@@ -7,15 +7,15 @@ import {
   GitBranch,
   IconContext,
   LinkedinLogo,
-} from "phosphor-react";
-import { IconContextProps } from "phosphor-react/dist/lib";
+  IconProps,
+} from "@phosphor-icons/react";
 
 const variants = {
   start: { opacity: 0 },
   end: { opacity: 1, transition: { duration: 0.5, delay: 0.2 } },
 };
 
-const iconStyle: IconContextProps = {
+const iconStyle: IconProps = {
   size: 24,
   weight: "fill",
   color: "currentColor",

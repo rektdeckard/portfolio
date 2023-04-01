@@ -1,5 +1,5 @@
 import React from "react";
-import { LinkSimple } from "phosphor-react";
+import { LinkSimple } from "@phosphor-icons/react";
 import "./Heading.css";
 
 interface HeadingProps {

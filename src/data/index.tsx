@@ -2,13 +2,14 @@ import React from "react";
 import { Link } from "react-router-dom";
 import {
   Icon,
+  DeviceMobileSpeaker,
   HandPointing,
-  Translate,
   Lightbulb,
   NewspaperClipping,
   PhosphorLogo,
-  DeviceMobileSpeaker,
-} from "phosphor-react";
+  Rss,
+  Translate,
+} from "@phosphor-icons/react";
 
 import Heading from "../components/Heading/Heading";
 import Snippet from "../components/Snippet/Snippet";
@@ -29,8 +30,12 @@ import cockpit_gauges_png from "../assets/cockpit-gauges.png";
 import helena_spec_webp from "../assets/helenazhang-spec.webp";
 import helena_spec_png from "../assets/helenazhang-spec.png";
 import huebert_controls_svg from "../assets/huebert-controls.svg";
-import phosphor_site_png from "../assets/phosphor-css-nectar.png";
-import phosphor_site_webp from "../assets/phosphor-css-nectar.webp";
+import phosphor_site_png from "../assets/phosphor_site.png";
+import phosphor_site_webp from "../assets/phosphor_site.webp";
+// @ts-ignore
+import y_reader_video from "../assets/y-reader-video.mp4";
+// @ts-ignore
+import y_reader_video_hevc from "../assets/y-reader-video-hevc.mp4";
 
 export interface Project {
   id: string;
@@ -294,8 +299,7 @@ function shortestPath(source, target) {
     id: "cockpit",
     title: "Cockpit",
     description: "An immersive, techy dashboard for Android",
-    url:
-      "https://drive.google.com/drive/folders/1-0a62_LKvpX1713hEUAV4s-360yzdqwe?usp=sharing",
+    url: "https://drive.google.com/drive/folders/1-0a62_LKvpX1713hEUAV4s-360yzdqwe?usp=sharing",
     year: 2018,
     // color: "#6FD2B9",
     color: "#60F0C4",
@@ -306,9 +310,9 @@ function shortestPath(source, target) {
       <>
         <Heading id="digital-detox">Digital detox...lite</Heading>
         <p>
-          Our phones are basically digital drugs. Colorful app icons, badges
-          and notifications vying for our attention at every minute. It's tough
-          to resist, and I'd be the first to admit I have a problem. So when I
+          Our phones are basically digital drugs. Colorful app icons, badges and
+          notifications vying for our attention at every minute. It's tough to
+          resist, and I'd be the first to admit I have a problem. So when I
           discovered that with an Android phone and some special tools I could
           entirely replace the addictive homescreen paradigm with whatever I
           could dream up, I decided to make something that would, hopefully,
@@ -860,6 +864,8 @@ if (canvas) {
     url: "https://phosphoricons.com",
     year: 2020,
     Icon: PhosphorLogo,
+    // color: "",
+    accent: "#c4e456",
     content: (
       <>
         <Heading id="an-obsession">An obsession</Heading>
@@ -1084,6 +1090,95 @@ ReactDOM.render(<App />, document.getElementById("root"));
           is already on the way, and we are planning Sketch support via a
           library and/or plugin down the road.
         </p>
+      </>
+    ),
+  },
+  {
+    id: "y-reader",
+    title: "YReader",
+    description: "A modern Hacker News desktop client",
+    year: 2022,
+    url: "https://github.com/rektdeckard/y-reader",
+    color: "#000000",
+    accent: "#FE7820",
+    theme: "a11y-light",
+    Icon: Rss,
+    content: (
+      <>
+        <Heading id="nth">The gap</Heading>
+        <p>
+          It's hard to really justify how bad the Hacker News website is,
+          considering its pedigree and adjacency to so much tech capital.
+        </p>
+        <figure>
+          <video autoPlay loop width="100%">
+            <source src={y_reader_video_hevc} type="video/mp4" />
+            <source src={y_reader_video} type="video/mp4" />
+          </video>
+          <figcaption>YReader Hacker News client</figcaption>
+        </figure>
+        <Heading id="something">Something</Heading>
+        <p>Maybe more things here, lorem ipsum</p>
+        <Callout accent="#FE7820">
+          <p>YOYOYOYO</p>
+        </Callout>
+        <p>Maybe more things here, lorem ipsum</p>
+        <Snippet
+          language="rust"
+          caption="Using egui immediate-mode UI crate to build rich apps"
+        >
+          {`\
+impl YReader {
+    fn init(&self) {
+        let data_top = Arc::clone(&self.data);
+        thread::spawn(move || loop {
+            let client = JsonClient::new();
+            let ids = client.top_stories();
+            if let Ok(ids) = ids {
+                let page;
+                {
+                    let data = data_top.lock().unwrap();
+                    page = data.top_page;
+                }
+                for (idx, id) in ids.iter().take(WINDOW * (page + 1)).enumerate() {
+                    if let Ok(item) = client.item(*id) {
+                        let mut data = data_top.lock().unwrap();
+                        data.top.insert(idx, item);
+                    }
+                }
+                let mut data = data_top.lock().unwrap();
+                data.top_ids = ids;
+                data.top_page = (data.top_page + 1) % 2;
+            }
+            thread::sleep(Duration::from_secs(REFETCH_DELAY_SECONDS));
+        });
+
+        let data_new = Arc::clone(&self.data);
+        thread::spawn(move || loop {
+            let client = JsonClient::new();
+            let ids = client.new_stories();
+            if let Ok(ids) = ids {
+                let page;
+                {
+                    let data = data_new.lock().unwrap();
+                    page = data.new_page;
+                }
+                for (idx, id) in ids.iter().take(WINDOW * (page + 1)).enumerate() {
+                    if let Ok(item) = client.item(*id) {
+                        let mut data = data_new.lock().unwrap();
+                        data.new.insert(idx, item);
+                    }
+                }
+                let mut data = data_new.lock().unwrap();
+                data.new_ids = ids;
+                data.new_page = (data.new_page + 1) % 2;
+            }
+            thread::sleep(Duration::from_secs(REFETCH_DELAY_SECONDS));
+        });
+    }
+}
+`}
+        </Snippet>
       </>
     ),
   },

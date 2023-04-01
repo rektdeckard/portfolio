@@ -1,7 +1,7 @@
 import React from "react";
 import { Link, useParams } from "react-router-dom";
 import { motion, Variants, Transition } from "framer-motion";
-import { ArrowBendUpLeft, ArrowUpRight, SmileyXEyes } from "phosphor-react";
+import { ArrowBendUpLeft, ArrowUpRight, SmileyXEyes } from "@phosphor-icons/react";
 
 import { projects } from "../../data";
 import "./Detail.css";

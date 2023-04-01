@@ -1,6 +1,6 @@
 import React from "react";
 import { Prism, SyntaxHighlighterProps } from "react-syntax-highlighter";
-import { atomDark as style } from "react-syntax-highlighter/dist/esm/styles/prism";
+import { cb as style } from "react-syntax-highlighter/dist/esm/styles/prism";
 
 const prismProps: SyntaxHighlighterProps = {
   style,

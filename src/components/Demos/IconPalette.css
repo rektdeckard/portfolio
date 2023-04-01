@@ -1,6 +1,6 @@
 .icon-palette {
   margin: 0.5em 0;
-  background-color: #1d1f21;
+  background-color: #343330;
   border-radius: 6px;
 }
 
@@ -84,18 +84,18 @@
   color: black;
 }
 .react-dropdown-select-item:hover {
-  background-color: #ffd171 !important;
+  background-color: #c4e456 !important;
 }
 
 .react-dropdown-select-item.react-dropdown-select-item-selected,
 .react-dropdown-select-item.react-dropdown-select-item-active {
   color: black !important;
-  background-color: #ffd171 !important;
+  background-color: #c4e456 !important;
 }
 
 .react-dropdown-select-item:focus {
   color: black !important;
-  background-color: #ffd171 !important;
+  background-color: #c4e456 !important;
 }
 
 .react-dropdown-select-item.react-dropdown-select-item-disabled {

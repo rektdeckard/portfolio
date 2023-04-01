@@ -1,4 +1,4 @@
-import { LinkBreak } from "phosphor-react";
+import { LinkBreak } from "@phosphor-icons/react";
 import React from "react";
 import "./ErrorBoundary.css";
 
