@@ -7,6 +7,7 @@ import {
   GitBranch,
   IconContext,
   LinkedinLogo,
+  TwitterLogo,
   IconProps,
 } from "@phosphor-icons/react";
 
@@ -40,6 +41,9 @@ const Header: React.FC<{}> = () => {
         <div className="links">
           <a href="https://github.com/rektdeckard">
             <GitBranch /> GitHub
+          </a>
+          <a href="https://twitter.com/friedtm">
+            <TwitterLogo /> Twitter
           </a>
           <a href="https://linkedin.com/in/tobiasfried">
             <LinkedinLogo /> LinkedIn

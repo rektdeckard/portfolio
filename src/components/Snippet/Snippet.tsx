@@ -1,6 +1,6 @@
 import React from "react";
 import { Prism, SyntaxHighlighterProps } from "react-syntax-highlighter";
-import { cb as style } from "react-syntax-highlighter/dist/esm/styles/prism";
+import { tomorrow as style } from "react-syntax-highlighter/dist/esm/styles/prism";
 
 const prismProps: SyntaxHighlighterProps = {
   style,
@@ -20,7 +20,7 @@ const Snippet: React.FC<SnippetProps> = ({
   children,
 }) => {
   return (
-    <figure style={{ flex: 1 }}>
+    <figure>
       <Prism {...prismProps} language={language}>
         {children}
       </Prism>

@@ -4,6 +4,7 @@ import {
   Icon,
   DeviceMobileSpeaker,
   HandPointing,
+  Gauge,
   Lightbulb,
   NewspaperClipping,
   PhosphorLogo,
@@ -27,6 +28,8 @@ import cockpit_webp from "../assets/cockpit.webp";
 import cockpit_png from "../assets/cockpit.png";
 import cockpit_gauges_webp from "../assets/cockpit-gauges.webp";
 import cockpit_gauges_png from "../assets/cockpit-gauges.png";
+import gejji_svg from "../assets/gejji3d.svg";
+import gejji_hist_svg from "../assets/gejji3d_hist.svg";
 import helena_spec_webp from "../assets/helenazhang-spec.webp";
 import helena_spec_png from "../assets/helenazhang-spec.png";
 import huebert_controls_svg from "../assets/huebert-controls.svg";
@@ -143,7 +146,7 @@ function shortestPath(source, target) {
       }
     }
   }
-};
+};\
 `}
         </Snippet>
         <p>
@@ -401,7 +404,7 @@ let mapQueryUrl = \`https://maps.googleapis.com/maps/api/staticmap?\` +
   }|color:\${labelColor}\` +
   \`&style=feature:road.highway|element:geometry.fill|color:\${highwayColor}\` +
   // ...About 40 more repetitive style parameters... 
-  \`&key\${API_KEY}\`;
+  \`&key\${API_KEY}\`;\
 `}
         </Snippet>
         <p>
@@ -547,7 +550,7 @@ const options = {
 fetch("http://<BRIDGE_IP>/api/groups/<GROUP_NUMBER>", options)
   .then((res) => res.json())
   // Update application state accordingly
-  .then((res) => updateLights(res));
+  .then((res) => updateLights(res));\
 `}
         </Snippet>
         <Heading id="deceptively-simple">
@@ -744,7 +747,7 @@ fetch("http://<BRIDGE_IP>/api/groups/<GROUP_NUMBER>", options)
   </body>
   <script src="/js/static.js"></script>
   <script src="/js/quote.js"></script>
-</html>          
+</html>\
 `}
         </Snippet>
         <p>
@@ -810,7 +813,7 @@ if (canvas) {
     noise(context);
     requestAnimationFrame(loop);
   })();
-};
+};\
 `}
         </Snippet>
         <p>
@@ -968,7 +971,7 @@ const App = () => {
   );
 };
 
-ReactDOM.render(<App />, document.getElementById("root"));
+ReactDOM.render(<App />, document.getElementById("root"));\
 `}
         </Snippet>
         <Heading id="automate-the-fragile-stuff">
@@ -1176,7 +1179,137 @@ impl YReader {
             thread::sleep(Duration::from_secs(REFETCH_DELAY_SECONDS));
         });
     }
-}
+}\
+`}
+        </Snippet>
+      </>
+    ),
+  },
+  {
+    id: "gejji",
+    title: "Gejji",
+    description:
+      "Monitor system performance on dedicated, retro LED indicators",
+    url: "https://github.com/rektdeckard/gejji",
+    year: 2022,
+    Icon: Gauge,
+    color: "#FDC126",
+    theme: "inverse",
+    accent: "#332d2d",
+    content: (
+      <>
+        <Heading id="retro-is-beautiful">Retro is beautiful</Heading>
+        <p>
+          In my weekend forays into embedded systems, I came up with the idea to
+          build a dedicated hardware system resource monitor to always show the
+          CPU, Memory, and I/O utilization of my computer in a beautiful
+          phyisical device. Who doesn't like a retro techy aesthetic?
+        </p>
+        <p>
+          The initial design used a simple 4 character 14-segment amber LED
+          display and an Adafruit Feather HUZZAH microcontroller for the brains.
+          It alternated showing the current CPU and Memory usage in percent,
+          collecting performance data using the{" "}
+          <a href="https://github.com/microsoft/DTrace-on-Windows">
+            DTrace for Windows
+          </a>{" "}
+          library, and streaming the data over the UART in a bespoke text
+          format. Needless to say, it only worked on Windows.
+        </p>
+        <figure>
+          <picture>
+            <source srcSet={""} type="image/webp" />
+            <img src={gejji_svg} alt="" style={{ borderRadius: 0 }} />
+          </picture>
+          <figcaption>
+            A rendering of Gejji's initial, simple display
+          </figcaption>
+        </figure>
+        <p>
+          It fit nicely on my desk, and I was happy with it, for a time. But I
+          soon wanted more information: disk and network I/O, histograms to
+          visualize the statistics over time. I also wanted a robust CLI with
+          backwards-compatibility for my original hardware, improved support for
+          things like display update interval and display brightness, and the
+          ability to run the host as a daemon so it could be started on boot
+          with no interaction and run completely in the background.
+        </p>
+
+        <Heading id="rust-for-embedded">Rust for embedded</Heading>
+        <p>
+          Seeing the opportunity for a challenge, I decided to rewrite both the
+          host and microcontroller code in Rust, using{" "}
+          <a href="https://github.com/esp-rs/espflash">espflash</a> and{" "}
+          <a href="https://mabez.dev/blog/posts/esp-rust-ecosystem/">
+            this lovely guide by Scott Mabin
+          </a>{" "}
+          to compile Rust for the ESP32 board. I chose a 128x32 pixel monochrome
+          OLED display, and wrote a primitive but effective graphing library to
+          render pretty charts. The end result looked something like this:
+        </p>
+        <figure>
+          <picture>
+            <source srcSet={""} type="image/webp" />
+            <img src={gejji_hist_svg} alt="" style={{ borderRadius: 0 }} />
+          </picture>
+          <figcaption>
+            A rendering of Gejji's later iteration, with histogram
+          </figcaption>
+        </figure>
+        <Callout accent="#332d2d">
+          <p>
+            Aside from reducing carpal tunnel risks for my partner and myself,
+            the automation and testing processes gave us a confidence we
+            couldn't get doing all of this manually.
+          </p>
+        </Callout>
+        <p>Foo</p>
+        <Snippet language="rust" caption="Serial device detection">
+          {`\
+let mut sys = System::new_with_specifics(
+  RefreshKind::everything()
+      .without_disks()
+      .without_users_list()
+      .without_components(),
+);
+
+loop {
+  sys.refresh_cpu();
+  sys.refresh_memory();
+  let cpu_usage = (sys.get_global_processor_info().get_cpu_usage() * 10.0).round() as u64;
+  let mem_usage = (((sys.get_used_memory() as f64 + sys.get_total_swap() as f64)
+      / sys.get_total_memory() as f64)
+      * 1000.0)
+      .round() as u64;
+
+  if verbose {
+      print!("{:?}", Utc::now());
+      print!(" | CPU: {}%", cpu_usage as f64 / 10.0);
+      println!(" | MEM: {}%", mem_usage as f64 / 10.0);
+  }
+
+  let json = json!({
+      "cpu": cpu_usage,
+      "mem" : mem_usage,
+      "interval": interval,
+      "bri": brightness,
+  });
+
+  match detect_device() {
+      Ok(mut dev) => {
+          dev.clear(ClearBuffer::All).expect("Could not clear buffer");
+          dev.write(json.to_string().as_bytes())
+              .expect("Could not write");
+      }
+      Err(e) => {
+          if !quiet {
+              println!("{:30} Error: {}", format!("{:?}", Utc::now()), e.description);
+          }
+      }
+  }
+
+  thread::sleep(Duration::from_secs(interval));
+}\
 `}
         </Snippet>
       </>

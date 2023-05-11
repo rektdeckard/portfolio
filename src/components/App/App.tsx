@@ -13,7 +13,7 @@ import Detail from "../Detail/Detail";
 import Copyright from "../Copyright/Copyright";
 import { projects } from "../../data";
 import "./App.css";
-// import SimpleSite from "./SimpleSite";
+import SimpleSite from "./SimpleSite";
 
 const App: React.FC<{}> = () => {
   const ref = useRef<HTMLDivElement>(null);

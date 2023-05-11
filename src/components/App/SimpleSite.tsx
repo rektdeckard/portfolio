@@ -5,8 +5,8 @@ import React, { CSSProperties } from "react";
 const styles: Record<string, CSSProperties> = {
   body: {
     width: "100vw",
-    // minHeight: "100vh",
-    // padding: 32,
+    minHeight: "100vh",
+    padding: 32,
     backgroundColor: "#141414",
     color: "lightblue",
     fontFamily: "monospace",
@@ -14,7 +14,7 @@ const styles: Record<string, CSSProperties> = {
   main: {
     maxWidth: 640,
     margin: "auto",
-    overflow: "overlay"
+    overflow: "overlay",
   },
   a: { color: "lightcyan" },
   ul: { listStyle: "sqaure" },
@@ -33,10 +33,8 @@ const SimpleSite: React.FC<{}> = () => (
     <main style={styles.main}>
       <h1>Tobias Fried</h1>
       <p>
-        Hey, I'm a full-stack engineer and maker of digital tools and toys
-        looking for a new opportunity. Let's talk about TypeScript, React vs.
-        Vue, microframeworks, SSR vs. CSR, serverless, serverful, GraphQL,
-        automation, TDD, CI/CD...
+        Hey there. I'm a full-stack engineer and maker of digital tools and
+        toys. I am currently at <a href="https://qatalog.com">Qatalog</a>.
       </p>
       <section>
         <h2>Contact</h2>
@@ -47,13 +45,13 @@ const SimpleSite: React.FC<{}> = () => (
             </a>
           </li>
           <li>
-            <a href="https://linkedin.com/in/tobiasfried" style={styles.a}>
-              LinkedIn
+            <a href="https://twitter.com/friedtm" style={styles.a}>
+              Twitter
             </a>
           </li>
           <li>
-            <a href="https://twitter.com/friedtm" style={styles.a}>
-              Twitter
+            <a href="https://linkedin.com/in/tobiasfried" style={styles.a}>
+              LinkedIn
             </a>
           </li>
           <li>
@@ -65,6 +63,22 @@ const SimpleSite: React.FC<{}> = () => (
       </section>
       <section>
         <h2>Projects</h2>
+        <article style={styles.article}>
+          <h3>
+            <a href="https://github.com/rektdeckard/gejji" style={styles.a}>
+              Gejji
+            </a>
+            <small style={styles.small}>2021</small>
+          </h3>
+          <p>Monitor system performance on dedicated, retro LCD indicators</p>
+          <ul>
+            <li>
+              <a href="https://github.com/rektdeckard/gejji" style={styles.a}>
+                GitHub
+              </a>
+            </li>
+          </ul>
+        </article>
         <article style={styles.article}>
           <h3>
             <a href="https://phosphoricons.com" style={styles.a}>
