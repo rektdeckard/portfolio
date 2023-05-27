@@ -1,12 +1,14 @@
-import React, { Suspense } from "react";
+import { lazy, Suspense } from "react";
 import "@antv/graphin/dist/index.css";
 
 import "./NetworkGraph.css";
 import data from "../../data/graph.json";
 
-const Graphin = React.lazy(() => import("@antv/graphin"));
+const Graphin = lazy(() => import("@antv/graphin"));
 
-const NetworkGraph: React.FC<{}> = () => {
+const NetworkGraph = () => {
+  console.log({ Graphin, data });
+
   return (
     <div className="graph">
       <Suspense fallback={null}>
@@ -27,8 +29,6 @@ const NetworkGraph: React.FC<{}> = () => {
           }}
           options={{
             wheelSensitivity: 4,
-            // disablePan: true,
-            // disableDrag: true,
             disableZoom: true,
           }}
         />

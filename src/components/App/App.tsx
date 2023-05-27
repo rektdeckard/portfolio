@@ -1,9 +1,8 @@
-import React, { useRef } from "react";
+import { useRef } from "react";
 import {
   BrowserRouter as Router,
-  Redirect,
   Route,
-  Switch,
+  Routes,
 } from "react-router-dom";
 import { AnimateSharedLayout } from "framer-motion";
 
@@ -13,40 +12,29 @@ import Detail from "../Detail/Detail";
 import Copyright from "../Copyright/Copyright";
 import { projects } from "../../data";
 import "./App.css";
-import SimpleSite from "./SimpleSite";
 
-const App: React.FC<{}> = () => {
+const App = () => {
   const ref = useRef<HTMLDivElement>(null);
-  // const [simple, setSimple] = useState<boolean>(false);
 
   return (
     <div className="container" ref={ref}>
       <AnimateSharedLayout type="crossfade">
         <Router>
-          <Switch>
-            <Route exact path="/">
-              {/* <span
-                className="ui toggle checkbox"
-                style={{ margin: 16, float: "right" }}
-              >
-                <input
-                  type="checkbox"
-                  checked={simple}
-                  onChange={() => setSimple((s) => !s)}
-                />
-                <label></label>
-              </span>
-              {simple ? <SimpleSite /> : <> */}
-              <Header />
-              {projects.map((project) => (
-                <Card key={project.id} {...project} ref={ref} />
-              ))}
-              <Copyright />
-              {/* </>} */}
-            </Route>
-            <Route path="/:id" component={Detail} />
-            <Redirect to="/" />
-          </Switch>
+          <Routes>
+            <Route
+              path="/"
+              element={
+                <>
+                  <Header />
+                  {projects.map((project) => (
+                    <Card key={project.id} {...project} ref={ref} />
+                  ))}
+                  <Copyright />
+                </>
+              }
+            ></Route>
+            <Route path="/:id" Component={Detail} />
+          </Routes>
         </Router>
       </AnimateSharedLayout>
     </div>

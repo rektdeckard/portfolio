@@ -1,7 +1,6 @@
-import React from "react";
 import "./Copyright.css";
 
-const Copyright: React.FC<{}> = () => (
+const Copyright = () => (
   <footer className="copyright">
     <p>Copyright © {new Date().getFullYear()} Tobias Fried</p>
     <p>

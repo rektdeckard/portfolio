@@ -1,4 +1,3 @@
-import React from "react";
 import { motion } from "framer-motion";
 
 import "./Header.css";
@@ -7,6 +6,7 @@ import {
   GitBranch,
   IconContext,
   LinkedinLogo,
+  MediumLogo,
   TwitterLogo,
   IconProps,
 } from "@phosphor-icons/react";
@@ -24,7 +24,7 @@ const iconStyle: IconProps = {
   style: { marginRight: 8 },
 };
 
-const Header: React.FC<{}> = () => {
+const Header = () => {
   return (
     <motion.header variants={variants} initial="start" animate="end">
       <h1 className="intro">
@@ -47,6 +47,9 @@ const Header: React.FC<{}> = () => {
           </a>
           <a href="https://linkedin.com/in/tobiasfried">
             <LinkedinLogo /> LinkedIn
+          </a>
+          <a href="https://medium.com/@friedtm">
+            <MediumLogo /> Medium
           </a>
           <a href="mailto:friedtm@gmail.com">
             <EnvelopeSimple /> Email

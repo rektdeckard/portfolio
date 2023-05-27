@@ -1,7 +1,7 @@
-import React, { useState } from "react";
+import { useState } from "react";
 import "./SliderCard.css";
 
-const SliderCard: React.FC<{}> = () => {
+const SliderCard = () => {
   const [powerState, setPowerState] = useState<boolean>(true);
   const [brightness, setBrightness] = useState<number>(220);
   const alpha = +powerState && brightness / 255;

@@ -1,4 +1,4 @@
-import React, { useState } from "react";
+import { useState, UIEvent } from "react";
 import {
   RocketLaunch,
   GameController,
@@ -46,18 +46,18 @@ const options: WeightOption[] = [
   },
 ];
 
-const IconPalette: React.FC<{}> = () => {
+const IconPalette = () => {
   const [size, setSize] = useState<number>(64);
   const [weight, setWeight] = useState<Weight>("light");
 
   const handleStyleChange = (values: WeightOption[]) =>
     setWeight(values[0].value as Weight);
 
-  const handleFocus = (event: React.UIEvent<HTMLInputElement>) => {
+  const handleFocus = (event: UIEvent<HTMLInputElement>) => {
     event.currentTarget.focus();
   };
 
-  const handleBlur = (event: React.UIEvent<HTMLInputElement>) => {
+  const handleBlur = (event: UIEvent<HTMLInputElement>) => {
     event.currentTarget.blur();
   };
 

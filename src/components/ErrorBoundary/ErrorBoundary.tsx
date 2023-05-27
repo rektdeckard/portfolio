@@ -1,5 +1,5 @@
+import { Component, ReactNode } from "react";
 import { LinkBreak } from "@phosphor-icons/react";
-import React from "react";
 import "./ErrorBoundary.css";
 
 interface ErrorState {
@@ -7,8 +7,12 @@ interface ErrorState {
   error?: Error;
 }
 
-class ErrorBoundary extends React.Component<Object, ErrorState> {
-  constructor(props: Object) {
+interface AnyContent extends Object {
+  children?: ReactNode;
+}
+
+class ErrorBoundary extends Component<AnyContent, ErrorState> {
+  constructor(props: AnyContent) {
     super(props);
     this.state = { hasError: false };
   }
@@ -23,10 +27,12 @@ class ErrorBoundary extends React.Component<Object, ErrorState> {
 
   render() {
     if (this.state.hasError) {
-      return <div className="error-container">
-        <LinkBreak size={128} weight="duotone" />
-        <p>Oops, something went wrong!</p>
-      </div>;
+      return (
+        <div className="error-container">
+          <LinkBreak size={128} weight="duotone" />
+          <p>Oops, something went wrong!</p>
+        </div>
+      );
     }
 
     return this.props.children;

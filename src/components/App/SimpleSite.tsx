@@ -1,4 +1,4 @@
-import React, { CSSProperties } from "react";
+import { CSSProperties } from "react";
 
 // import "./SimpleSite.css";
 
@@ -28,7 +28,7 @@ const styles: Record<string, CSSProperties> = {
   small: { float: "right" },
 };
 
-const SimpleSite: React.FC<{}> = () => (
+const SimpleSite = () => (
   <div style={styles.body}>
     <main style={styles.main}>
       <h1>Tobias Fried</h1>

@@ -1,7 +1,11 @@
-import React from "react";
-import { Link, useParams } from "react-router-dom";
+import { useEffect, useLayoutEffect } from "react";
+import { Link, Navigate, useLocation, useParams } from "react-router-dom";
 import { motion, Variants, Transition } from "framer-motion";
-import { ArrowBendUpLeft, ArrowUpRight, SmileyXEyes } from "@phosphor-icons/react";
+import {
+  ArrowBendUpLeft,
+  ArrowUpRight,
+  SmileyXEyes,
+} from "@phosphor-icons/react";
 
 import { projects } from "../../data";
 import "./Detail.css";
@@ -24,10 +28,23 @@ const fallback = (
   </div>
 );
 
-interface DetailProps {}
-
-const Detail: React.FC<DetailProps> = () => {
+const Detail = () => {
   const { id } = useParams<{ id: string }>();
+  const { hash } = useLocation();
+
+  useLayoutEffect(() => {
+    if (!hash) return;
+
+    const anchor = document.querySelector(hash);
+    if (!anchor) return;
+
+    anchor.scrollIntoView({ block: "start" });
+  }, [hash]);
+
+  const project = projects?.find((p) => p.id === id!.toLowerCase());
+
+  if (!project) return <Navigate to="/" />;
+
   const {
     title,
     description = "Sorry, that doesn't exist!",
@@ -37,7 +54,7 @@ const Detail: React.FC<DetailProps> = () => {
     accent = "#FFD171",
     content,
     theme,
-  } = projects.find((p) => p.id === id.toLowerCase()) || {};
+  } = project;
 
   return (
     <>
@@ -49,7 +66,6 @@ const Detail: React.FC<DetailProps> = () => {
           animate="end"
           exit="start"
           transition={transition}
-          // style={{ pointerEvents: "auto" }}
         >
           <motion.div
             variants={variants}
@@ -57,7 +73,6 @@ const Detail: React.FC<DetailProps> = () => {
             animate="end"
             exit="start"
             transition={transition}
-            // style={{ pointerEvents: "auto" }}
             className="overlay"
           />
           <div className="detail">
@@ -77,11 +92,11 @@ const Detail: React.FC<DetailProps> = () => {
                     <h1 className={theme}>{description}</h1>
                   </motion.div>
                   {title && (
-                   <div style={{ flex: 1 }}>
+                    <div style={{ flex: 1 }}>
                       <a href={url} className={`large-text link ${theme}`}>
                         {title} <ArrowUpRight size={24} />
                       </a>
-                   </div>
+                    </div>
                   )}
                   <motion.div animate>
                     <span className={`large-text ${theme}`}>{year}</span>

@@ -1,11 +1,12 @@
-import React from "react";
+import { ReactNode } from "react";
 import "./Callout.css";
 
 interface CalloutProps {
   accent?: string;
+  children?: ReactNode;
 }
 
-const Callout: React.FC<CalloutProps> = ({ accent = "black", children }) => {
+const Callout = ({ accent = "black", children }: CalloutProps) => {
   return (
     <blockquote className="callout">
       <div className="callout-bar" style={{ backgroundColor: accent }} />

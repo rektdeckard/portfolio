@@ -1,4 +1,4 @@
-import React, { useMemo, forwardRef } from "react";
+import { useMemo, forwardRef, RefObject } from "react";
 import { Link } from "react-router-dom";
 import { motion, Variants } from "framer-motion";
 import { InertiaOptions } from "framer-motion/types/gestures/drag/types";
@@ -6,6 +6,14 @@ import { ArrowsOutSimple } from "@phosphor-icons/react";
 
 import "./Card.css";
 import { Project } from "../../data";
+
+function formatYear(
+  yearOrRange: number | readonly [start: number, end?: number]
+): string {
+  return Array.isArray(yearOrRange)
+    ? `${yearOrRange[0]}—${yearOrRange[1] ?? ''}`
+    : yearOrRange.toString();
+}
 
 const dragTransition: InertiaOptions = { timeConstant: 50, power: 0.1 };
 
@@ -57,7 +65,7 @@ const Card = forwardRef<HTMLDivElement, Project>(
         whileHover="hover"
         whileTap="dragging"
         drag
-        dragConstraints={ref as React.RefObject<HTMLDivElement>}
+        dragConstraints={ref as RefObject<HTMLDivElement>}
         dragTransition={dragTransition}
       >
         <Icon size={32} />
@@ -65,7 +73,7 @@ const Card = forwardRef<HTMLDivElement, Project>(
           <h2>{description}</h2>
         </Link>
         <p style={{ flex: 1 }}>{title}</p>
-        <p>{year}</p>
+        <p>{formatYear(year)}</p>
       </motion.div>
     );
   }

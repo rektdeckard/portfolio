@@ -1,21 +1,21 @@
-import React, { useMemo, useState, useEffect } from "react";
+import { useMemo, useState, useEffect, ReactNode, HTMLAttributes } from "react";
 import { motion } from "framer-motion";
 import useIsInViewport from "use-is-in-viewport";
 
 import "./ChatBubbles.css";
 
-interface BubbleProps extends React.HTMLAttributes<HTMLDivElement> {
+interface BubbleProps extends HTMLAttributes<HTMLDivElement> {
   from?: "me" | "you" | "us";
   index?: number;
 }
 
-const Bubble: React.FC<BubbleProps> = ({
+const Bubble = ({
   from = "us",
   index = 0,
   children,
   className,
   style,
-}) => {
+}: BubbleProps) => {
   const [isInViewport, targetRef] = useIsInViewport({ threshold: 50 });
   const [hasBecomeVisible, setHasBecomeVisible] = useState<boolean>(false);
 
@@ -63,10 +63,10 @@ const Bubble: React.FC<BubbleProps> = ({
 };
 
 interface ChatBubbleProps {
-  messages?: ReadonlyArray<BubbleProps & { content: React.ReactNode }>;
+  messages?: ReadonlyArray<BubbleProps & { content?: ReactNode }>;
 }
 
-const ChatBubbles: React.FC<ChatBubbleProps> = ({ messages = [] }) => {
+const ChatBubbles = ({ messages = [] }: ChatBubbleProps) => {
   return (
     <div className="bubbles">
       {messages.map((message, i) => (

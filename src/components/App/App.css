@@ -55,6 +55,10 @@ figcaption {
   text-align: center;
 }
 
+.square {
+  border-radius: 0;
+}
+
 h1 {
   font-size: 48px;
 }

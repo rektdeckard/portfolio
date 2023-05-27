@@ -1,4 +1,4 @@
-import React from "react";
+import { ReactNode } from "react";
 import { Prism, SyntaxHighlighterProps } from "react-syntax-highlighter";
 import { tomorrow as style } from "react-syntax-highlighter/dist/esm/styles/prism";
 
@@ -12,6 +12,7 @@ const prismProps: SyntaxHighlighterProps = {
 interface SnippetProps {
   caption?: string;
   language?: string;
+  children?: ReactNode;
 }
 
 const Snippet: React.FC<SnippetProps> = ({
@@ -21,6 +22,7 @@ const Snippet: React.FC<SnippetProps> = ({
 }) => {
   return (
     <figure>
+      {/* @ts-ignore */}
       <Prism {...prismProps} language={language}>
         {children}
       </Prism>

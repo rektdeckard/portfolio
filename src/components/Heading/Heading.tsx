@@ -1,9 +1,10 @@
-import React from "react";
+import { ReactNode } from "react";
 import { LinkSimple } from "@phosphor-icons/react";
 import "./Heading.css";
 
 interface HeadingProps {
   id: string;
+  children?: ReactNode;
 }
 
 const Heading: React.FC<HeadingProps> = ({ id, children }) => (

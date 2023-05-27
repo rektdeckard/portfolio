@@ -1,4 +1,4 @@
-import React from "react";
+import { ReactNode, ReactElement } from "react";
 import { Link } from "react-router-dom";
 import {
   Icon,
@@ -44,13 +44,13 @@ export interface Project {
   id: string;
   title: string;
   description: string;
-  year: number;
+  year: number | readonly [start: number, end?: number];
   url: string;
   color?: string;
   accent?: string;
   theme?: string;
   Icon?: Icon;
-  content?: React.ReactNode;
+  content?: ReactNode;
 }
 
 export const projects: ReadonlyArray<Project> = [
@@ -213,7 +213,7 @@ function shortestPath(source, target) {
                       🤦🏾‍♀️
                     </span>
                   </>
-                ),
+                ) as any,
               },
               {
                 from: "you",
@@ -865,7 +865,7 @@ if (canvas) {
     title: "Phosphor Icons",
     description: "An open source icon library for React, Vue, and vanilla JS",
     url: "https://phosphoricons.com",
-    year: 2020,
+    year: [2020],
     Icon: PhosphorLogo,
     // color: "",
     accent: "#c4e456",
@@ -922,23 +922,12 @@ if (canvas) {
           </a>
           , but also exposing an intuitive API and writing great documentation.
         </p>
-        <Callout accent="#FFD171">
+        <Callout accent="#c4e456">
           <p>
             We wanted to make an icon library that was as easy to learn as it
             was to use, covered the vast majority of platforms, and just worked.
           </p>
         </Callout>
-        <p>
-          <del>
-            A lot of UI Toolkits out there enforce their own design system
-            guidelines on the library user; components can have one of six color
-            variants, one of four size variants, and so on. The problem with
-            this approach is that most applications call for their own colors,
-            sizes, and other variants, and changing these defaults inevitably
-            requires mucking around in CSS preprocesser variables or worse — the
-            dreaded <code>!important</code> directive.
-          </del>
-        </p>
         <p>
           Taking advantage of React's <code>Context API</code> and Vue's{" "}
           <code>provide/inject</code> feature, I brought stateful local and
@@ -949,7 +938,7 @@ if (canvas) {
         <Snippet caption="Using React Context to apply default icon styles">
           {`\
 import React from "react";
-import ReactDOM from "react-dom";
+import { createRoot } from 'react-dom/client';
 import { IconContext, Horse, Heart, Cube } from "phosphor-react";
 
 const App = () => {
@@ -971,7 +960,7 @@ const App = () => {
   );
 };
 
-ReactDOM.render(<App />, document.getElementById("root"));\
+createRoot(document.getElementById('root')!).render(<App />);\
 `}
         </Snippet>
         <Heading id="automate-the-fragile-stuff">
@@ -1014,7 +1003,7 @@ ReactDOM.render(<App />, document.getElementById("root"));\
           in its many variants and sizes, arranged to visually highlight
           inconsistencies.
         </p>
-        <Callout accent="#FFD171">
+        <Callout accent="#c4e456">
           <p>
             Aside from reducing carpal tunnel risks for my partner and myself,
             the automation and testing processes gave us a confidence we
@@ -1111,7 +1100,20 @@ ReactDOM.render(<App />, document.getElementById("root"));\
         <Heading id="nth">The gap</Heading>
         <p>
           It's hard to really justify how bad the Hacker News website is,
-          considering its pedigree and adjacency to so much tech capital.
+          considering its pedigree and adjacency to so much tech capital. Yes,
+          it works, and it is impressive that it still{" "}
+          <a href="https://news.ycombinator.com/item?id=16076041">
+            runs on a single, on-prem server
+          </a>
+          . But the UX is dated, and it is not so enjoyable to browse via the
+          official website.
+        </p>
+        <p>
+          I am far from the first person to come to this conclusion, as there
+          are literally thousands of <abbr title="Hacker News">HN</abbr> clients
+          out there. But I took this opportunity to explore cross-platform
+          graphical application development in Rust, and resolved to write my
+          own client.
         </p>
         <figure>
           <video autoPlay loop width="100%">
@@ -1195,7 +1197,7 @@ impl YReader {
     Icon: Gauge,
     color: "#FDC126",
     theme: "inverse",
-    accent: "#332d2d",
+    accent: "#333333",
     content: (
       <>
         <Heading id="retro-is-beautiful">Retro is beautiful</Heading>
@@ -1203,7 +1205,7 @@ impl YReader {
           In my weekend forays into embedded systems, I came up with the idea to
           build a dedicated hardware system resource monitor to always show the
           CPU, Memory, and I/O utilization of my computer in a beautiful
-          phyisical device. Who doesn't like a retro techy aesthetic?
+          phyisical device. Who doesn't like a retro techy gadget?
         </p>
         <p>
           The initial design used a simple 4 character 14-segment amber LED
@@ -1214,12 +1216,13 @@ impl YReader {
             DTrace for Windows
           </a>{" "}
           library, and streaming the data over the UART in a bespoke text
-          format. Needless to say, it only worked on Windows.
+          format. It only worked on Windows and was pretty finnicky, but it was
+          damn cool.
         </p>
         <figure>
           <picture>
             <source srcSet={""} type="image/webp" />
-            <img src={gejji_svg} alt="" style={{ borderRadius: 0 }} />
+            <img src={gejji_svg} alt="" className="square" />
           </picture>
           <figcaption>
             A rendering of Gejji's initial, simple display
@@ -1235,84 +1238,85 @@ impl YReader {
           with no interaction and run completely in the background.
         </p>
 
-        <Heading id="rust-for-embedded">Rust for embedded</Heading>
+        <Heading id="redesign">Redesign</Heading>
         <p>
-          Seeing the opportunity for a challenge, I decided to rewrite both the
-          host and microcontroller code in Rust, using{" "}
-          <a href="https://github.com/esp-rs/espflash">espflash</a> and{" "}
-          <a href="https://mabez.dev/blog/posts/esp-rust-ecosystem/">
-            this lovely guide by Scott Mabin
-          </a>{" "}
-          to compile Rust for the ESP32 board. I chose a 128x32 pixel monochrome
-          OLED display, and wrote a primitive but effective graphing library to
-          render pretty charts. The end result looked something like this:
+          I chose a 128x32 pixel monochrome OLED display, and wrote a primitive
+          but effective graphing library to render pretty histograms. The end
+          result looked something like this:
         </p>
         <figure>
           <picture>
             <source srcSet={""} type="image/webp" />
-            <img src={gejji_hist_svg} alt="" style={{ borderRadius: 0 }} />
+            <img src={gejji_hist_svg} alt="" className="square" />
           </picture>
           <figcaption>
             A rendering of Gejji's later iteration, with histogram
           </figcaption>
         </figure>
-        <Callout accent="#332d2d">
-          <p>
-            Aside from reducing carpal tunnel risks for my partner and myself,
-            the automation and testing processes gave us a confidence we
-            couldn't get doing all of this manually.
-          </p>
-        </Callout>
-        <p>Foo</p>
-        <Snippet language="rust" caption="Serial device detection">
+        <p>
+          The memory limitation led me to implement a simple Ring Buffer to
+          store chronological data and to write and read efficiently without
+          allocation. This also resulted in quite simple rendering code.
+        </p>
+        <Snippet language="cpp" caption="Simple histogram drawing code">
           {`\
-let mut sys = System::new_with_specifics(
-  RefreshKind::everything()
-      .without_disks()
-      .without_users_list()
-      .without_components(),
-);
+void drawHistogram(&Adafruit_GFX display, int *data, int offset, Edge edge)
+{
+    for(int i = offset, x = 0; x < display.width(); --i, ++x) {
+        if (i < 0)
+            i = display.width() - 1;
 
-loop {
-  sys.refresh_cpu();
-  sys.refresh_memory();
-  let cpu_usage = (sys.get_global_processor_info().get_cpu_usage() * 10.0).round() as u64;
-  let mem_usage = (((sys.get_used_memory() as f64 + sys.get_total_swap() as f64)
-      / sys.get_total_memory() as f64)
-      * 1000.0)
-      .round() as u64;
+        int16_t column = display.width() - x - 1;
 
-  if verbose {
-      print!("{:?}", Utc::now());
-      print!(" | CPU: {}%", cpu_usage as f64 / 10.0);
-      println!(" | MEM: {}%", mem_usage as f64 / 10.0);
-  }
-
-  let json = json!({
-      "cpu": cpu_usage,
-      "mem" : mem_usage,
-      "interval": interval,
-      "bri": brightness,
-  });
-
-  match detect_device() {
-      Ok(mut dev) => {
-          dev.clear(ClearBuffer::All).expect("Could not clear buffer");
-          dev.write(json.to_string().as_bytes())
-              .expect("Could not write");
-      }
-      Err(e) => {
-          if !quiet {
-              println!("{:30} Error: {}", format!("{:?}", Utc::now()), e.description);
-          }
-      }
-  }
-
-  thread::sleep(Duration::from_secs(interval));
+        switch (edge) {
+        case Edge::Top:
+            display.drawLine(
+                column,
+                0,
+                column,
+                (data[i] * display.height()) / Y_SCALE,
+                WHITE);
+            break;
+        case Edge::Bottom:
+            display.drawLine(
+                column,
+                display.height(),
+                column,
+                (display.height() - data[i] * display.height()) / Y_SCALE,
+                WHITE);
+            break;
+        }
+    }
 }\
 `}
         </Snippet>
+        <p>
+          With the help of the{" "}
+          <a href="https://crates.io/crates/sysinfo">sysinfo</a> crate and some
+          handy macros, we could now build and run cross-platform, and even
+          daemonize the host to make it simple to start at boot.
+        </p>
+
+        <Heading id="rust-for-embedded">Detour into Rust for embedded</Heading>
+        <p>
+          Given that the host code was already written in Rust, and seeing the
+          opportunity for a challenge, I decided to rewrite the microcontroller
+          code in Rust as well. Using{" "}
+          <a href="https://github.com/esp-rs/espflash">espflash</a> and{" "}
+          <a href="https://mabez.dev/blog/posts/esp-rust-ecosystem/">
+            this lovely guide by Scott Mabin
+          </a>
+          , I was able to compile Rust for the ESP32 board. But while ultimately
+          possible, I found few benefits — and a number of difficulties around
+          the tooling needed to get it working. I eventually went back to C++
+          for the microcontroller code, but hope to see progress in this space
+          in the future.
+        </p>
+        <p>
+          Overall, I'm quite happy with the outcome, and the sharp little device
+          sits on my desk to this day.
+        </p>
       </>
     ),
   },
-];
+] as const;

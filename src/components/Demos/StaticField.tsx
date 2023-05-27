@@ -1,9 +1,9 @@
-import React, { useRef, useState, useEffect } from "react";
+import { useRef, useState, useEffect } from "react";
 
 const MAX_ENTROPY = 2 ** 16;
 const INFLECTION_POINT = 2 ** 31;
 
-const StaticField: React.FC<{}> = () => {
+const StaticField = () => {
   const ref = useRef<HTMLCanvasElement>(null);
   const [running, setRunning] = useState<boolean>(true);
   const [crypt, setCrypt] = useState<boolean>(true);
