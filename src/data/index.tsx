@@ -1099,12 +1099,18 @@ createRoot(document.getElementById('root')!).render(<App />);\
       <>
         <Heading id="nth">The gap</Heading>
         <p>
-          It's hard to really justify how bad the Hacker News website is,
-          considering its pedigree and adjacency to so much tech capital. Yes,
-          it works, and it is impressive that it still{" "}
-          <a href="https://news.ycombinator.com/item?id=16076041">
-            runs on a single, on-prem server
-          </a>
+          If you're reading this, you have probably found yourself on{" "}
+          <a href="https://news.ycombinator.com">Hacker News</a> once or twice.
+          It's a simple, beloved site where users share tech-related links and{" "}
+          <em>
+            always
+            <sup>
+              <a id="ref-1" href="#footnote-1">
+                1
+              </a>
+            </sup>{" "}
+            have civil discussions about them
+          </em>
           . But the UX is dated, and it is not so enjoyable to browse via the
           official website.
         </p>
@@ -1115,6 +1121,15 @@ createRoot(document.getElementById('root')!).render(<App />);\
           graphical application development in Rust, and resolved to write my
           own client.
         </p>
+        <Heading id="decisions">Decisions</Heading>
+        <p>
+          The Rust community has been asking itself for a while now,{" "}
+          <a href="https://www.areweguiyet.com/">Are we GUI yet?"</a>
+          and at this point, the answer is decidedly YES. I decided to go with{" "}
+          <a href="https://github.com/emilk/egui">egui</a>: an opinionated,
+          declarative, immediate-mode GUI library with backends for both web and
+          native.
+        </p>
         <figure>
           <video autoPlay loop width="100%">
             <source src={y_reader_video_hevc} type="video/mp4" />
@@ -1122,15 +1137,33 @@ createRoot(document.getElementById('root')!).render(<App />);\
           </video>
           <figcaption>YReader Hacker News client</figcaption>
         </figure>
-        <Heading id="something">Something</Heading>
-        <p>Maybe more things here, lorem ipsum</p>
-        <Callout accent="#FE7820">
-          <p>YOYOYOYO</p>
-        </Callout>
-        <p>Maybe more things here, lorem ipsum</p>
+        <Heading id="limitations-and-workarounds">
+          Limitations and workarounds
+        </Heading>
+        <p>
+          The Hacker News website is impressive in this day and age, in that it
+          still{" "}
+          <a href="https://news.ycombinator.com/item?id=16076041">
+            runs on a single, on-prem server
+          </a>{" "}
+          and has a very simple architecture. But the official Hacker News API
+          is not great, and is{" "}
+          <a href="https://github.com/HackerNews/API#design">
+            "essentially a dump of [their] in-memory data structures"
+          </a>
+          — making certain common actions (like listing entities) quite
+          cumbersome. You cannot fetch a list of posts; instead, you fetch a
+          list of post IDs, then fetch each post in separate requests. Same goes
+          for comments and other entities.
+        </p>
+        <p>
+          This led me to implement a super-parallelized client that uses an
+          absurd number of threads (one per entity) to hydrate the UI
+          concurrently and efficiently, all at 60FPS.
+        </p>
         <Snippet
           language="rust"
-          caption="Using egui immediate-mode UI crate to build rich apps"
+          caption="Massively-concurrent data fetching to work around an awkard API"
         >
           {`\
 impl YReader {
@@ -1184,6 +1217,26 @@ impl YReader {
 }\
 `}
         </Snippet>
+        <Heading id="todo">Still to come</Heading>
+        <p>
+          While the client is already a great way to browse the content, I have
+          yet to implement a few features before considering this project ready
+          for public consumption:
+        </p>
+        <ul>
+          <li>User authentication</li>
+          <li>Post and comment submission/editing</li>
+          <li>Voting</li>
+          <li>Job boards</li>
+        </ul>
+        <Heading id="footnotes">Footnotes</Heading>
+        <ol>
+          <li>
+            <small id="footnote-1">
+              Not always. <a href="#ref-1">[ref]</a>
+            </small>
+          </li>
+        </ol>
       </>
     ),
   },
