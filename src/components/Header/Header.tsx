@@ -7,6 +7,7 @@ import {
   IconContext,
   LinkedinLogo,
   MediumLogo,
+  ReadCvLogo,
   TwitterLogo,
   IconProps,
 } from "@phosphor-icons/react";
@@ -47,6 +48,9 @@ const Header = () => {
           </a>
           <a href="https://linkedin.com/in/tobiasfried">
             <LinkedinLogo /> LinkedIn
+          </a>
+          <a href="https://read.cv/tobiasfried">
+            <ReadCvLogo /> Read.cv
           </a>
           <a href="https://medium.com/@friedtm">
             <MediumLogo /> Medium
