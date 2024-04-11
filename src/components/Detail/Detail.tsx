@@ -1,4 +1,4 @@
-import { useEffect, useLayoutEffect } from "react";
+import { useLayoutEffect } from "react";
 import { Link, Navigate, useLocation, useParams } from "react-router-dom";
 import { motion, Variants, Transition } from "framer-motion";
 import {
@@ -6,6 +6,7 @@ import {
   ArrowUpRight,
   SmileyXEyes,
 } from "@phosphor-icons/react";
+import { formatYear } from "../../utils";
 
 import { projects } from "../../data";
 import "./Detail.css";
@@ -99,7 +100,7 @@ const Detail = () => {
                     </div>
                   )}
                   <motion.div animate>
-                    <span className={`large-text ${theme}`}>{year}</span>
+                    <span className={`large-text ${theme}`}>{formatYear(year)}</span>
                   </motion.div>
                 </div>
               </motion.div>

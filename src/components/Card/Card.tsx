@@ -3,17 +3,10 @@ import { Link } from "react-router-dom";
 import { motion, Variants } from "framer-motion";
 import { InertiaOptions } from "framer-motion/types/gestures/drag/types";
 import { ArrowsOutSimple } from "@phosphor-icons/react";
+import { formatYear } from "../../utils";
 
 import "./Card.css";
 import { Project } from "../../data";
-
-function formatYear(
-  yearOrRange: number | readonly [start: number, end?: number]
-): string {
-  return Array.isArray(yearOrRange)
-    ? `${yearOrRange[0]}—${yearOrRange[1] ?? ''}`
-    : yearOrRange.toString();
-}
 
 const dragTransition: InertiaOptions = { timeConstant: 50, power: 0.1 };
 

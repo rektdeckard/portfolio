@@ -6,6 +6,7 @@ import {
   GitBranch,
   IconContext,
   LinkedinLogo,
+  MastodonLogo,
   MediumLogo,
   ReadCvLogo,
   TwitterLogo,
@@ -30,13 +31,20 @@ const Header = () => {
     <motion.header variants={variants} initial="start" animate="end">
       <h1 className="intro">
         <span className="highlight inverse">Tobias Fried</span> is a full-stack
-        engineer and maker of digital tools and toys. He's currently at{" "}
+        engineer and maker of digital tools and toys.
+        ½ of{" "}
         <span className="highlight inverse">
-          <a href="https://qatalog.com" rel="noopener noreferrer">
+          <a href="https://phosphoricons.com" rel="noopener">
+            Phosphor Icons
+          </a>
+        </span>
+        . Formerly at{" "}
+        <span className="highlight inverse">
+          <a href="https://qatalog.com" rel="noopener">
             Qatalog
           </a>
         </span>
-        .
+        . Open to work.
       </h1>
       <IconContext.Provider value={iconStyle}>
         <div className="links">
@@ -45,6 +53,9 @@ const Header = () => {
           </a>
           <a href="https://twitter.com/friedtm">
             <TwitterLogo /> Twitter
+          </a>
+          <a rel="me" href="https://hachyderm.io/@rektdeckard">
+            <MastodonLogo />Mastodon
           </a>
           <a href="https://linkedin.com/in/tobiasfried">
             <LinkedinLogo /> LinkedIn

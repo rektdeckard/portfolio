@@ -1,4 +1,4 @@
-import { ReactNode, ReactElement } from "react";
+import { ReactNode, Suspense, lazy } from "react";
 import { Link } from "react-router-dom";
 import {
   Icon,
@@ -52,6 +52,13 @@ export interface Project {
   Icon?: Icon;
   content?: ReactNode;
 }
+
+const IconCount = lazy(
+  () => fetch("https://script.google.com/macros/s/AKfycbyFtNDr2e26aHumtDOu780zD1O7ANfRqITkdBc-G3nG2tVG7Qat96Ac7hnsi4XYhDWXkQ/exec?proc=count", { redirect: "follow" })
+    .then((res) => res.json())
+    .then((data) => ({ default: () => <>{(data.count * 6).toLocaleString()}</> }))
+    .catch(() => ({ default: () => <>{9000..toLocaleString()}</> }))
+);
 
 export const projects: ReadonlyArray<Project> = [
   {
@@ -442,7 +449,7 @@ let mapQueryUrl = \`https://maps.googleapis.com/maps/api/staticmap?\` +
         <p>
           The custom icons designed for Cockpit sowed the seed for a complete
           set of app icons became a complete set of icons{" "}
-          <a href="https://play.google.com/store/apps/details?id=com.tobiasfried.phosphor.mercury">
+          <a href="https://github.com/phosphor-icons/android">
             for Android home screens
           </a>
           , and ultimately an{" "}
@@ -884,7 +891,7 @@ if (canvas) {
         </p>
         <p>
           Over time that seed grew, eventually becoming a complete set of icons{" "}
-          <a href="https://play.google.com/store/apps/details?id=com.tobiasfried.phosphor.mercury">
+          <a href="https://github.com/phosphor-icons/android">
             for Android home screens
           </a>
           , replacing icons for over 800 of the most common apps with clean,
@@ -969,8 +976,8 @@ createRoot(document.getElementById('root')!).render(<App />);\
         <p>
           When working with large component libraries, it's important to factor
           out sources of human error. Mistakes crop up inevitably at scale, and
-          with over 3,500 icons and their corresponding implementations —
-          packages in 3 javascript frameworks, a Figma plugin and library, and
+          with <Suspense fallback={9072..toLocaleString()}><IconCount /></Suspense> icons and their corresponding implementations —
+          packages in 5 javascript frameworks, a Figma plugin and library, and
           other things I'm forgetting — we had a lot of complexity to manage by
           hand. This led me to build custom internal tooling to support our
           efforts from the design process all the way through to production,
@@ -979,7 +986,7 @@ createRoot(document.getElementById('root')!).render(<App />);\
         <ul>
           <li>
             An{" "}
-            <a href="https://phosphor-icons.github.io/phosphor-testbed">
+            <a href="https://testbed.phosphoricons.com">
               icon testbed and live SVG editor
             </a>{" "}
             to check visual size and consistency of new icons against known
@@ -1076,11 +1083,10 @@ createRoot(document.getElementById('root')!).render(<App />);\
           We continue to grow the library, using analytics and feedback from the
           community to add the most-needed icons first. We hope to expand to
           support more use-cases for developers and designers alike. A{" "}
-          <a href="https://github.com/phosphor-icons/phosphor-flutter">
+          <a href="https://github.com/phosphor-icons/flutter">
             Flutter library
-          </a>{" "}
-          is already on the way, and we are planning Sketch support via a
-          library and/or plugin down the road.
+          </a>, along with a number of other third-party ports, have since been
+          added, and we have plans for more down the road.
         </p>
       </>
     ),

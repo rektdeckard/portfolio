@@ -895,18 +895,10 @@
     "@jridgewell/resolve-uri" "3.1.0"
     "@jridgewell/sourcemap-codec" "1.4.14"
 
-"@jridgewell/trace-mapping@^0.3.24", "@jridgewell/trace-mapping@^0.3.25":
-  version "0.3.25"
-  resolved "https://registry.yarnpkg.com/@jridgewell/trace-mapping/-/trace-mapping-0.3.25.tgz#15f190e98895f3fc23276ee14bc76b675c2e50f0"
-  integrity sha512-vNk6aEwybGtawWmy/PzwnGDOjCkLWSD2wqvjGGAgOAwCGWySYXfYoxt00IJkTF+8Lb57DwOb3Aa0o9CApepiYQ==
-  dependencies:
-    "@jridgewell/resolve-uri" "^3.1.0"
-    "@jridgewell/sourcemap-codec" "^1.4.14"
-
-"@phosphor-icons/react@^2.0.9":
-  version "2.0.9"
-  resolved "https://registry.yarnpkg.com/@phosphor-icons/react/-/react-2.0.9.tgz#9b720dfe35ed9cb75fa0c59921bbc98acf483b45"
-  integrity sha512-/dtQ0M9MXAr35wy8zPlwF684EvYRvGWZPAv+Bd0BR4vzIhjzfLBdHSovFxSP1rj3UOHvVR08qgRL04Kv90oqHA==
+"@phosphor-icons/react@^2.1.4":
+  version "2.1.4"
+  resolved "https://registry.yarnpkg.com/@phosphor-icons/react/-/react-2.1.4.tgz#94c6dd69a5bcb5093dbf9f473d4fa83fbc27d1d2"
+  integrity sha512-EeNwgcg1aeK5vG/JYVTullnZzk5zjftOrjLb1iYetyhn5ImFFREc+xG0FAB/dAY277DGDSF8pNdNbqG1SUKIxQ==
 
 "@remix-run/router@1.6.1":
   version "1.6.1"

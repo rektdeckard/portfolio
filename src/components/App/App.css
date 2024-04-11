@@ -60,7 +60,7 @@ figcaption {
 }
 
 h1 {
-  font-size: 48px;
+  font-size: 40px;
 }
 
 ul {
@@ -94,7 +94,7 @@ pre ::selection {
 
 @media screen and (max-width: 1023px) {
   h1 {
-    font-size: 32px;
+    font-size: 24px;
   }
 
   .container {
