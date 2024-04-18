@@ -20,6 +20,8 @@ const Card = forwardRef<HTMLDivElement, Project>(
       color = "#000000",
       accent = "#FFD171",
       Icon = ArrowsOutSimple,
+      content,
+      ...rest
     },
     ref
   ) => {
@@ -60,6 +62,7 @@ const Card = forwardRef<HTMLDivElement, Project>(
         drag
         dragConstraints={ref as RefObject<HTMLDivElement>}
         dragTransition={dragTransition}
+        {...rest}
       >
         <Icon size={32} />
         <Link to={`${id}`}>

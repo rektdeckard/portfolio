@@ -54,7 +54,7 @@ const Header = () => {
           <a href="https://twitter.com/friedtm">
             <TwitterLogo /> Twitter
           </a>
-          <a rel="me" href="https://hachyderm.io/@rektdeckard">
+          <a href="https://hachyderm.io/@rektdeckard">
             <MastodonLogo />Mastodon
           </a>
           <a href="https://linkedin.com/in/tobiasfried">
