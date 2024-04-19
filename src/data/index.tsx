@@ -1280,7 +1280,6 @@ impl YReader {
         </p>
         <figure>
           <picture>
-            <source srcSet={""} type="image/webp" />
             <img src={gejji_svg} alt="" className="square" />
           </picture>
           <figcaption>
@@ -1305,7 +1304,6 @@ impl YReader {
         </p>
         <figure>
           <picture>
-            <source srcSet={""} type="image/webp" />
             <img src={gejji_hist_svg} alt="" className="square" />
           </picture>
           <figcaption>
