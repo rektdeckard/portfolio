@@ -38,13 +38,13 @@ const Header = () => {
             Phosphor Icons
           </a>
         </span>
-        . Formerly at{" "}
+        . Currently at{" "}
         <span className="highlight inverse">
-          <a href="https://qatalog.com" rel="noopener">
-            Qatalog
+          <a href="https://livekit.io" rel="noopener">
+            LiveKit
           </a>
         </span>
-        . Open to work.
+        .
       </h1>
       <IconContext.Provider value={iconStyle}>
         <div className="links">
