@@ -48,6 +48,6 @@
     "@vitejs/plugin-react": "^4.0.0",
     "source-map-explorer": "2",
     "typescript": "5",
-    "vite": "^5.2.9"
+    "vite": "^5.2.14"
   }
 }
