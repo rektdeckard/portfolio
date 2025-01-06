@@ -1,0 +1,19 @@
+---
+import { getCollection, render } from "astro:content";
+import MarkdownPostLayout from "@layouts/MarkdownProjectLayout.astro";
+
+export async function getStaticPaths() {
+  const projects = await getCollection("projects");
+  return projects.map((project) => ({
+    params: { slug: project.id },
+    props: { project },
+  }));
+}
+
+const { project } = Astro.props;
+const { Content } = await render(project);
+---
+
+<MarkdownPostLayout frontmatter={project.data}>
+  <Content />
+</MarkdownPostLayout>

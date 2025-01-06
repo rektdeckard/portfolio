@@ -1,0 +1,92 @@
+---
+title: "Huebert"
+description: "A desktop dashboard to control your Philips Hue"
+url: "https://rektdeckard.github.io/huebert"
+year: 2019
+tags: ["iot", "smart home", "frontend", "react"]
+---
+
+import StylizedImage from "@components/StylizedImage.astro";
+import huebertImage from "@assets/images/huebert-controls.svg";
+import certImage from "@assets/images/cert-warning.png";
+
+## Motivation
+
+Smart home lighting is pretty great. The ability to set the mood for a horror movie, gaming session, or party is a new level of immersion. And hey, our screens change color temperature to protect our eyes and sleep patterns, so why shouldn't the lights in our houses?
+
+*Controlling* your smart lights, however, is another story. When I installed Philips Hue bulbs in my apartment, my initial awe was followed shortly by the realization that 'smart' is a relative term. I couldn't touch the wall switches if I wanted the bulbs to stay connected. It always felt like a *process* to simply dim the lights as I worked late into the evening. The desktop apps for managing them were bloated, and my phone was...across the room. I started wondering, could my smart lights and sensors be controlled from a web app? The answer was Yes. Sort of.
+
+<StylizedImage
+  alt="A rendering of the Huebert dashboard"
+  src={huebertImage}
+/>
+
+## Hello, Huebert
+
+Enter stage right, Huebert, my idea for a web and desktop client for Philips Hue lighting and home automation. It would provide a clean and lightweight interface to adjust your lights directly from the browser. As far as I knew, it would be the only browser-based app of its kind. As it would turn out, there may be a reason for that.
+
+> I started wondering, could my smart lights and sensors be controlled from a web app?
+>
+> **TL;DR:** Yes. Sort of.
+
+## Getting to know Hue
+
+Philips Hue's [API documentation](https://developers.meethue.com) (account creation required) is thorough and flush with specifications and examples, and shows Philips' deep commitment to making an ecosystem of hackable and open products. They actively welcome development of third-party hardware and software, and even have a lengthy section on light and color theory in the developer pages.
+
+The Hue Bridge operates a local webserver on your WiFi network that listens to requests at several endpoints, providing control of everything from individual lights to scheduling lighting changes to customizing the behavior and triggers of connected switches and sensors. Commands use a declarative language that allow you to describe the state a light or element should be in, and the Bridge handles transitioning to that state.
+
+```js
+// Describe the light state
+const lightState = {
+  bri: 125,
+  hue: 52322,
+  sat: 254,
+};
+  
+const options = {
+  method: "POST",
+  body: JSON.stringify(lightState),
+  headers: {
+      "Content-Type": "application/json"
+  },
+};
+  
+// Send POST request to the desired light or group endpoint
+fetch("http://<BRIDGE_IP>/api/groups/<GROUP_NUMBER>", options)
+  .then((res) => res.json())
+  // Update application state accordingly
+  .then((res) => updateLights(res));\
+```
+
+## A deceptively simple implementation
+
+I chose to scaffold out a web application in React, since the declarative nature of the framework seemed a good fit for the API. Talking to the Bridge via the RESTful interface was a breeze, and building an interface around such inherently colorful data was a joy 🌈. To move fast, I leaned on the [Semantic UI](https://react.semantic-ui.com/) toolkit for basic interface components. Other components were custom-made to fit the context. A working prototype came together in a matter of days.
+
+> TODO: SLIDER DEMO THING
+
+Since I was on a roll, I figured why not port the project to a multiplatform Electron app as well. No internet access? No problem! A desktop app could talk to your lights without leaving the local network.
+
+## Pitfalls
+
+The first working web-app build was deployed after a week or two via GitHub Pages. Difficulties arose when I realized that:
+
+- The Hue Bridge does not expose an encrypted endpoint.
+- Modern browsers *really* don't like it when web content from encrypted sources (HTTPS) make requests to unencrypted (HTTP) destinations.
+- Philips *does* provide a Remote API that handles unencrypted traffic without routing communication through the browser, but it requires additional setup. Messages travel over the internet rather than the local network, and therefore incur additional latency.
+
+People were visiting the site, attempting to link to their Hue Bridge, and getting console errors about an `Invalid Certificate`. Their browsers were refusing to talk to unencrypted endpoints, since the origin itself was encrypted — also known as `Mixed Content`. Chrome and other browsers allow you to circumvent this protection, but not without blasting you with some pretty scary-looking warnings:
+
+<StylizedImage
+  alt="Scary Chrome warning that a site's certificate is not trusted"
+  src={certImage}
+/>
+
+Thankfully, this issue wasn't present in the Electron version of the app, since it would be running on a host machine on the local network. Foregoing encryption in this context is fine, since the traffic never leaves your house.
+
+I did the math, and decided the compromise of asking users to occasionally consent to a scary warning (every time the browser is updated or the cache is cleared) while posing litte real security risk was better than the alternatives — hosting the web-app itself on an unencrypted domain and sending all communication in-the-clear, or using the Remote API and requiring a more complicated setup on the user's part.
+
+## Hard truths
+
+Browsers protect us from the vast majority of malicious actors out there, as well as much of our own unsafe behavior. Though working within their security restrictions can present challenges in edge-cases like this one, I'm glad to have them. At least I now know a lot more about the inner workings of [CORS](https://developer.mozilla.org/en-US/docs/Web/HTTP/CORS), [Mixed Content](https://developer.mozilla.org/en-US/docs/Web/Security/Mixed_content), and browser-specific security policies.
+
+Ultimately I was able to provide myself, as well as a creative community of enthusiasts, a much-needed tool. Even if it's a little rough around the edges.

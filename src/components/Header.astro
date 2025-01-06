@@ -1,0 +1,25 @@
+---
+const { pathname } = Astro.url;
+const items = {
+  "/": "About",
+  "/projects": "Projects",
+} as const;
+---
+
+<header>
+  <nav class="flex flex-wrap gap-4 font-mono uppercase bg-current">
+    {
+      Object.entries(items).map(([path, title]) => (
+        <a
+          href={path}
+          class:list={{
+            overline:
+              path === "/" ? path === pathname : pathname.startsWith(path),
+          }}
+        >
+          <span class:list={{ "bg-current": pathname === path }}>{title}</span>
+        </a>
+      ))
+    }
+  </nav>
+</header>

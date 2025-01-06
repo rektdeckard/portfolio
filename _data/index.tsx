@@ -53,11 +53,16 @@ export interface Project {
   content?: ReactNode;
 }
 
-const IconCount = lazy(
-  () => fetch("https://script.google.com/macros/s/AKfycbyFtNDr2e26aHumtDOu780zD1O7ANfRqITkdBc-G3nG2tVG7Qat96Ac7hnsi4XYhDWXkQ/exec?proc=count", { redirect: "follow" })
+const IconCount = lazy(() =>
+  fetch(
+    "https://script.google.com/macros/s/AKfycbyFtNDr2e26aHumtDOu780zD1O7ANfRqITkdBc-G3nG2tVG7Qat96Ac7hnsi4XYhDWXkQ/exec?proc=count",
+    { redirect: "follow" },
+  )
     .then((res) => res.json())
-    .then((data) => ({ default: () => <>{(data.count * 6).toLocaleString()}</> }))
-    .catch(() => ({ default: () => <>{9000..toLocaleString()}</> }))
+    .then((data) => ({
+      default: () => <>{(data.count * 6).toLocaleString()}</>,
+    }))
+    .catch(() => ({ default: () => <>{(9000).toLocaleString()}</> })),
 );
 
 export const projects: ReadonlyArray<Project> = [
@@ -976,12 +981,15 @@ createRoot(document.getElementById('root')!).render(<App />);\
         <p>
           When working with large component libraries, it's important to factor
           out sources of human error. Mistakes crop up inevitably at scale, and
-          with <Suspense fallback={9072..toLocaleString()}><IconCount /></Suspense> icons and their corresponding implementations —
-          packages in 5 javascript frameworks, a Figma plugin and library, and
-          other things I'm forgetting — we had a lot of complexity to manage by
-          hand. This led me to build custom internal tooling to support our
-          efforts from the design process all the way through to production,
-          including:
+          with{" "}
+          <Suspense fallback={(9072).toLocaleString()}>
+            <IconCount />
+          </Suspense>{" "}
+          icons and their corresponding implementations — packages in 5
+          javascript frameworks, a Figma plugin and library, and other things
+          I'm forgetting — we had a lot of complexity to manage by hand. This
+          led me to build custom internal tooling to support our efforts from
+          the design process all the way through to production, including:
         </p>
         <ul>
           <li>
@@ -1085,7 +1093,8 @@ createRoot(document.getElementById('root')!).render(<App />);\
           support more use-cases for developers and designers alike. A{" "}
           <a href="https://github.com/phosphor-icons/flutter">
             Flutter library
-          </a>, along with a number of other third-party ports, have since been
+          </a>
+          , along with a number of other third-party ports, have since been
           added, and we have plans for more down the road.
         </p>
       </>

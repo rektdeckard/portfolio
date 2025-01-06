@@ -1,0 +1,18 @@
+---
+import { Image, type LocalImageProps } from "astro:assets";
+
+export type Props = LocalImageProps & {
+  srcDark: LocalImageProps["src"];
+};
+
+const { srcDark, ...props } = Astro.props;
+---
+
+<Fragment>
+  <Image {...props} class:list={[props.class, "dark:hidden"]} />
+  <Image
+    {...props}
+    src={srcDark}
+    class:list={[props.class, "hidden dark:block"]}
+  />
+</Fragment>

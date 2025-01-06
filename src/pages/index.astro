@@ -1,11 +1,18 @@
 ---
-import Welcome from '../components/Welcome.astro';
-import Layout from '../layouts/Layout.astro';
+import { getCollection } from "astro:content";
+import BaseLayout from "@layouts/BaseLayout.astro";
+import StylizedImage from "@components/StylizedImage.astro";
+import VariantImage from "@components/VariantImage.astro";
 
-// Welcome to Astro! Wondering what to do next? Check out the Astro documentation at https://docs.astro.build
-// Don't want to use any of this? Delete everything in this file, the `assets`, `components`, and `layouts` directories, and start fresh.
+import testImage from "../assets/images/toby-avatar.png";
+// import avatarG from "../assets/images/toby-avatar-g.png";
+// import avatarP from "../assets/images/toby-avatar-p.png";
+
+const projects = await getCollection("projects");
 ---
 
-<Layout>
-	<Welcome />
-</Layout>
+<BaseLayout pageTitle="About">
+  <h1>TODO IMPLEMENT HOMEPAGE</h1>
+  <StylizedImage src={testImage} alt="" class="" />
+  <!-- <VariantImage src={avatarP} srcDark={avatarG} alt="" /> -->
+</BaseLayout>

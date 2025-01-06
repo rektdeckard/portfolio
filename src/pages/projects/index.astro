@@ -1,0 +1,38 @@
+---
+import { getCollection } from "astro:content";
+import BaseLayout from "@layouts/BaseLayout.astro";
+import type { CollectionEntry } from "astro:content";
+
+const projects = await getCollection("projects");
+
+const projectsByYear = projects.reduce<
+  Record<number, Array<CollectionEntry<"projects">>>
+>((acc, curr) => {
+  const startYear = Array.isArray(curr.data.year)
+    ? curr.data.year[0]
+    : curr.data.year;
+  if (!acc[startYear]) acc[startYear] = [];
+  acc[startYear].push(curr);
+  return acc;
+}, {});
+
+let sortedProjectsByYear = Object.entries(projectsByYear);
+sortedProjectsByYear.sort(([a], [b]) => b.localeCompare(a));
+---
+
+<BaseLayout pageTitle="Projects">
+  <ul>
+    {
+      sortedProjectsByYear.map(([year, projects]) => (
+        <Fragment>
+          <h2>{year}</h2>
+          {projects.map((project) => (
+            <li>
+              <a href={`/projects/${project.id}`}>{project.data.title}</a>
+            </li>
+          ))}
+        </Fragment>
+      ))
+    }
+  </ul>
+</BaseLayout>

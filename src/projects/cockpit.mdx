@@ -1,0 +1,71 @@
+---
+title: "Cockpit"
+description: "An immersive, techy dashboard for Android"
+url: "https://drive.google.com/drive/folders/1-0a62_LKvpX1713hEUAV4s-360yzdqwe?usp=sharing"
+year: 2018
+tags: ["mobile", "android", "frontend"]
+---
+
+import StylizedImage from "@components/StylizedImage.astro";
+import cockpitImage from "@assets/images/cockpit.png";
+import cockpitGaugesImage from "@assets/images/cockpit-gauges.png";
+
+## Digital detox...lite
+
+Our phones are basically digital drugs. Colorful app icons, badges and notifications vying for our attention at every minute. It's tough to resist, and I'd be the first to admit I have a problem. So when I discovered that with an Android phone and some special tools I could entirely replace the addictive homescreen paradigm with whatever I could dream up, I decided to make something that would, hopefully, help institute some harm-reduction with in phone habits. And maybe look kinda cool in the process.
+
+## Heads up
+
+Cockpit is a data-rich homescreen replacement for Android phones inspired by (surprise) aircraft cockpit design. The HUD style interface surfaces useful information like recent messages, nearby transit and weather, and device resource utilization to keep you in the know without hijacking your attention.
+
+<StylizedImage
+  alt="Rendering of a custom phone dashboard showing a local map, weather, messages, and other quick actions"
+  src={cockpitImage}
+/>
+
+Built using <abbr title="Kustom Live Wallpaper">KLWP</abbr> by [Kustom Industries](https://play.google.com/store/apps/dev?id=5300483087872269403&hl=en_US&gl=US), Cockpit replaces the typical grid of apps and eschews the
+ever-present notification shade in favor of four content areas:
+
+- A *status* section with a clock, local weather, map view, and realtime nearby transit stations.
+- A *notice* section with a customizable quick view into the three messaging or communication apps you need the most.
+- A *vitals* section with like CPU and network usage.
+- A *dock* section containing commonly-used apps, each with a custom icon treatment designed by [my better half](https://helenazhang.com).
+
+> I found that this interface significantly reduced the amount of time I spent mindlessly browsing my phone.
+
+## Functional bits
+
+While the framework API exposes some device vitals and notifications, generating the map view and nearby transit visualizations was a bit more of a challenge. I relied on Google's [Static Maps](https://developers.google.com/maps/documentation/maps-static/overview) and [GTFS Realtime](https://developers.google.com/transit/gtfs-realtime) REST APIs to put it all together. For the map, we would construct a complex query using device GPS coordinates and user-set variables like the current dashboard theme and map zoom level, request a static map image with the appropriate style parameters, then apply post-processing and layer it into the dashboard UI.
+
+```js
+let mapQueryUrl = \`https://maps.googleapis.com/maps/api/staticmap?\` +
+  \`center=\${lat},\${lon}\` +
+  \`&maptype=\${mapType}\` +
+  \`&size=\${Math.round(height)}&scale=\${scale}&zoom=\${zoom}\` +
+  \`&style=feature:all|element:labels|visibility\${
+    labels ? "simplified" : "off"
+  }\` +
+  \`&style=feature:administrative|element:labels|visibility\${
+    labels && cityLabels ? "simplified" : "off"
+  }|color:\${labelColor}\` +
+  \`&style=feature:road.highway|element:geometry.fill|color:\${highwayColor}\` +
+  // ...About 40 more repetitive style parameters... 
+  \`&key\${API_KEY}\`;\
+```
+
+The transit stations would be a bit simpler, requiring just a simple API query and some parsing of the response, before displaying the transit modes on screen. Both the map and transit components could be customized to deep-link into the preferred navigation app with some of the navigation context pre-filled.
+
+At the time, I was on a less-than-ideal phone plan with exhorbitant data costs, and I was paranoid of going over my caps — which I did constantly anyway. I figured that placing this quota right on the home screen would keep me honest about my consumption in more ways than one. It turned out to work beautifully!
+
+<StylizedImage
+  alt="Close-up of indicators in the vitals section"
+  src={cockpitGaugesImage}
+/>
+
+I found that this interface significantly reduced the amount of time I spent mindlessly browsing my phone; native notifications were silenced by default with this setup, and the loud, colorful icons and badges were no longer calling to be checked constantly. My data and usage was in check. And it made my feel like a character in Westworld when I used it.
+
+## Variations on a theme
+
+The custom icons designed for Cockpit sowed the seed for a complete set of app icons became a complete set of icons [for Android home screens](https://github.com/phosphor-icons/android) and ultimately an [open-source resource](/projects/phosphor-icons) for designers and developers of all kinds. My partner Helena even wrote [several articles](https://medium.com/@minoraxis) on the subject of icon design and history.
+
+Cockpit got a number of new color schemes, underwent several revisions to adapt to breaking API changes and new OS limitations, but is still alive and well today. I stopped using it on my primary mobile phone, but I know I'll come back to it one day.

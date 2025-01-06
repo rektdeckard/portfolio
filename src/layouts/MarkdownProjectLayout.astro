@@ -1,0 +1,29 @@
+---
+import type { CollectionEntry } from "astro:content";
+import BaseLayout from "@layouts/BaseLayout.astro";
+import "@styles/global.css";
+
+export interface Props {
+  frontmatter: CollectionEntry<"projects">["data"];
+}
+
+const { frontmatter } = Astro.props;
+---
+
+<BaseLayout pageTitle={frontmatter.title}>
+  <article class="flex flex-col gap-4">
+    <h1 class="font-bold text-xl">{frontmatter.title}</h1>
+    <p>{frontmatter.description}</p>
+    <p>{frontmatter.year}</p>
+    <div class="tags">
+      {
+        frontmatter.tags?.map((tag: string) => (
+          <p class="tag">
+            <a href={`/tags/${tag}`}>{tag}</a>
+          </p>
+        ))
+      }
+    </div>
+    <slot />
+  </article>
+</BaseLayout>

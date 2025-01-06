@@ -1,0 +1,110 @@
+---
+title: "Helena Zhang"
+description: "A portfolio website inspired by newspaper design"
+url: "https://helenazhang.com"
+year: 2020
+tags: ["portfolio", "frontend"]
+---
+
+import StylizedImage from "@components/StylizedImage.astro";
+import helenaImage from "@assets/images/helenazhang.png";
+import helenaSpecImage from "@assets/images/helenazhang-spec.webp";
+
+## The brief
+
+My partner Helena and I have a soft spot for the early days of the internet, when sites were unique, experimental, and performant. We wanted to build her a portfolio that was all of these things — but with modern web conventions at the core: responsive design, lazy loading, interactions that felt dynamic and tactile.
+
+Helena put together a design inspired by newspapers, with dense columns of content and explicit hierarchies of information. We mixed in references to broadcast TV and other analog media to make an experience that felt simultaneously nostalgic and modern.
+
+<StylizedImage
+  alt="Site specifications"
+  src={helenaSpecImage}
+/>
+
+## Laying the foundation
+
+I knew that using a popular framework like React or Vue.js went against the vibe for the site. It had to load fast, in mere kilobytes, and degrade gracefully in cases of poor bandwidth or lack of JavaScript — none of which are possible with typical SPAs today. This would be a regular old HTML/CSS/JS site. But since it's not 2003 any more, it needed to have some panache, too.
+
+Since most of the content would follow a grid-like pattern, I first laid out a scaffold using CSS `grid` layouts. After some experimentation with different breakpoints (mobile in particular), I pivoted to a `flexbox` based layout to simplify things. I borrowed some ideas (and code) from the [Bulma](https://bulma.io/) CSS framework to achieve good reusability on the column components.
+
+## Arguing semantics
+
+A requirement of the portfolio site was that is should be simple enough for Helena to update herself with new content and projects. HTML5 Semantic Elements helped make the markup read like an outline, and massively aided comprehension. No `&lt;div&gt;` soup for you!
+
+```html
+<!DOCTYPE html>
+<html lang="en">
+  <head>...</head>
+  <body>
+    <header class="is-centered">
+      <nav>...</nav>
+      <h1>Hello, world! I'm a designer/writer...</h1>
+    </header>
+    <main>
+      <section id="articles">
+        <h2>Articles</h2>
+        <article>...</article>
+        <article>...</article>
+      </section>
+      <section id="design">...</section>
+      <section id="projects">...</section>
+      <section id="dribbble">
+        <h2>Dribbble</h2>
+        <figure>...</figure>
+        <figure>...</figure>
+      </section>
+      ...
+    </main>
+    <footer class="is-centered">...</footer>
+    <canvas id="static"></canvas>
+  </body>
+  <script src="/js/static.js"></script>
+  <script src="/js/quote.js"></script>
+</html>\
+```
+
+Perhaps the two greatest benefits to this approach are the impressive gains to accessibility (screen readers and assistive devices have a much easier time of parsing this type of document), and the boost it gives to webpage SEO and indexing.
+
+## Making some noise
+
+> TODO: StaticField
+
+The design included a small block of TV static at the foot of the page; a purely aesthetic element that was originally intended to be a simple image. For fun, I decided to make it dynamic and wrote a white noise generator and spit the results onto a `&lt;canvas&gt;` element, to great nostalgic effect. The first, naïve pass used the Canvas API methods `fillRect()` and `clearRect()`, looping through the canvas coordinates and painting 1x1 'pixels' randomly in black or white. Since painting on a canvas is additive, each frame also had to clear the canvas before painting into it again. It was terribly slow.
+
+With some research into optimal data structures in JavaScript, and some performance testing of my own, I came up with a solution that didn't require clearing the canvas, and only needed one paint call per frame (instead of one per pixel!). Using a `Uint32Array` as a shared buffer for both the white noise values and the `ImageData` itself, we would fill the typed array with 32-bit integers representing transparent black (all `0` bits) or solid white (all `1` bits) at random, then paint this `ImageData` in one go with `putImageData()`. The canvas itself was given a black background that peeked through the transparent pixels.
+
+```js
+// static.js
+const canvas = document.getElementById("static");
+
+if (canvas) {
+  const context = canvas.getContext("2d");
+  const { offsetHeight, offsetWidth } = canvas;
+  canvas.width = offsetWidth;
+  canvas.height = offsetHeight;
+
+  const idata = context.createImageData(offsetWidth, offsetHeight);
+  const buffer = new Uint32Array(idata.data.buffer);
+
+  function noise(context) {
+    let len = buffer.length - 1;
+    while (len--) buffer[len] = Math.random() < 0.5 ? 0 : -1 >> 0;
+    context.putImageData(idata, 0, 0);
+  };
+
+  (function loop() {
+    noise(context);
+    requestAnimationFrame(loop);
+  })();
+};\
+```
+
+As a further optimization, I turned to the browser's built-in [Crypto API](https://developer.mozilla.org/en-US/docs/Web/API/Crypto) to get random bits even faster, with less overhead. The `window.crypto` object exposes a single method, `getRandomValues(typedArray)`, which will fill a passed `TypedArray` with cryptographically strong random bits via a PRNG seeded by a system-level entropy source. Similar to how we went from `n` paint events down to `1`, we were now getting our random bits wholesale.
+
+> **NB:** requesting more than 65,536 bits at a time from `window.crypto.getRandomValues()` will throw a `QuotaExceededError`, due to minimum guaranteed entropy of seed values. If more bits are needed, the buffer can be filled, used, and filled again.
+
+There are certainly less CPU-intensive ways to create the visual effect of TV static: precomputing more noise than needed and choosing a random index into the noise to start painting from each frame, or even just using a GIF. But the fact that this implementation is truly (pseudo)random each frame and still manages to maintain 60 FPS is pretty unique.
+
+## Looking further afield
+
+When I sat down to build this, I was expecting a familiar exercise in static site development. Through the process of playing around with a seemingly mundane aesthetic element, though, I discovered quite a bit about browser APIs, and learned to look for solutions in unexpected places. By architecting the site for future modification and code readability, we got some excellent side-benefits. The end result was exactly the type of experience we wanted to create at the start. And we brought this thing from a sketch to production in one week flat.
