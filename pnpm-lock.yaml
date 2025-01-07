@@ -23,6 +23,9 @@ importers:
       astro:
         specifier: ^5.1.2
         version: 5.1.2(jiti@1.21.7)(rollup@4.29.1)(typescript@5.7.2)(yaml@2.7.0)
+      kdim:
+        specifier: ^0.6.6
+        version: 0.6.6
       tailwindcss:
         specifier: ^3.4.17
         version: 3.4.17
@@ -1229,6 +1232,9 @@ packages:
   js-yaml@4.1.0:
     resolution: {integrity: sha512-wpxZs9NoxZaJESJGIZTyDEaYpl0FKSA+FB9aJiyemKhMwkxQg63h4T1KJgUGHpTqPDNRcmmYLugrRjJlBtWvRA==}
     hasBin: true
+
+  kdim@0.6.6:
+    resolution: {integrity: sha512-bHWAlJzbFNub0SDnv0nK8jhIOYCglJIXqa1pnuO1WrG6IQvq/cotBINy83GnUW9A56kU0eAh782XaihuwInDKA==}
 
   kleur@3.0.3:
     resolution: {integrity: sha512-eTIzlVOSUR+JxdDFepEYcBMtZ9Qqdef+rnzWdRZuMbOywu5tO2w2N7rqjoANZ5k9vywhL6Br1VRjUIgTQx4E8w==}
@@ -3381,6 +3387,8 @@ snapshots:
   js-yaml@4.1.0:
     dependencies:
       argparse: 2.0.1
+
+  kdim@0.6.6: {}
 
   kleur@3.0.3: {}
 

@@ -15,6 +15,7 @@
     "@astrojs/tailwind": "^5.1.4",
     "@phosphor-icons/core": "^2.1.1",
     "astro": "^5.1.2",
+    "kdim": "^0.6.6",
     "tailwindcss": "^3.4.17"
   },
   "devDependencies": {

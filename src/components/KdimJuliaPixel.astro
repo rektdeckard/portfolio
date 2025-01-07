@@ -1,0 +1,169 @@
+---
+import type { HTMLAttributes } from "astro/types";
+
+interface Props extends HTMLAttributes<"canvas"> {
+  iterations?: number;
+  scale?: number;
+  stride?: number;
+  rate?: number;
+  domain?: number;
+}
+
+const {
+  iterations = 40,
+  scale = 4,
+  stride = 6,
+  rate = 0.002,
+  domain = 1,
+  ...props
+} = Astro.props;
+---
+
+<canvas
+  data-example="julia"
+  data-iterations={iterations}
+  data-scale={scale}
+  data-stride={stride}
+  data-rate={rate}
+  data-domain={domain}
+  {...props}></canvas>
+
+<style>
+  canvas[data-example="julia"] {
+    width: fit-content;
+    height: fit-content;
+    display: block;
+    image-rendering: pixelated;
+  }
+</style>
+
+<script>
+  import { Complex, Noise } from "kdim";
+  import { INTERPOLATORS } from "@utils/color";
+  import { onColorSchemeChange, isDarkMode } from "@utils/media";
+
+  let j = new Complex(0, 0);
+  let interpolate = isDarkMode()
+    ? INTERPOLATORS.MellifluousDark
+    : INTERPOLATORS.MellifluousSpectal;
+
+  onColorSchemeChange((isDark) => {
+    interpolate = isDark
+      ? INTERPOLATORS.MellifluousDark
+      : INTERPOLATORS.MellifluousSpectal;
+  });
+
+  function julia(
+    x: number,
+    y: number,
+    width: number,
+    height: number,
+    scale: number,
+    iterations: number,
+  ) {
+    let z = new Complex(
+      (x / width) * scale - scale / 2,
+      (y / height) * scale - scale / 2,
+    );
+
+    for (let i = 0; i < iterations; i++) {
+      z = z.pow(2).add(j);
+      if (+z.abs() > 2) {
+        return i;
+      }
+    }
+    return iterations;
+  }
+
+  function getAttributes(c: HTMLCanvasElement) {
+    const iterations = +c.dataset.iterations!;
+    const scale = +c.dataset.scale!;
+    const stride = +c.dataset.stride!;
+    const rate = +c.dataset.rate!;
+    const domain = +c.dataset.domain!;
+    return { iterations, scale, stride, rate, domain };
+  }
+
+  for (const c of document.querySelectorAll<HTMLCanvasElement>(
+    "[data-example='julia']",
+  )) {
+    const { iterations, scale, stride, rate, domain } = getAttributes(c);
+
+    const s = new Noise.Simplex().seed(11);
+    const { width, height } = c;
+    const ctx = c.getContext("2d")!;
+    ctx.imageSmoothingEnabled = false;
+    const i = ctx.createImageData(width, height);
+
+    let t = 0.0;
+    let loop = true;
+    let iter: number;
+    let ax: number;
+    let ay: number;
+    let r: number, g: number, b: number;
+
+    function draw() {
+      ax = s.xy(t, 0) * domain;
+      ay = s.xy(0, t) * domain;
+
+      for (let y = 0; y + stride <= height; y += stride) {
+        for (let x = 0; x + stride <= width; x += stride) {
+          j.real = ax;
+          j.imaginary = ay;
+
+          iter = julia(
+            x + stride / 2,
+            y + stride / 2,
+            width,
+            height,
+            scale,
+            iterations,
+          );
+
+          if (iter === iterations) {
+            r = g = b = 0;
+          } else {
+            const value = iter / iterations;
+            const res = interpolate(value);
+            r = res.r;
+            g = res.g;
+            b = res.b;
+          }
+
+          const idx = (y * width + x) * 4;
+          i.data[idx] = r;
+          i.data[idx + 1] = g;
+          i.data[idx + 2] = b;
+          i.data[idx + 3] = 255;
+
+          if (stride > 1) {
+            for (let sx = 0; sx < stride; sx++) {
+              for (let sy = 0; sy < stride; sy++) {
+                const idxs = (sy * width + sx) * 4 + idx;
+                i.data[idxs] = r;
+                i.data[idxs + 1] = g;
+                i.data[idxs + 2] = b;
+                i.data[idxs + 3] = 255;
+              }
+            }
+          }
+        }
+      }
+
+      ctx.putImageData(i, 0, 0);
+      t += rate;
+      if (loop) requestAnimationFrame(draw);
+    }
+
+    c.addEventListener("mouseenter", () => {
+      loop = true;
+      draw();
+    });
+    c.addEventListener("mouseleave", () => {
+      loop = false;
+    });
+
+    draw();
+    onColorSchemeChange(draw);
+  }
+</script>

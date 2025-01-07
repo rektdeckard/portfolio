@@ -1,8 +1,7 @@
-
 ---
 title: "yReader"
 description: "A modern Hacker News desktop client"
-url: "https://github.com/rektdeckard/y-reade"
+url: "https://github.com/rektdeckard/y-reader"
 year: 2022
 tags: ["hacker news", "frontend", "dektop", "rust", "oss"]
 ---

@@ -5,14 +5,14 @@ import StylizedImage from "@components/StylizedImage.astro";
 import VariantImage from "@components/VariantImage.astro";
 
 import testImage from "../assets/images/toby-avatar.png";
-// import avatarG from "../assets/images/toby-avatar-g.png";
-// import avatarP from "../assets/images/toby-avatar-p.png";
+import avatarG from "../assets/images/toby-avatar-g.png";
+import avatarP from "../assets/images/toby-avatar-p.png";
 
 const projects = await getCollection("projects");
 ---
 
 <BaseLayout pageTitle="About">
   <h1>TODO IMPLEMENT HOMEPAGE</h1>
-  <StylizedImage src={testImage} alt="" class="" />
-  <!-- <VariantImage src={avatarP} srcDark={avatarG} alt="" /> -->
+  <StylizedImage src={testImage} alt="" class="" height={268} />
+  <VariantImage src={avatarP} srcDark={avatarG} alt="" height={268} />
 </BaseLayout>

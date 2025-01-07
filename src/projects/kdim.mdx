@@ -1,0 +1,28 @@
+---
+title: "kdim"
+description: "An expoloration of mathematical concept and data structures in TypeScript"
+url: "https://github.com/rektdeckard/kdim"
+year: 2024
+tags: ["math", "fractals", "typescript", "frontend", "data structures", "oss"]
+---
+
+import KdimJuliaPixel from "@components/KdimJuliaPixel.astro";
+import KdimNoise from "@components/KdimNoise.astro";
+
+## Exploration for the sake of it
+
+As a self-taught developer, I have always been at least a little insecure about my formal skills in computer science. Sure, at the end of the day what matters is what you can build with the skills you have -- and I'm no slouch with practical skills. But I recently became interested in developing some of the more esoteric muscles around programming, those to do with mathematics, algorithms, and data structures.
+
+What set me off was learning about the K-dimensional Tree, a time-efficient data structure for searching higher-dimensional datasets. Inspired by Mike Pound's [Computerphile Video](https://www.youtube.com/watch?v=BK5x7IUTIyU) I decided to implement one from first principles.
+
+<KdimJuliaPixel
+  stride={5}
+  domain={1}
+  scale={3}
+  width={400}
+  height={400}
+/>
+
+TKTK
+
+<KdimNoise stride={5} type="Simplex" freq={3} rate={0.01} width={400} height={400} />

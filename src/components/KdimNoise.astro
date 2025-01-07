@@ -1,0 +1,125 @@
+---
+import type { HTMLAttributes } from "astro/types";
+import type { Noise } from "kdim";
+
+interface Props extends HTMLAttributes<"canvas"> {
+  type?: keyof typeof Noise;
+  seed?: number;
+  freq?: number;
+  stride?: number;
+  rate?: number;
+}
+
+const {
+  type = "Simplex",
+  seed = 11,
+  freq = 3,
+  stride = 6,
+  rate = 0.02,
+  ...props
+} = Astro.props;
+---
+
+<canvas
+  data-example="noise"
+  data-type={type}
+  data-seed={seed}
+  data-freq={freq}
+  data-stride={stride}
+  data-rate={rate}
+  {...props}></canvas>
+
+<style>
+  canvas[data-example="noise"] {
+    width: fit-content;
+    height: fit-content;
+    display: block;
+    image-rendering: pixelated;
+  }
+</style>
+
+<script>
+  import { Noise, Random } from "kdim";
+  import { INTERPOLATORS } from "@utils/color";
+  import { onColorSchemeChange, isDarkMode } from "@utils/media";
+
+  let interpolate = isDarkMode()
+    ? INTERPOLATORS.MellifluousDark
+    : INTERPOLATORS.MellifluousSpectal;
+
+  onColorSchemeChange((isDark) => {
+    interpolate = isDark
+      ? INTERPOLATORS.MellifluousDark
+      : INTERPOLATORS.MellifluousSpectal;
+  });
+
+  function getAttributes(c: HTMLCanvasElement) {
+    const type = (c.getAttribute("data-type") ||
+      "Perlin") as keyof typeof Noise;
+    const seed = +(c.getAttribute("data-seed") || 11);
+    const freq = +(c.getAttribute("data-freq") || 4);
+    const stride = +(c.getAttribute("data-stride") || 6);
+    const rate = +(c.getAttribute("data-rate") || 0.01);
+    return { type, seed, freq, stride, rate };
+  }
+
+  for (const c of document.querySelectorAll<HTMLCanvasElement>(
+    "[data-example='noise']",
+  )) {
+    const { width, height } = c;
+    const d = Math.min(width, height);
+    const { type, seed, freq, stride, rate } = getAttributes(c);
+    const rand = new Random.Seedable(seed);
+    const ctx = c.getContext("2d")!;
+    const img = ctx.createImageData(width, height);
+    const noise = new Noise[type](rand);
+
+    let z = 0;
+    let loop = false;
+
+    function draw() {
+      for (let y = 0; y + stride <= height; y += stride) {
+        for (let x = 0; x + stride <= width; x += stride) {
+          const sx = (x * freq) / d;
+          const sy = (y * freq) / d;
+          const v = noise.xyz(sx, sy, z);
+          const { r, g, b } = interpolate((v + 1) / 2);
+
+          const i = (x + y * width) * 4;
+          img.data[i + 0] = r;
+          img.data[i + 1] = g;
+          img.data[i + 2] = b;
+          img.data[i + 3] = 255;
+
+          if (stride > 1) {
+            for (let sx = 0; sx < stride; sx++) {
+              for (let sy = 0; sy < stride; sy++) {
+                const idxs = (sy * width + sx) * 4 + i;
+                img.data[idxs] = r;
+                img.data[idxs + 1] = g;
+                img.data[idxs + 2] = b;
+                img.data[idxs + 3] = 255;
+              }
+            }
+          }
+        }
+      }
+
+      ctx.putImageData(img, 0, 0);
+      z += rate;
+
+      if (loop) requestAnimationFrame(draw);
+    }
+
+    c.addEventListener("mouseenter", () => {
+      loop = true;
+      draw();
+    });
+    c.addEventListener("mouseleave", () => {
+      loop = false;
+    });
+
+    draw();
+    onColorSchemeChange(draw);
+  }
+</script>
