@@ -6,7 +6,8 @@ year: 2018
 tags: ["mobile", "android", "frontend"]
 ---
 
-import StylizedImage from "@components/StylizedImage.astro";
+import AppWindow from "@components/AppWindow.astro";
+import ThemedImage from "@components/ThemedImage.astro";
 import cockpitImage from "@assets/images/cockpit.png";
 import cockpitGaugesImage from "@assets/images/cockpit-gauges.png";
 
@@ -18,10 +19,12 @@ Our phones are basically digital drugs. Colorful app icons, badges and notificat
 
 Cockpit is a data-rich homescreen replacement for Android phones inspired by (surprise) aircraft cockpit design. The HUD style interface surfaces useful information like recent messages, nearby transit and weather, and device resource utilization to keep you in the know without hijacking your attention.
 
-<StylizedImage
-  alt="Rendering of a custom phone dashboard showing a local map, weather, messages, and other quick actions"
-  src={cockpitImage}
-/>
+<AppWindow chrome title="Cockpit">
+  <ThemedImage
+    alt="Rendering of a custom phone dashboard showing a local map, weather, messages, and other quick actions"
+    src={cockpitImage}
+  />
+</AppWindow>
 
 Built using <abbr title="Kustom Live Wallpaper">KLWP</abbr> by [Kustom Industries](https://play.google.com/store/apps/dev?id=5300483087872269403&hl=en_US&gl=US), Cockpit replaces the typical grid of apps and eschews the
 ever-present notification shade in favor of four content areas:
@@ -57,10 +60,12 @@ The transit stations would be a bit simpler, requiring just a simple API query a
 
 At the time, I was on a less-than-ideal phone plan with exhorbitant data costs, and I was paranoid of going over my caps — which I did constantly anyway. I figured that placing this quota right on the home screen would keep me honest about my consumption in more ways than one. It turned out to work beautifully!
 
-<StylizedImage
+<AppWindow chrome title="Vitals" caption="Close-up of indicators in the vitals section">
+<ThemedImage
   alt="Close-up of indicators in the vitals section"
   src={cockpitGaugesImage}
 />
+</AppWindow>
 
 I found that this interface significantly reduced the amount of time I spent mindlessly browsing my phone; native notifications were silenced by default with this setup, and the loud, colorful icons and badges were no longer calling to be checked constantly. My data and usage was in check. And it made my feel like a character in Westworld when I used it.
 

@@ -6,7 +6,8 @@ year: 2019
 tags: ["iot", "smart home", "frontend", "react"]
 ---
 
-import StylizedImage from "@components/StylizedImage.astro";
+import AppWindow from "@components/AppWindow.astro";
+import ThemedImage from "@components/ThemedImage.astro";
 import huebertImage from "@assets/images/huebert-controls.svg";
 import certImage from "@assets/images/cert-warning.png";
 
@@ -16,10 +17,12 @@ Smart home lighting is pretty great. The ability to set the mood for a horror mo
 
 *Controlling* your smart lights, however, is another story. When I installed Philips Hue bulbs in my apartment, my initial awe was followed shortly by the realization that 'smart' is a relative term. I couldn't touch the wall switches if I wanted the bulbs to stay connected. It always felt like a *process* to simply dim the lights as I worked late into the evening. The desktop apps for managing them were bloated, and my phone was...across the room. I started wondering, could my smart lights and sensors be controlled from a web app? The answer was Yes. Sort of.
 
-<StylizedImage
-  alt="A rendering of the Huebert dashboard"
-  src={huebertImage}
-/>
+<AppWindow chrome title="Huebert.app">
+  <ThemedImage
+    alt="A rendering of the Huebert dashboard"
+    src={huebertImage}
+  />
+</AppWindow>
 
 ## Hello, Huebert
 
@@ -76,10 +79,12 @@ The first working web-app build was deployed after a week or two via GitHub Page
 
 People were visiting the site, attempting to link to their Hue Bridge, and getting console errors about an `Invalid Certificate`. Their browsers were refusing to talk to unencrypted endpoints, since the origin itself was encrypted — also known as `Mixed Content`. Chrome and other browsers allow you to circumvent this protection, but not without blasting you with some pretty scary-looking warnings:
 
-<StylizedImage
-  alt="Scary Chrome warning that a site's certificate is not trusted"
-  src={certImage}
-/>
+<AppWindow chrome title="Chrome.app">
+  <ThemedImage
+    alt="Scary Chrome warning that a site's certificate is not trusted"
+    src={certImage}
+  />
+</AppWindow>
 
 Thankfully, this issue wasn't present in the Electron version of the app, since it would be running on a host machine on the local network. Foregoing encryption in this context is fine, since the traffic never leaves your house.
 

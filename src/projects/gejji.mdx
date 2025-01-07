@@ -1,0 +1,81 @@
+---
+title: "Gejji"
+description: "Monitor system performance on dedicated, retro LED indicators"
+url: "https://github.com/rektdeckard/gejji"
+year: 2022
+tags: ["embedded", "arduino", "rust", "performance"]
+---
+
+import AppWindow from "@components/AppWindow.astro";
+import ThemedImage from "@components/ThemedImage.astro";
+import gejjiImage from "@assets/images/gejji3d.svg";
+import gejjiHistImage from "@assets/images/gejji3d_hist.svg";
+
+## Retro is beautiful
+
+In my weekend forays into embedded systems, I came up with the idea to build a dedicated hardware system resource monitor to always show the CPU, Memory, and I/O utilization of my computer in a beautiful phyisical device. Who doesn't like a retro techy gadget?
+
+The initial design used a simple 4 character 14-segment amber LED display and an Adafruit Feather HUZZAH microcontroller for the brains. It alternated showing the current CPU and Memory usage in percent, collecting performance data using the [DTrace for Windows](https://github.com/microsoft/DTrace-on-Windows) library, and streaming the data over the UART in a bespoke text format. It only worked on Windows and was pretty finnicky, but it was damn cool.
+
+<AppWindow chrome title="Gejji 1.0" caption="A rendering of Gejji's initial, simple display">
+  <ThemedImage class="p-4" src={gejjiImage} alt="" />
+</AppWindow>
+
+It fit nicely on my desk, and I was happy with it, for a time. But I
+soon wanted more information: disk and network I/O, histograms to
+visualize the statistics over time. I also wanted a robust CLI with
+backwards-compatibility for my original hardware, improved support for
+things like display update interval and display brightness, and the
+ability to run the host as a daemon so it could be started on boot
+with no interaction and run completely in the background.
+
+## Redesign
+
+I chose a 128x32 pixel monochrome OLED display, and wrote a primitive
+but effective graphing library to render pretty histograms. The end
+result looked something like this:
+
+<AppWindow chrome title="Gejji 2.0" caption="A rendering of Gejji's later iteration, with histogram">
+  <ThemedImage class="p-4" src={gejjiHistImage} alt="" />
+</AppWindow>
+
+The memory limitation led me to implement a simple Ring Buffer to store chronological data and to write and read efficiently without allocation. This also resulted in quite simple rendering code.
+
+```cpp
+void drawHistogram(&Adafruit_GFX display, int *data, int offset, Edge edge)
+{
+    for(int i = offset, x = 0; x < display.width(); --i, ++x) {
+        if (i < 0)
+            i = display.width() - 1;
+
+        int16_t column = display.width() - x - 1;
+
+        switch (edge) {
+        case Edge::Top:
+            display.drawLine(
+                column,
+                0,
+                column,
+                (data[i] * display.height()) / Y_SCALE,
+                WHITE);
+            break;
+        case Edge::Bottom:
+            display.drawLine(
+                column,
+                display.height(),
+                column,
+                (display.height() - data[i] * display.height()) / Y_SCALE,
+                WHITE);
+            break;
+        }
+    }
+}
+```
+
+With the help of the [sysinfo](https://crates.io/crates/sysinfo) crate and some handy macros, we could now build and run cross-platform, and even daemonize the host to make it simple to start at boot.
+
+## Detour into Rust for embedded
+
+Given that the host code was already written in Rust, and seeing the opportunity for a challenge, I decided to rewrite the microcontroller code in Rust as well. Using [espflash](https://github.com/esp-rs/espflash) and [this lovely guide by Scott Mabin](https://mabez.dev/blog/posts/esp-rust-ecosystem), I was able to compile Rust for the ESP32 board. But while ultimately possible, I found few benefits — and a number of difficulties around the tooling needed to get it working. I eventually went back to C++ for the microcontroller code, but hope to see progress in this space in the future.
+
+Overall, I'm quite happy with the outcome, and the sharp little device sits on my desk to this day.

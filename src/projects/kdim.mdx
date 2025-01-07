@@ -6,6 +6,7 @@ year: 2024
 tags: ["math", "fractals", "typescript", "frontend", "data structures", "oss"]
 ---
 
+import AppWindow from "@components/AppWindow.astro";
 import KdimJuliaPixel from "@components/KdimJuliaPixel.astro";
 import KdimNoise from "@components/KdimNoise.astro";
 
@@ -15,14 +16,18 @@ As a self-taught developer, I have always been at least a little insecure about 
 
 What set me off was learning about the K-dimensional Tree, a time-efficient data structure for searching higher-dimensional datasets. Inspired by Mike Pound's [Computerphile Video](https://www.youtube.com/watch?v=BK5x7IUTIyU) I decided to implement one from first principles.
 
-<KdimJuliaPixel
-  stride={5}
-  domain={1}
-  scale={3}
-  width={400}
-  height={400}
-/>
+<AppWindow chrome title="julia-random-walk.js">
+  <KdimJuliaPixel
+    stride={5}
+    domain={1}
+    scale={3}
+    width={400}
+    height={400}
+  />
+</AppWindow>
 
 TKTK
 
-<KdimNoise stride={5} type="Simplex" freq={3} rate={0.01} width={400} height={400} />
+<AppWindow chrome title="simplex-noise.js">
+  <KdimNoise stride={5} type="Simplex" freq={3} rate={0.01} width={400} height={400} />
+</AppWindow>

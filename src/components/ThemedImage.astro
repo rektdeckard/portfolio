@@ -1,0 +1,12 @@
+---
+import { Image, type LocalImageProps } from "astro:assets";
+import ThemeFilter from "@components/ThemeFilter.astro";
+
+export type Props = LocalImageProps;
+
+const { ...props } = Astro.props;
+---
+
+<ThemeFilter>
+  <Image {...props} class:list={[props.class, "block h-auto max-w-full"]} />
+</ThemeFilter>

@@ -6,7 +6,8 @@ year: 2020
 tags: ["portfolio", "frontend"]
 ---
 
-import StylizedImage from "@components/StylizedImage.astro";
+import AppWindow from "@components/AppWindow.astro";
+import ThemedImage from "@components/ThemedImage.astro";
 import helenaImage from "@assets/images/helenazhang.png";
 import helenaSpecImage from "@assets/images/helenazhang-spec.webp";
 
@@ -16,10 +17,12 @@ My partner Helena and I have a soft spot for the early days of the internet, whe
 
 Helena put together a design inspired by newspapers, with dense columns of content and explicit hierarchies of information. We mixed in references to broadcast TV and other analog media to make an experience that felt simultaneously nostalgic and modern.
 
-<StylizedImage
-  alt="Site specifications"
-  src={helenaSpecImage}
-/>
+<AppWindow chrome title="helenazhang.com" caption="Wireframes of the site">
+  <ThemedImage
+    alt="Wireframes of the site"
+    src={helenaSpecImage}
+  />
+</AppWindow>
 
 ## Laying the foundation
 

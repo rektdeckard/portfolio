@@ -6,7 +6,8 @@ year: [2020]
 tags: ["icons", "frontend", "oss"]
 ---
 
-import StylizedImage from "@components/StylizedImage.astro";
+import AppWindow from "@components/AppWindow.astro";
+import ThemedImage from "@components/ThemedImage.astro";
 import phosphorSiteImage from "@assets/images/phosphor_site.png";
 
 ## An obsession
@@ -74,10 +75,12 @@ Naturally, we needed a fun and functional site to house the project. We wanted a
 
 I took it as an opportunity to try out some new tools in the React ecosystem. TypeScript formed the foundation for less buggy code with more compile-time guarantees. I used the (now archived) [Recoil](https://recoiljs.org/), an experimental state management library from Facebook. It was an absolute joy to work with, and eliminates hundreds of lines of Redux boilerplate. I implemented a smart client-size fuzzy search with help from the awesome [Fuse.js](https://fusejs.io/) library, making searching for icons much more forgiving.
 
-<StylizedImage
-  alt="phosphoricons.com"
-  src={phosphorSiteImage}
-/>
+<AppWindow chrome title="phosphoricons.com" caption="Above-the-fold content on the new Phosphor site">
+  <ThemedImage
+    alt="phosphoricons.com"
+    src={phosphorSiteImage}
+  />
+</AppWindow>
 
 Ultimately, we managed to pack a ton of ergonomic features into a simple and straightforward one-page site, and even received some accolades from sites like:
 

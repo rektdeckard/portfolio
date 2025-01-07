@@ -1,7 +1,8 @@
 ---
+import { Image } from "astro:assets";
 import { getCollection } from "astro:content";
 import BaseLayout from "@layouts/BaseLayout.astro";
-import StylizedImage from "@components/StylizedImage.astro";
+import ThemedImage from "@components/ThemedImage.astro";
 import VariantImage from "@components/VariantImage.astro";
 
 import testImage from "../assets/images/toby-avatar.png";
@@ -9,10 +10,26 @@ import avatarG from "../assets/images/toby-avatar-g.png";
 import avatarP from "../assets/images/toby-avatar-p.png";
 
 const projects = await getCollection("projects");
+const size = 268;
 ---
 
 <BaseLayout pageTitle="About">
   <h1>TODO IMPLEMENT HOMEPAGE</h1>
-  <StylizedImage src={testImage} alt="" class="" height={268} />
-  <VariantImage src={avatarP} srcDark={avatarG} alt="" height={268} />
+  <div class="flex">
+    <ThemedImage src={testImage} alt="" class="" height={size} />
+    <VariantImage src={avatarG} srcDark={avatarP} alt="" height={size} />
+  </div>
+  <div class="flex">
+    <div
+      class:list={[
+        "overflow-clip",
+        "relative inline-block",
+        "before:absolute before:inset-0 before:bg-brightGreen dark:before:bg-blue before:mix-blend-hue",
+        "after:absolute after:inset-0 after:bg-white after:mix-blend-multiply",
+      ]}
+    >
+      <Image src={testImage} alt="" height={size} />
+    </div>
+    <VariantImage src={avatarP} srcDark={avatarG} alt="" height={size} />
+  </div>
 </BaseLayout>

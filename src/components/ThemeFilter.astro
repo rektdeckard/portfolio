@@ -1,0 +1,20 @@
+---
+import type { HTMLAttributes } from "astro/types";
+
+interface Props extends HTMLAttributes<"div"> {}
+
+const props = Astro.props;
+---
+
+<div
+  {...props}
+  class:list={[
+    props.class,
+    "overflow-clip",
+    "relative inline-block -mb-2",
+    "before:absolute before:inset-0 before:bg-blue dark:before:bg-brightGreen before:mix-blend-hue",
+    "after:absolute after:inset-0 after:bg-white after:mix-blend-multiply",
+  ]}
+>
+  <slot />
+</div>
