@@ -8,13 +8,18 @@ export interface Props {
 }
 
 const { frontmatter } = Astro.props;
+const yearString = Array.isArray(frontmatter.year)
+  ? `${frontmatter.year[0]}—${frontmatter.year[1] ?? ""}`
+  : frontmatter.year.toString();
 ---
 
 <BaseLayout pageTitle={frontmatter.title}>
   <article class="flex flex-col gap-4">
-    <h1 class="font-bold text-xl">{frontmatter.title}</h1>
-    <p>{frontmatter.description}</p>
-    <p>{frontmatter.year}</p>
+    <hgroup>
+      <h1 class="font-bold text-xl">{frontmatter.title}</h1>
+      <p>{frontmatter.description}</p>
+    </hgroup>
+    <p>{yearString}</p>
     <div class="tags">
       {
         frontmatter.tags?.map((tag: string) => (
