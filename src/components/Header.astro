@@ -1,8 +1,10 @@
 ---
 const { pathname } = Astro.url;
 const items = {
-  "/": "About",
+  "/": "Me",
   "/projects": "Projects",
+  "/writing": "Writing",
+  "/experiments": "Experiments",
 } as const;
 ---
 
@@ -13,8 +15,9 @@ const items = {
         <a
           href={path}
           class:list={{
-            overline:
+            underline:
               path === "/" ? path === pathname : pathname.startsWith(path),
+            "bg-current": pathname === path,
           }}
         >
           <span class:list={{ "bg-current": pathname === path }}>{title}</span>

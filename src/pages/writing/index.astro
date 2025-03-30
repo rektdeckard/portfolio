@@ -1,0 +1,36 @@
+---
+import { getCollection } from "astro:content";
+import BaseLayout from "@layouts/BaseLayout.astro";
+import {
+  sortedCollectionByYear,
+  omitDraftEntries,
+  getPostName,
+} from "@utils/content";
+
+const writings = await getCollection("writings", omitDraftEntries);
+const sortedWritingsByYear = sortedCollectionByYear(writings);
+console.log(
+  JSON.stringify(
+    sortedWritingsByYear.flatMap(([, entries]) =>
+      entries.map((e) => e.data.date),
+    ),
+  ),
+);
+---
+
+<BaseLayout pageTitle="Projects">
+  <ul>
+    {
+      sortedWritingsByYear.map(([year, entries]) => (
+        <Fragment>
+          <h2>{year}</h2>
+          {entries.map((entry) => (
+            <li>
+              <a href={`/writing/${entry.id}`}>{getPostName(entry)}</a>
+            </li>
+          ))}
+        </Fragment>
+      ))
+    }
+  </ul>
+</BaseLayout>

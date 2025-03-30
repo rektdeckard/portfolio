@@ -1,0 +1,29 @@
+---
+import { getCollection } from "astro:content";
+import BaseLayout from "@layouts/BaseLayout.astro";
+import {
+  getPostName,
+  omitDraftEntries,
+  sortedCollectionByTag,
+} from "@utils/content";
+
+const writings = await getCollection("writings", omitDraftEntries);
+const writingsByTag = sortedCollectionByTag(writings);
+---
+
+<BaseLayout pageTitle="Writing::Tags">
+  <ul>
+    {
+      writingsByTag.map(([tag, entries]) => (
+        <Fragment>
+          <h2 id={`tag-${tag}`}>{tag}</h2>
+          {entries.map((entry) => (
+            <li>
+              <a href={`/writing/${entry.id}`}>{getPostName(entry)}</a>
+            </li>
+          ))}
+        </Fragment>
+      ))
+    }
+  </ul>
+</BaseLayout>

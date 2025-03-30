@@ -10,13 +10,16 @@ const { pageTitle } = Astro.props;
 const { pathname } = Astro.url;
 ---
 
-<html lang="en" class="text-black bg-blue dark:text-brightGreen dark:bg-black">
+<html
+  lang="en"
+  class="text-black bg-green dark:text-brightYellow dark:bg-black"
+>
   <head>
     <meta charset="utf-8" />
     <link rel="icon" type="image/svg+xml" href="/favicon.svg" />
     <meta name="viewport" content="width=device-width" />
     <meta name="generator" content={Astro.generator} />
-    <title>TF{pathname === "/" ? "" : ` | ${pageTitle}`}</title>
+    <title>TF{pathname === "/" ? "" : `::${pageTitle}`}</title>
   </head>
   <body class="flex flex-col p-8 min-h-svh">
     <Header />

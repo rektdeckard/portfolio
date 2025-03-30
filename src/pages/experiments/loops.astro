@@ -1,0 +1,246 @@
+---
+import BaseLayout from "@layouts/BaseLayout.astro";
+import AppWindow from "@components/AppWindow.astro";
+---
+
+<BaseLayout pageTitle="Loops">
+  <AppWindow title="Fourier Loops" chrome>
+    <div id="container" class="relative">
+      <canvas id="canvas" width="600" height="600"></canvas>
+      <div
+        id="layer"
+        class="absolute inset-0 opacity-60 bg-[20px 20px] mix-blend-multiply"
+      >
+      </div>
+      <svg
+        class="absolute inset-0 opacity-40"
+        xmlns="http://www.w3.org/2000/svg"
+        version="1.1"
+        xmlns:xlink="http://www.w3.org/1999/xlink"
+        viewBox="0 0 700 700"
+        width="600"
+        height="600"
+      >
+        <defs>
+          <linearGradient
+            gradientTransform="rotate(-156, 0.5, 0.5)"
+            x1="50%"
+            y1="0%"
+            x2="50%"
+            y2="100%"
+            id="gggrain-gradient2"
+          >
+            <stop
+              stop-color="hsla(193, 87%, 52%, 1.00)"
+              stop-opacity="1"
+              offset="-0%"></stop>
+            <stop
+              stop-color="rgba(255,255,255,0)"
+              stop-opacity="0"
+              offset="100%"></stop>
+          </linearGradient>
+          <linearGradient
+            gradientTransform="rotate(156, 0.5, 0.5)"
+            x1="50%"
+            y1="0%"
+            x2="50%"
+            y2="100%"
+            id="gggrain-gradient3"
+          >
+            <stop stop-color="hsl(39, 92%, 54%)" stop-opacity="1"></stop>
+            <stop
+              stop-color="rgba(255,255,255,0)"
+              stop-opacity="0"
+              offset="100%"></stop>
+          </linearGradient>
+          <filter
+            id="gggrain-filter"
+            x="-20%"
+            y="-20%"
+            width="140%"
+            height="140%"
+            filterUnits="objectBoundingBox"
+            primitiveUnits="userSpaceOnUse"
+            color-interpolation-filters="sRGB"
+          >
+            <feTurbulence
+              type="fractalNoise"
+              baseFrequency="0.67"
+              numOctaves="2"
+              seed="2"
+              stitchTiles="stitch"
+              x="0%"
+              y="0%"
+              width="100%"
+              height="100%"
+              result="turbulence"></feTurbulence>
+            <feColorMatrix
+              type="saturate"
+              values="0"
+              x="0%"
+              y="0%"
+              width="100%"
+              height="100%"
+              in="turbulence"
+              result="colormatrix"></feColorMatrix>
+            <feComponentTransfer
+              x="0%"
+              y="0%"
+              width="100%"
+              height="100%"
+              in="colormatrix"
+              result="componentTransfer"
+            >
+              <feFuncR type="linear" slope="3"></feFuncR>
+              <feFuncG type="linear" slope="3"></feFuncG>
+              <feFuncB type="linear" slope="3"></feFuncB>
+            </feComponentTransfer>
+            <feColorMatrix
+              x="0%"
+              y="0%"
+              width="100%"
+              height="100%"
+              in="componentTransfer"
+              result="colormatrix2"
+              type="matrix"
+              values="1 0 0 0 0
+                    0 1 0 0 0
+                    0 0 1 0 0
+                    0 0 0 22 -14"
+            ></feColorMatrix>
+          </filter>
+        </defs>
+        <g>
+          <rect width="100%" height="100%" fill="hsl(321, 63%, 53%)"></rect>
+          <rect width="100%" height="100%" fill="url(#gggrain-gradient3)"
+          ></rect>
+          <rect width="100%" height="100%" fill="url(#gggrain-gradient2)"
+          ></rect>
+          <rect
+            width="100%"
+            height="100%"
+            fill="transparent"
+            filter="url(#gggrain-filter)"
+            opacity="1"
+            style="mix-blend-mode: overlay"></rect>
+        </g>
+      </svg>
+    </div>
+  </AppWindow>
+  <div>
+    <label>
+      Fourier terms
+      <input id="fourier" type="number" min="1" max="20" value="4" step="1" />
+    </label>
+    <label>
+      Seed
+      <input id="seed" type="number" min="0" max="100" value="35" step="1" />
+    </label>
+    <label>
+      Period
+      <input id="period" type="number" min="1" max="100" value="10" step="1" />
+    </label>
+    <label>
+      Color period
+      <input id="color" type="number" min="0.1" max="4" value="1" step="0.1" />
+    </label>
+  </div>
+</BaseLayout>
+
+<script>
+  const canvas = document.getElementById("canvas") as HTMLCanvasElement;
+  const ctx = canvas.getContext("2d") as CanvasRenderingContext2D;
+
+  function clear() {
+    ctx.clearRect(0, 0, canvas.width, canvas.height);
+  }
+
+  let fourierInput = document.getElementById("fourier") as HTMLInputElement;
+  let fourier = parseInt(fourierInput.value);
+  fourierInput.addEventListener("input", () => {
+    fourier = parseInt(fourierInput.value);
+    clear();
+  });
+
+  function loopingRandomWalk(t: number, period: number, seed = 0) {
+    let x = 0,
+      y = 0;
+
+    for (let i = 1; i <= fourier; i++) {
+      const freq = (2 * Math.PI * i) / period;
+      const phaseX = (Math.sin(seed * i * 1.3) * 2 * Math.PI) % (2 * Math.PI);
+      const phaseY = (Math.cos(seed * i * 1.7) * 2 * Math.PI) % (2 * Math.PI);
+
+      x += Math.sin(freq * t + phaseX) / i;
+      y += Math.cos(freq * t + phaseY) / i;
+    }
+
+    return [x, y];
+  }
+
+  let periodInput = document.getElementById("period") as HTMLInputElement;
+  let period = parseInt(periodInput.value);
+  periodInput.addEventListener("input", () => {
+    period = parseInt(periodInput.value);
+    clear();
+  });
+
+  let seedInput = document.getElementById("seed") as HTMLInputElement;
+  let seed = parseInt(seedInput.value);
+  seedInput.addEventListener("input", () => {
+    seed = parseInt(seedInput.value);
+    clear();
+  });
+
+  let colorPeriodInput = document.getElementById("color") as HTMLInputElement;
+  let colorPeriod = parseFloat(colorPeriodInput.value);
+  colorPeriodInput.addEventListener("input", () => {
+    colorPeriod = parseFloat(colorPeriodInput.value);
+    clear();
+  });
+
+  clear();
+  (function draw() {
+    // ctx.fillStyle = "rgba(255, 255, 255, 0.01)";
+    // ctx.fillRect(0, 0, canvas.width, canvas.height);
+    const [x, y] = loopingRandomWalk(Date.now() / 1000, period, seed);
+    const [r, c] = loopingRandomWalk(Date.now() / 1000, period, seed + 1);
+    const [g, b] = loopingRandomWalk(
+      Date.now() / 1000,
+      period / colorPeriod,
+      seed + 2,
+    );
+
+    try {
+      const xPixel = ((x * 0.5 + 1) * canvas.width) / 2;
+      const yPixel = ((y * 0.5 + 1) * canvas.height) / 2;
+
+      ctx.beginPath();
+      ctx.arc(xPixel, yPixel, (r + 2.5) * 16, 0, 2 * Math.PI);
+      // ctx.rect(xPixel, yPixel, (r + 2.5) * 20, (r + 2.5) * 20);
+      ctx.fillStyle = `rgb(${Math.floor((c + 1) * 256)} ${Math.floor((g + 1) * 256)} ${Math.floor((b + 1) * 256)})`;
+      ctx.fill();
+
+      // ctx.stroke();
+
+      requestAnimationFrame(draw);
+    } catch (e) {
+      console.error(e, {
+        fourier,
+        period,
+        seed,
+        colorPeriod,
+        x,
+        y,
+        r,
+        c,
+        g,
+        b,
+      });
+    }
+  })();
+
+  window.onunhandledrejection = function (e) {
+    console.error(e.reason);
+  };
+</script>

@@ -1,9 +1,12 @@
 ---
 import { getCollection, render } from "astro:content";
 import MarkdownPostLayout from "@layouts/MarkdownProjectLayout.astro";
+import { omitDraftEntries } from "@utils/content";
+
+export const prerender = true;
 
 export async function getStaticPaths() {
-  const projects = await getCollection("projects");
+  const projects = await getCollection("projects", omitDraftEntries);
   return projects.map((project) => ({
     params: { slug: project.id },
     props: { project },

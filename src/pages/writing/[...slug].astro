@@ -1,0 +1,40 @@
+---
+import BaseLayout from "@layouts/BaseLayout.astro";
+import { getCollection, render } from "astro:content";
+import { getPostName, omitDraftEntries } from "@utils/content";
+import { formatLongDate } from "@utils/datetime";
+
+export const prerender = true;
+
+export async function getStaticPaths() {
+  const writings = await getCollection("writings", omitDraftEntries);
+  return writings.map((writing) => ({
+    params: { slug: writing.id },
+    props: { writing },
+  }));
+}
+
+const { writing: entry } = Astro.props;
+const { Content } = await render(entry);
+---
+
+<BaseLayout pageTitle={`Writing::${entry.id}`}>
+  <article class="flex flex-col gap-4">
+    <hgroup>
+      <h1 class="font-bold text-xl">{getPostName(entry)}</h1>
+      <p>
+        {entry.data.title ? formatLongDate(entry.data.date) : "A daily journal"}
+      </p>
+    </hgroup>
+    <div class="tags">
+      {
+        entry.data.tags?.map((tag: string) => (
+          <p class="tag">
+            <a href={`/writing/tags/#tag-${tag}`}>{tag}</a>
+          </p>
+        ))
+      }
+    </div>
+    <Content />
+  </article>
+</BaseLayout>
