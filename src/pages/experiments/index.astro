@@ -1,12 +1,20 @@
 ---
 import BaseLayout from "@layouts/BaseLayout.astro";
+
+const pages = Object.keys(import.meta.glob("./*.astro")).map((path) => ({
+  name: path.replace("./", "").replace(".astro", ""),
+  url: path.replace("./", "").replace(".astro", ""),
+}));
 ---
 
 <BaseLayout pageTitle="Experiments">
   <ul>
-    <li><a href="/experiments/loops.html">Loops</a></li>
-    <li><a href="/experiments/peano.html">Peano</a></li>
-    <li><a href="/experiments/phosphor.html">Phosphor Test</a></li>
-    <li><a href="/experiments/phosphor-font.html">Phosphor Font Test</a></li>
+    {
+      pages.map((page) => (
+        <li>
+          <a href={`/experiments/${page.url}`}>{page.name}</a>
+        </li>
+      ))
+    }
   </ul>
 </BaseLayout>

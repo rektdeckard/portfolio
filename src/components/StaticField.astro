@@ -1,0 +1,108 @@
+---
+import AppWindow from "./AppWindow.astro";
+---
+
+<AppWindow title="Static Field" chrome>
+  <div class="flex justify-evenly">
+    <div>
+      <input id="static-run" type="checkbox" checked="checked" />
+      <label for="static-run">Run</label>
+    </div>
+    <div>
+      <input id="static-crypto" type="checkbox" checked={false} />
+      <label for="static-crypto">Cryptographic</label>
+    </div>
+    <div>
+      <input id="static-normalized" type="checkbox" disabled />
+      <label for="static-normalized">Normalized</label>
+    </div>
+  </div>
+  <canvas class="bg-black border" width={400} height={300}></canvas>
+</AppWindow>
+
+<script>
+  const MAX_ENTROPY = 2 ** 16;
+  const INFLECTION_POINT = 2 ** 31;
+
+  let run = false;
+  let crypt = true;
+  let shouldNormalize = false;
+
+  const canvas = document.querySelector("canvas") as HTMLCanvasElement;
+  const ctx = canvas.getContext("2d") as CanvasRenderingContext2D;
+
+  let idata: ImageData;
+  let buffer: Uint32Array;
+  let af: number | null = null;
+
+  function setup() {
+    const { offsetWidth, offsetHeight } = canvas;
+    if (!offsetWidth || !offsetHeight) {
+      return;
+    }
+    console.log(canvas.width, canvas.height, offsetWidth, offsetHeight);
+    canvas.width = offsetWidth;
+    canvas.height = offsetHeight;
+    idata = ctx.createImageData(canvas.width, canvas.height);
+    buffer = new Uint32Array(idata.data.buffer);
+    if (af !== null) {
+      cancelAnimationFrame(af);
+    }
+    loop();
+  }
+  window.addEventListener("resize", setup, { passive: true });
+  setup();
+
+  function normalize(value: number, infl: number): number {
+    if (!shouldNormalize) return value;
+    return value < infl ? 0 : -1 >> 0;
+  }
+
+  function loop() {
+    if (crypt) {
+      let rnd = crypto.getRandomValues(
+        new Uint32Array(MAX_ENTROPY / Uint32Array.BYTES_PER_ELEMENT),
+      );
+      let len = buffer.length - 1;
+      while (len--) {
+        buffer[len] = normalize(rnd[len % rnd.length], INFLECTION_POINT);
+        if (!(len % MAX_ENTROPY)) crypto.getRandomValues(rnd);
+      }
+      ctx.putImageData(idata, 0, 0);
+    } else {
+      let len = buffer.length - 1;
+      while (len--) {
+        buffer[len] = Math.random() < 0.5 ? 0 : -1 >> 0;
+      }
+      ctx.putImageData(idata, 0, 0);
+    }
+    if (run) af = requestAnimationFrame(loop);
+  }
+  loop();
+
+  const runInput = document.getElementById("static-run") as HTMLInputElement;
+  runInput.checked = run;
+  runInput?.addEventListener("input", (e) => {
+    run = (e.target as HTMLInputElement).checked;
+    if (run) loop();
+  });
+
+  const normalizedInput = document.getElementById(
+    "static-normalized",
+  ) as HTMLInputElement;
+  normalizedInput.checked = shouldNormalize;
+  normalizedInput.disabled = !crypt;
+  normalizedInput.addEventListener("input", (e) => {
+    shouldNormalize = (e.target as HTMLInputElement).checked;
+  });
+
+  const cryptoInput = document.getElementById(
+    "static-crypto",
+  ) as HTMLInputElement;
+  cryptoInput.checked = crypt;
+  cryptoInput.addEventListener("input", (e) => {
+    crypt = (e.target as HTMLInputElement).checked;
+    normalizedInput.disabled = !crypt;
+    normalizedInput.checked = !crypt || shouldNormalize;
+  });
+</script>

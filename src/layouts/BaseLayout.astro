@@ -5,8 +5,9 @@ import "@styles/global.css";
 
 interface Props {
   pageTitle: string;
+  class?: string;
 }
-const { pageTitle } = Astro.props;
+const { pageTitle, class: className } = Astro.props;
 const { pathname } = Astro.url;
 ---
 
@@ -23,7 +24,7 @@ const { pathname } = Astro.url;
   </head>
   <body class="flex flex-col p-8 min-h-svh">
     <Header />
-    <main class="grow">
+    <main class:list={["grow", className]}>
       <slot />
     </main>
     <Footer />

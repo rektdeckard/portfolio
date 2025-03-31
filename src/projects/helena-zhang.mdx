@@ -7,6 +7,7 @@ tags: ["portfolio", "frontend"]
 ---
 
 import AppWindow from "@components/AppWindow.astro";
+import StaticField from "@components/StaticField.astro";
 import ThemedImage from "@components/ThemedImage.astro";
 import helenaImage from "@assets/images/helenazhang.png";
 import helenaSpecImage from "@assets/images/helenazhang-spec.webp";
@@ -70,7 +71,7 @@ Perhaps the two greatest benefits to this approach are the impressive gains to a
 
 ## Making some noise
 
-> TODO: StaticField
+<StaticField />
 
 The design included a small block of TV static at the foot of the page; a purely aesthetic element that was originally intended to be a simple image. For fun, I decided to make it dynamic and wrote a white noise generator and spit the results onto a `&lt;canvas&gt;` element, to great nostalgic effect. The first, naïve pass used the Canvas API methods `fillRect()` and `clearRect()`, looping through the canvas coordinates and painting 1x1 'pixels' randomly in black or white. Since painting on a canvas is additive, each frame also had to clear the canvas before painting into it again. It was terribly slow.
 

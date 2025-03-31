@@ -8,7 +8,7 @@ const items = {
 } as const;
 ---
 
-<header>
+<header class="sticky top-0 z-[1] bg-green dark:bg-black">
   <nav class="flex flex-wrap gap-4 font-mono uppercase bg-current">
     {
       Object.entries(items).map(([path, title]) => (

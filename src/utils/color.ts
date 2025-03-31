@@ -82,6 +82,7 @@ export function ramp<T>(range: T[]) {
 }
 
 export const INTERPOLATORS = {
+  AmberDark: rgbBasis(["#1A1A1A", "#a6794c", "#cbaa89"].map(hexToRGB)),
   MellifluousDark: rgbBasis(["#1A1A1A", "#828040", "#b3b393"].map(hexToRGB)),
   MellifluousSpectal: rgbBasis(
     ["#020202", "#5a6599", "#9c6995", "#c95954", "#a6794c"].map(hexToRGB),
