@@ -1,0 +1,85 @@
+---
+interface Props {}
+
+const { pathname } = Astro.url;
+const galleryId = `${pathname}-gallery`;
+---
+
+<dialog
+  popover="auto"
+  data-unique="gallery"
+  id={galleryId}
+  class="fixed inset-0 w-screen h-screen overflow-none bg-black/0 backdrop:bg-black/50 backdrop:backdrop-blur-sm p-8 my-0 mx-auto outline-none"
+>
+  <div
+    class="flex h-full items-start gap-4 snap-mandatory snap-always snap-x overflow-x-auto overflow-y-hidden"
+  >
+  </div>
+</dialog>
+
+<script>
+  const gallery = document.querySelector(
+    "[data-unique='gallery']",
+  ) as HTMLDialogElement;
+  const scroller = gallery.querySelector("div") as HTMLDivElement;
+
+  // Using a native popover, find all `img` elements in the page and add them to the gallery component, and cause a click on any image to open the gallery.
+  const images = document.querySelectorAll("img");
+  images.forEach((img) => {
+    const container = document.createElement("div");
+    container.className =
+      "w-screen h-full grow-0 shrink-0 basis-full grid items-center p-4 snap-center";
+    const image = img.cloneNode(true) as HTMLImageElement;
+    image.id = "";
+    image.className = "w-full h-full object-scale-down";
+    container.appendChild(image);
+    scroller.appendChild(container);
+    img.addEventListener("click", () => {
+      gallery.showModal();
+      image.scrollIntoView({ behavior: "smooth" });
+    });
+  });
+
+  // Use arrow keys to navigate the gallery
+  gallery.addEventListener("keydown", (e) => {
+    if (e.key === "ArrowLeft") {
+      scroller.scrollBy({
+        left: -window.innerWidth,
+        behavior: "smooth",
+      });
+    } else if (e.key === "ArrowRight") {
+      scroller.scrollBy({
+        left: window.innerWidth,
+        behavior: "smooth",
+      });
+    }
+  });
+  // Close the gallery when clicking
+  gallery.addEventListener("click", () => {
+    gallery.close();
+  });
+</script>
+
+<style>
+  dialog[open] {
+    animation: fadein 150ms ease forwards;
+  }
+
+  @keyframes fadein {
+    0% {
+      opacity: 0;
+      transform: scale(0.9);
+    }
+    100% {
+      opacity: 1;
+      transform: scale(1);
+    }
+  }
+  ::-webkit-scrollbar {
+    display: none;
+  }
+  [data-unique="gallery"] > div {
+    -ms-overflow-style: none; /* Hides scrollbar in IE and Edge */
+    scrollbar-width: none;
+  }
+</style>

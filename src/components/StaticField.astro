@@ -40,7 +40,6 @@ import AppWindow from "./AppWindow.astro";
     if (!offsetWidth || !offsetHeight) {
       return;
     }
-    console.log(canvas.width, canvas.height, offsetWidth, offsetHeight);
     canvas.width = offsetWidth;
     canvas.height = offsetHeight;
     idata = ctx.createImageData(canvas.width, canvas.height);

@@ -3,6 +3,7 @@ import BaseLayout from "@layouts/BaseLayout.astro";
 import { getCollection, render } from "astro:content";
 import { getPostName, omitDraftEntries } from "@utils/content";
 import { formatLongDate } from "@utils/datetime";
+import ImageGallery from "@components/ImageGallery.astro";
 
 export const prerender = true;
 
@@ -37,4 +38,5 @@ const { Content } = await render(entry);
     </div>
     <Content />
   </article>
+  <ImageGallery />
 </BaseLayout>

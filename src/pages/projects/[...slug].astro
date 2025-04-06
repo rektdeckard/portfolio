@@ -2,6 +2,7 @@
 import { getCollection, render } from "astro:content";
 import MarkdownPostLayout from "@layouts/MarkdownProjectLayout.astro";
 import { omitDraftEntries } from "@utils/content";
+import ImageGallery from "@components/ImageGallery.astro";
 
 export const prerender = true;
 
@@ -19,4 +20,5 @@ const { Content } = await render(project);
 
 <MarkdownPostLayout frontmatter={project.data}>
   <Content />
+  <ImageGallery />
 </MarkdownPostLayout>
