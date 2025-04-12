@@ -93,6 +93,7 @@ import AppWindow from "./AppWindow.astro";
   normalizedInput.disabled = !crypt;
   normalizedInput.addEventListener("input", (e) => {
     shouldNormalize = (e.target as HTMLInputElement).checked;
+    loop();
   });
 
   const cryptoInput = document.getElementById(
@@ -103,5 +104,6 @@ import AppWindow from "./AppWindow.astro";
     crypt = (e.target as HTMLInputElement).checked;
     normalizedInput.disabled = !crypt;
     normalizedInput.checked = !crypt || shouldNormalize;
+    loop();
   });
 </script>

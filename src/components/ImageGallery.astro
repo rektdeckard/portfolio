@@ -29,8 +29,12 @@ const galleryId = `${pathname}-gallery`;
     const container = document.createElement("div");
     container.className =
       "w-screen h-full grow-0 shrink-0 basis-full grid items-center p-4 snap-center";
-    const image = img.cloneNode(true) as HTMLImageElement;
-    image.id = "";
+    const image = document.createElement("img");
+    image.src = img.src;
+    image.alt = img.alt;
+    image.loading = "lazy";
+    image.draggable = false;
+    image.decoding = "async";
     image.className = "w-full h-full object-scale-down";
     container.appendChild(image);
     scroller.appendChild(container);

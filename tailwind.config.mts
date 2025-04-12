@@ -23,7 +23,7 @@ export default {
     },
     fontFamily: {
       sans: ["sans-serif"],
-      mono: ["DepartureMono", "monospace"],
+      mono: ["monospace", "DepartureMono"],
     },
     extend: {},
   },
