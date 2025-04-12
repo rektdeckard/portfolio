@@ -4,6 +4,7 @@ on:
   push:
     branches:
       - master
+  workflow_dispatch:
 
 env:
   SUBDOMAINS: |
@@ -32,7 +33,10 @@ jobs:
         run: pnpm install
 
       - name: Install sshpass
-        run: sudo apt-get install -y sshpass
+        run: |
+          sudo apt-get clean
+          sudo apt-get update
+          sudo apt-get install -y sshpass
 
       - name: Add SSH Key to known_hosts
         env:
@@ -53,6 +57,7 @@ jobs:
           HOST: ${{ secrets.DREAMHOST_FTP_HOST }}
         run: |
           IFS=$'\n' read -r -d '' -a subdomain < <(printf '%s\0' "$SUBDOMAINS")
-          for version in "${subdomain[@]}"; do
+          for subdomain in "${subdomain[@]}"; do
+            echo "Deploying to $subdomain"
             sshpass -p "$PASSWORD" rsync -avz --delete ./dist/* $USERNAME@$HOST:$subdomain
           done
