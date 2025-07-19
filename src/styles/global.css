@@ -11,6 +11,15 @@
   src: url("/assets/fonts/DepartureMono-Regular.woff2") format("woff2");
 }
 
+/* MDIO */
+@font-face {
+  font-display: swap;
+  font-family: "MDIO";
+  font-style: normal;
+  font-weight: 400;
+  src: url("/assets/fonts/MDIO-Regular.woff2") format("woff2");
+}
+
 /* Shiki color scheme awareness */
 @media (prefers-color-scheme: dark) {
   .astro-code,
@@ -34,6 +43,51 @@
   background-color: rgb(from currentcolor r g b / var(--standard-opacity));
 }
 
-ul {
-  list-style: square inside;
+@layer base {
+  *:focus {
+    @apply outline-1 outline-dashed;
+  }
 }
+
+@layer utilities {
+  .grid-home {
+    @apply grid grid-cols-[1fr_10ch_10ch_21ch_60ch_10ch_1fr] gap-[1ch] *:pe-[1ch];
+  }
+
+  .grid-index {
+    @apply grid grid-cols-[1fr_10ch_10ch_10ch_10ch_60ch_10ch_1fr] gap-[1ch] *:pe-[1ch];
+  }
+}
+
+@layer components {
+  a {
+    @apply underline underline-offset-2 outline-offset-2 hover:outline-1 hover:outline-dashed;
+  }
+
+  ul {
+    @apply list-[square] list-inside;
+  }
+
+  input[type='range'] {
+    @apply appearance-none bg-[transparent];
+  }
+
+  input[type='range']::-webkit-slider-runnable-track {
+    @apply h-full bg-[transparent];
+  }
+
+  input[type='range']::-webkit-slider-thumb {
+    @apply bg-[transparent] w-12 h-6 cursor-ew-resize outline-none ;
+    -webkit-appearance: none;
+    margin-top: -0.5rem; /* align with track */
+  }
+
+  input[type='range']::-moz-range-thumb {
+    @apply bg-[transparent] w-12 h-6 cursor-ew-resize border-none;
+  }
+
+  input[type='range']::-moz-range-track {
+    @apply h-full bg-[transparent];
+  }
+}
+

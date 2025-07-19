@@ -1,5 +1,5 @@
 ---
-import BaseLayout from "@layouts/BaseLayout.astro";
+import IndexLayout from "@layouts/IndexLayout.astro";
 
 const pages = Object.keys(import.meta.glob("./*.astro")).map((path) => ({
   name: path.replace("./", "").replace(".astro", ""),
@@ -7,14 +7,26 @@ const pages = Object.keys(import.meta.glob("./*.astro")).map((path) => ({
 }));
 ---
 
-<BaseLayout pageTitle="Experiments">
-  <ul>
-    {
-      pages.map((page) => (
-        <li>
-          <a href={`/experiments/${page.url}`}>{page.name}</a>
-        </li>
-      ))
-    }
-  </ul>
-</BaseLayout>
+<IndexLayout pageTitle="Experiments">
+  <section class="">
+    <ol>
+      {
+        pages.map((page, idx) => (
+          <li
+            class:list={{
+              "bg-blush": idx % 2 === 0,
+            }}
+          >
+            <a
+              class="grid-index min-h-28 no-underline outline-none focus:bg-black focus:text-white hover:bg-black hover:text-white"
+              href={`/experiments/${page.url}`}
+            >
+              <span class="col-start-2">{`${idx + 1}`.padStart(2, "0")}</span>
+              <span class="col-start-4 col-span-3 underline">{page.name}</span>
+            </a>
+          </li>
+        ))
+      }
+    </ol>
+  </section>
+</IndexLayout>

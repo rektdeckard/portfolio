@@ -4,6 +4,11 @@ on:
   push:
     branches:
       - master
+  workflow_dispatch:
+
+env:
+  SUBDOMAINS: |
+    2025.tobiasfried.com
 
 jobs:
   deploy:
@@ -21,13 +26,16 @@ jobs:
         uses: actions/setup-node@v4
         with:
           node-version: 20
-          cache: "pnpm"
+          cache: 'pnpm'
 
       - name: Install dependencies
         run: pnpm install
 
       - name: Install sshpass
-        run: sudo apt-get install -y sshpass
+        run: |
+          sudo apt-get clean
+          sudo apt-get update
+          sudo apt-get install -y sshpass
 
       - name: Add SSH Key to known_hosts
         env:
@@ -46,6 +54,9 @@ jobs:
           USERNAME: ${{ secrets.DREAMHOST_USERNAME }}
           PASSWORD: ${{ secrets.DREAMHOST_PASSWORD }}
           HOST: ${{ secrets.DREAMHOST_FTP_HOST }}
-          DEPLOY_PATH: tobiasfried.com
         run: |
-          sshpass -p "$PASSWORD" rsync -avz --delete ./dist/* $USERNAME@$HOST:$DEPLOY_PATH
+          IFS=$'\n' read -r -d '' -a subdomain < <(printf '%s\0' "$SUBDOMAINS")
+          for subdomain in "${subdomain[@]}"; do
+            echo "Deploying to $subdomain"
+            sshpass -p "$PASSWORD" rsync -avz --delete ./dist/* $USERNAME@$HOST:$subdomain
+          done

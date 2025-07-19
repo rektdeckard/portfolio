@@ -1,28 +1,35 @@
 ---
 import { getCollection } from "astro:content";
-import BaseLayout from "@layouts/BaseLayout.astro";
+import IndexLayout from "@layouts/IndexLayout.astro";
 import { omitDraftEntries, sortedCollectionByYear } from "@utils/content";
+import { formatYearOrRange } from "@utils/datetime";
 
 const projects = await getCollection("projects", omitDraftEntries);
-const sortedProjectsByYear = sortedCollectionByYear(projects);
+const sortedProjects = sortedCollectionByYear(projects);
 ---
 
-<BaseLayout pageTitle="Projects">
-  <ul>
-    {
-      sortedProjectsByYear.map(([year, projects]) => (
-        <Fragment>
-          <h2>{year}</h2>
-          {projects.map((project) => (
-            <li>
-              <a class="font-bold" href={`/projects/${project.id}`}>
-                {project.data.title}
-              </a>{" "}
-              :: {project.data.description}
-            </li>
-          ))}
-        </Fragment>
-      ))
-    }
-  </ul>
-</BaseLayout>
+<IndexLayout pageTitle="Projects">
+  <section class="">
+    <ol>
+      {
+        sortedProjects.map((project, idx) => (
+          <li
+            class:list={{
+              "bg-beige": idx % 2 === 0,
+            }}
+          >
+            <a
+              class="grid-index min-h-28 no-underline outline-none focus:bg-black focus:text-white hover:bg-black hover:text-white"
+              href={`/projects/${project.id}`}
+            >
+              <span class="col-start-2">{`${idx + 1}`.padStart(2, "0")}</span>
+              <span>{formatYearOrRange(project.data.year)}</span>
+              <span class="col-span-2 underline">{project.data.title}</span>
+              <p>{project.data.description}</p>
+            </a>
+          </li>
+        ))
+      }
+    </ol>
+  </section>
+</IndexLayout>

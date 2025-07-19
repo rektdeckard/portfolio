@@ -1,34 +1,119 @@
 ---
 import { Image } from "astro:assets";
 import { getCollection } from "astro:content";
-import BaseLayout from "@layouts/BaseLayout.astro";
-import ThemedImage from "@components/ThemedImage.astro";
-import VariantImage from "@components/VariantImage.astro";
 
+import HomeLayout from "@layouts/HomeLayout.astro";
 import testImage from "../assets/images/toby-avatar.png";
-import avatarG from "../assets/images/toby-avatar-g.png";
-import avatarP from "../assets/images/toby-avatar-p.png";
 
-const projects = await getCollection("projects");
-const size = 268;
+const books = await getCollection("readings");
 ---
 
-<BaseLayout pageTitle="About">
-  <div class="flex">
-    <ThemedImage src={testImage} alt="" class="" height={size} />
-    <VariantImage src={avatarG} srcDark={avatarP} alt="" height={size} />
-  </div>
-  <div class="flex">
-    <div
-      class:list={[
-        "overflow-clip",
-        "relative inline-block",
-        "before:absolute before:inset-0 before:bg-brightYellow dark:before:bg-green before:mix-blend-hue",
-        "after:absolute after:inset-0 after:bg-white after:mix-blend-multiply",
-      ]}
-    >
-      <Image src={testImage} alt="" height={size} />
+<HomeLayout pageTitle="About">
+  <section class="grid-home bg-powder min-h-[336px]">
+    <Image
+      class="col-start-3 col-span-2 z-10"
+      alt=""
+      width={225}
+      src={testImage}
+    />
+    <div class="space-y-4 text-xl">
+      <p>
+        Hello, world. I’m Tobias, a full-stack software engineer and a maker of
+        tools and toys. I’m 1/2 of Phosphor Icons and TKTK.
+      </p>
+      <p>
+        Check out my <a href="/projects">projects</a>, read some of my <a
+          href="/writing">writing</a
+        >, or play with some of my
+        <a href="/experiments">experiments</a>.
+      </p>
     </div>
-    <VariantImage src={avatarP} srcDark={avatarG} alt="" height={size} />
-  </div>
-</BaseLayout>
+  </section>
+  <section class="grid-home min-h-28">
+    <svg
+      class="invisible col-start-4 justify-self-end me-2"
+      xmlns="http://www.w3.org/2000/svg"
+      width="32"
+      height="32"
+      viewBox="0 0 24 24"
+      ><path
+        fill="currentColor"
+        d="M2 3H0v18h24V3zm20 2v14H2V5zM10 7H6v4h4zm-6 6h8v4H4zm16-6h-6v2h6zm-6 4h6v2h-6zm6 4h-6v2h6z"
+      ></path>
+    </svg>
+    <div>
+      <p>MODEL NO. 923157387T270</p>
+      <p>LOCATION SCOUT TURNED SOFTWARE ENGINEER</p>
+      <p>CO-FOUNDER OF PHOSPHOR ICONS</p>
+      <p>GIRLDAD 1X</p>
+    </div>
+  </section>
+  <section class="grid-home min-h-28 bg-powder">
+    <svg
+      class="invisible col-start-4 justify-self-end me-2"
+      xmlns="http://www.w3.org/2000/svg"
+      width="32"
+      height="32"
+      viewBox="0 0 24 24"
+      ><path
+        fill="currentColor"
+        d="M21 11V3h-8v2h4v2h-2v2h-2v2h-2v2H9v2h2v-2h2v-2h2V9h2V7h2v4zM11 5H3v16h16v-8h-2v6H5V7h6z"
+      ></path>
+    </svg>
+    <div class="col-start-5 flex flex-col justify-between h-full">
+      <div class="flex items-center gap-5">
+        <a class="uppercase" href="https://github.com/rektdeckard">GitHub</a>
+        <a class="uppercase" href="https://hachyderm.io/@rektdeckard"
+          >Mastodon</a
+        >
+        <a class="uppercase" href="https://linkedin.com/in/tobiasfried"
+          >LinkedIn</a
+        >
+        <a class="uppercase" href="https://twitter.com/friedtm">Twitter</a>
+        <a class="uppercase" href="https://medium.com/@friedtm">Medium</a>
+        <a class="uppercase" href="mailto:friedtm@gmail.com">Email</a>
+      </div>
+      <p>CURRENTLY READING</p>
+    </div>
+  </section>
+  <section class="grid-home min-h-28">
+    <svg
+      class="invisible col-start-4 justify-self-end me-2"
+      xmlns="http://www.w3.org/2000/svg"
+      width="32"
+      height="32"
+      viewBox="0 0 24 24"
+      ><path
+        fill="currentColor"
+        d="M3 3h8v2H3v12h8V5h2v12h8V5h-8V3h10v16H13v2h-2v-2H1V3zm16 7h-4v2h4zm-4-3h4v2h-4zm2 6h-2v2h2z"
+      ></path>
+    </svg>
+    <div class="flex flex-col items-start gap-4 col-start-5">
+      {
+        books.map((book) => (
+          <a
+            title={`${book.data.details.title} by ${(
+              book.data.details.authors || book.data.details.contributors!
+            )
+              .map((a) => a.name)
+              .join(", ")}`}
+            href={book.data.preview_url}
+            class="place-self-start"
+          >
+            <bar-code
+              type="ean13"
+              scale={3}
+              height={39}
+              value={book.data.isbn}
+            />
+          </a>
+        ))
+      }
+    </div>
+  </section>
+</HomeLayout>
+
+<script>
+  import { init } from "@utils/barcode";
+  init();
+</script>

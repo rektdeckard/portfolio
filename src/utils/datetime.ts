@@ -13,3 +13,11 @@ export function shiftUTCToMDT(date: Date): Date {
 export function formatLongDate(date: Date): string {
   return dayjs(date).format("MMMM D, YYYY");
 }
+
+export function formatYearOrRange(
+  yearOrRange: number | [number] | [number, number | undefined],
+): string {
+  return Array.isArray(yearOrRange)
+    ? `${yearOrRange[0]}—${yearOrRange[1] ?? ""}`
+    : yearOrRange.toString();
+}

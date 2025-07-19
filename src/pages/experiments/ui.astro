@@ -1,0 +1,94 @@
+---
+import BaseLayout from "@layouts/BaseLayout.astro";
+import { ActionButton } from "@components/ActionButton.tsx";
+import { Stepper } from "@components/Stepper.tsx";
+import { Slider } from "@components/Slider.tsx";
+---
+
+<BaseLayout pageTitle="Loops">
+  <h2>ActionButton</h2>
+  <br />
+  <div class="flex flex-col items-start gap-2">
+    <ActionButton client:load label="Randomize Parameters" key="r" />
+    <ActionButton client:load label="Save GIF" key="s" />
+    <ActionButton client:load label="No shortcut" />
+    <ActionButton client:load label="Illegal Action" key="i" disabled />
+  </div>
+  <br />
+  <hr />
+  <br />
+  <h2>Stepper</h2>
+  <br />
+  <div class="grid grid-cols-[28px_60px_28px_1fr] gap-1">
+    <Stepper
+      client:load
+      defaultValue={5}
+      min={1}
+      max={20}
+      id="fourier"
+      name="fourier"
+      label="Fourier Terms"
+      class="contents"
+    />
+    <Stepper
+      client:load
+      defaultValue={1}
+      min={0}
+      max={10}
+      step={0.1}
+      precision={2}
+      id="period"
+      name="period"
+      label="Period"
+      class="contents"
+    />
+    <Stepper
+      client:load
+      defaultValue={1}
+      min={-10}
+      max={10}
+      step={0.1}
+      precision={2}
+      id="color-period"
+      name="color-period"
+      label="Color Period"
+      class="contents"
+    />
+    <Stepper
+      client:load
+      min={0}
+      max={100}
+      id="seed"
+      name="seed"
+      label="Seed"
+      class="contents"
+    />
+  </div>
+  <br />
+  <h2>Slider</h2>
+  <br />
+  <div class="flex flex-col gap-5">
+    <Slider
+      client:load
+      min={1}
+      max={20}
+      step={1}
+      defaultValue={5}
+      label="Fourier Terms"
+      id="fourier-slider"
+      name="fourier-slider"
+      class="grid grid-cols-[400px_1fr] gap-1"
+    />
+    <Slider
+      client:load
+      min={0}
+      max={Math.PI}
+      step={0.05}
+      defaultValue={2.35}
+      label="Spline Reticulation"
+      id="spline-reticulation-slider"
+      name="spline-reticulation-slider"
+      class="grid grid-cols-[400px_1fr] gap-1"
+    />
+  </div>
+</BaseLayout>

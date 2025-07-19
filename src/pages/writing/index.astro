@@ -1,36 +1,41 @@
 ---
 import { getCollection } from "astro:content";
-import BaseLayout from "@layouts/BaseLayout.astro";
+import IndexLayout from "@layouts/IndexLayout.astro";
 import {
-  sortedCollectionByYear,
   omitDraftEntries,
   getPostName,
+  sortedCollectionByYear,
 } from "@utils/content";
+import { formatLongDate } from "@utils/datetime";
 
 const writings = await getCollection("writings", omitDraftEntries);
 const sortedWritingsByYear = sortedCollectionByYear(writings);
-console.log(
-  JSON.stringify(
-    sortedWritingsByYear.flatMap(([, entries]) =>
-      entries.map((e) => e.data.date),
-    ),
-  ),
-);
 ---
 
-<BaseLayout pageTitle="Projects">
-  <ul>
-    {
-      sortedWritingsByYear.map(([year, entries]) => (
-        <Fragment>
-          <h2>{year}</h2>
-          {entries.map((entry) => (
-            <li>
-              <a href={`/writing/${entry.id}`}>{getPostName(entry)}</a>
-            </li>
-          ))}
-        </Fragment>
-      ))
-    }
-  </ul>
-</BaseLayout>
+<IndexLayout pageTitle="Writing">
+  <section class="">
+    <ol>
+      {
+        sortedWritingsByYear.map((entry, idx) => (
+          <li
+            class:list={{
+              "bg-sky": idx % 2 === 0,
+            }}
+          >
+            <a
+              class="grid-index min-h-28 no-underline outline-none focus:bg-black focus:text-white hover:bg-black hover:text-white"
+              href={`/writing/${entry.id}`}
+            >
+              <span class="col-start-2">{`${idx + 1}`.padStart(2, "0")}</span>
+              <span class="col-span-2">{formatLongDate(entry.data.date)}</span>
+              <span class="col-start-6 underline">
+                {entry.data.title || "Journal"}
+              </span>
+              <p>{entry.data.draft}</p>
+            </a>
+          </li>
+        ))
+      }
+    </ol>
+  </section>
+</IndexLayout>

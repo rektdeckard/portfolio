@@ -12,7 +12,7 @@ export function getPostName(post: CollectionEntry<"writings">): string {
   return post.data.title ?? formatLongDate(post.data.date);
 }
 
-export function sortedCollectionByYear<
+export function sortedCollectionByYearMap<
   K extends CollectionKey,
   T extends CollectionEntry<K>,
 >(collection: T[]): [string, T[]][] {
@@ -36,6 +36,40 @@ export function sortedCollectionByYear<
   }
 
   return Object.entries(entriesByYear).sort(([a], [b]) => b.localeCompare(a));
+}
+
+export function sortedCollectionByYear<
+  K extends CollectionKey,
+  T extends CollectionEntry<K>,
+>(collection: T[]): T[] {
+  return collection.sort((a, b) => {
+    const getYear = (entry: T): number => {
+      if ("year" in entry.data) {
+        return Array.isArray(entry.data.year)
+          ? entry.data.year[0]
+          : entry.data.year;
+      } else if ("date" in entry.data) {
+        return +entry.data.date.getFullYear();
+      }
+      return 0;
+    };
+    const yearA = getYear(a);
+    const yearB = getYear(b);
+    if (yearA !== yearB) {
+      return yearB - yearA;
+    }
+
+    switch (a.collection) {
+      case "projects":
+        return a.data.title.localeCompare(
+          (b as CollectionEntry<"projects">).data.title,
+        );
+      case "writings":
+        return +(b as CollectionEntry<"writings">).data.date - +a.data.date;
+      default:
+        throw new Error(`Unable to sort collection type "${a.collection}"`);
+    }
+  });
 }
 
 export function sortedCollectionByTag<

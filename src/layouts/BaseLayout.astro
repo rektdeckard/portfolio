@@ -22,7 +22,7 @@ const { pathname } = Astro.url;
     <meta name="generator" content={Astro.generator} />
     <title>TF{pathname === "/" ? "" : `::${pageTitle}`}</title>
   </head>
-  <body class="flex flex-col p-8 min-h-svh">
+  <body class="flex flex-col gap-2 p-8 min-h-svh">
     <Header />
     <main class:list={["grow", className]}>
       <slot />

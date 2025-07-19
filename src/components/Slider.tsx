@@ -1,0 +1,105 @@
+import { createSignal, onCleanup, onMount, type Signal } from "solid-js";
+
+export type SliderProps = {
+  defaultValue?: number;
+  min?: number;
+  max?: number;
+  step?: number;
+  disabled?: boolean;
+  class?: string;
+  precision?: number;
+  id?: string;
+  name?: string;
+  label?: string;
+  onChange?: (value: number) => void;
+} & (
+    { defaultValue?: number; state?: never }
+    | { state: Signal<number>; defaultValue?: never }
+  )
+
+export function Slider(props: SliderProps) {
+  const [value, setValue] = props.state ?? createSignal(props.defaultValue || 0);
+  const [rezises, resize] = createSignal();
+
+  const min = props.min || 0;
+  const step = props.step ?? 1;
+  const precision = props.precision ?? getPrecision(step);
+  const trackRef: { current?: HTMLInputElement } = {};
+
+  function getPrecision(step: number): number {
+    return (step.toString().split(".")[1]?.length ?? 0);
+  }
+
+  function scaleByStep(val: number, precision: number): number {
+    const factor = Math.pow(10, precision);
+    return Math.round(val * factor) / factor;
+  }
+
+  function onInput(event: Event) {
+    const target = event.target as HTMLInputElement;
+    let newValue = parseFloat(target.value);
+    if (isNaN(newValue)) newValue = min;
+    newValue = scaleByStep(newValue, precision);
+    if (props.max !== undefined && newValue > props.max) newValue = props.max;
+    if (newValue < min) newValue = min;
+    setValue(newValue);
+    props.onChange?.(newValue);
+  }
+
+  // Position the label above the thumb
+  const thumbPosition = () => {
+    const _ = rezises();
+    const el = trackRef.current;
+    if (!el) return 0;
+    const percent = (value() - min) / ((props.max ?? 100) - min);
+    return (el.clientWidth - 36) * percent;
+  }
+  onMount(() => {
+    window.addEventListener("resize", resize);
+    onCleanup(() => window.removeEventListener("resize", resize));
+  })
+
+  return (
+    <div classList={{ "flex items-center font-mono focus-within:outline-1 focus-within:outline-offset-4 focus-within:outline-dashed": true, [props.class || ""]: !!props.class }}>
+      <div class="relative grow h-6">
+        <svg
+          xmlns="http://www.w3.org/2000/svg"
+          class="absolute w-full h-full pointer-events-none"
+        >
+          <defs>
+            <pattern id="vertical-lines" patternUnits="userSpaceOnUse" width="8" height="22.5">
+              <rect x="3" y="2" width="1" height="18.5" fill="currentcolor" />
+            </pattern>
+          </defs>
+          <rect width="100%" height="100%" fill="url(#vertical-lines)" />
+        </svg>
+
+        <div
+          class="absolute top-0 bottom-0 bg-brightYellow text-black w-12 pointer-events-none flex items-center justify-center leading-none"
+          style={{
+            left: `calc(${thumbPosition()}px)`,
+          }}
+        >
+          <span>{value().toFixed(precision)}</span>
+        </div>
+
+        <input
+          ref={(el) => (trackRef.current = el)}
+          class="outline-none w-full h-full z-10 bg-transparent accent-current disabled:cursor-not-allowed"
+          type="range"
+          value={value()}
+          min={min}
+          max={props.max}
+          step={step}
+          onInput={onInput}
+          disabled={props.disabled}
+          id={props.id}
+          name={props.name}
+          aria-label={props.label}
+        />
+      </div>
+
+      {props.label && <label for={props.id} class="ps-4 uppercase">{props.label}</label>}
+    </div>
+  );
+}

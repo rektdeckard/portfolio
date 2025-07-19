@@ -1,0 +1,47 @@
+---
+import { ActionButton } from "@components/ActionButton";
+import "@styles/global.css";
+
+interface Props {
+  pageTitle?: string;
+  class?: string;
+}
+
+const { pageTitle, class: className } = Astro.props;
+const { pathname } = Astro.url;
+---
+
+<html lang="en">
+  <head>
+    <meta charset="utf-8" />
+    <link rel="icon" type="image/svg+xml" href="/favicon.svg" />
+    <meta name="viewport" content="width=device-width" />
+    <meta name="generator" content={Astro.generator} />
+    <title>TF{pathname === "/" ? "" : `::${pageTitle}`}</title>
+  </head>
+  <body class="relative min-h-svh font-mono">
+    <div class="absolute inset-0 grid-home pointer-events-none z-0">
+      <div class="border-r border-dashed"></div>
+      <div class="border-r border-dashed"></div>
+      <div class="border-r border-dashed"></div>
+      <div class="border-r border-dashed"></div>
+      <div class="border-r border-dashed"></div>
+    </div>
+    <header class="grid-home pt-28 pb-24 whitespace-nowrap">
+      <span class="col-start-2">HOME</span>
+      <span>MACRO V04.00.03</span>
+      <span class="text-right">00:18:41</span>
+      <span>INTRODUCTION</span>
+      <ActionButton
+        client:load
+        key="t"
+        class="col-span-2 justify-self-start"
+        label="Change theme"
+      />
+    </header>
+    <main class="w-full">
+      <slot />
+    </main>
+    <footer></footer>
+  </body>
+</html>
