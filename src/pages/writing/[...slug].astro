@@ -1,9 +1,8 @@
 ---
-import BaseLayout from "@layouts/BaseLayout.astro";
+import ContentLayout from "@layouts/ContentLayout.astro";
 import { getCollection, render } from "astro:content";
 import { getPostName, omitDraftEntries } from "@utils/content";
 import { formatLongDate } from "@utils/datetime";
-import ImageGallery from "@components/ImageGallery.astro";
 
 export const prerender = true;
 
@@ -16,27 +15,56 @@ export async function getStaticPaths() {
 }
 
 const { writing: entry } = Astro.props;
-const { Content } = await render(entry);
+const { Content, headings } = await render(entry);
+
+const contentDate = formatLongDate(entry.data.date);
+const contentLength = entry.body
+  ? `${entry.body.split(/\W+/).length.toLocaleString()} words`
+  : undefined;
 ---
 
-<BaseLayout pageTitle={`Writing::${entry.id}`}>
-  <article class="flex flex-col gap-4">
-    <hgroup>
-      <h1 class="font-bold text-xl">{getPostName(entry)}</h1>
-      <p>
-        {entry.data.title ? formatLongDate(entry.data.date) : "A daily journal"}
-      </p>
-    </hgroup>
-    <div class="tags">
-      {
-        entry.data.tags?.map((tag: string) => (
-          <p class="tag">
-            <a href={`/writing/tags/#tag-${tag}`}>{tag}</a>
-          </p>
-        ))
-      }
+<ContentLayout
+  pageTitle={`Writing::${entry.id}`}
+  contentTitle={entry.data.title}
+  contentDate={contentDate}
+  contentLength={contentLength}
+>
+  <div class="grid-home">
+    <div class="self-start sticky top-[1ch] left-[1ch] col-span-3 text-sm">
+      <ol>
+        <li><a class="uppercase" href="#top">[top]</a></li>
+        {
+          headings.map((heading) => (
+            <li>
+              <a href={`#${heading.slug}`}>
+                {"#".repeat(heading.depth)} {heading.text}
+              </a>
+            </li>
+          ))
+        }
+      </ol>
     </div>
-    <Content />
-  </article>
-  <ImageGallery />
-</BaseLayout>
+    <article class="col-start-4 col-span-3 flex flex-col gap-4 z-10">
+      <hgroup id="top">
+        <h1 class="font-bold text-xl">{getPostName(entry)}</h1>
+        <p>
+          {
+            entry.data.title
+              ? formatLongDate(entry.data.date)
+              : "A daily journal"
+          }
+        </p>
+      </hgroup>
+      <div class="tags">
+        {
+          entry.data.tags?.map((tag: string) => (
+            <p class="tag">
+              <a href={`/writing/tags/#tag-${tag}`}>{tag}</a>
+            </p>
+          ))
+        }
+      </div>
+      <Content />
+    </article>
+  </div>
+</ContentLayout>

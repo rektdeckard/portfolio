@@ -65,7 +65,10 @@ export function sortedCollectionByYear<
           (b as CollectionEntry<"projects">).data.title,
         );
       case "writings":
-        return +(b as CollectionEntry<"writings">).data.date - +a.data.date;
+        return (
+          +(b as CollectionEntry<"writings">).data.date.getTime() -
+          +a.data.date.getTime()
+        );
       default:
         throw new Error(`Unable to sort collection type "${a.collection}"`);
     }

@@ -12,11 +12,7 @@ const pages = Object.keys(import.meta.glob("./*.astro")).map((path) => ({
     <ol>
       {
         pages.map((page, idx) => (
-          <li
-            class:list={{
-              "bg-blush": idx % 2 === 0,
-            }}
-          >
+          <li class="odd:bg-blush">
             <a
               class="grid-index min-h-28 no-underline outline-none focus:bg-black focus:text-white hover:bg-black hover:text-white"
               href={`/experiments/${page.url}`}

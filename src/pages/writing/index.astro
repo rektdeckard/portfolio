@@ -1,11 +1,7 @@
 ---
 import { getCollection } from "astro:content";
 import IndexLayout from "@layouts/IndexLayout.astro";
-import {
-  omitDraftEntries,
-  getPostName,
-  sortedCollectionByYear,
-} from "@utils/content";
+import { omitDraftEntries, sortedCollectionByYear } from "@utils/content";
 import { formatLongDate } from "@utils/datetime";
 
 const writings = await getCollection("writings", omitDraftEntries);
@@ -17,11 +13,7 @@ const sortedWritingsByYear = sortedCollectionByYear(writings);
     <ol>
       {
         sortedWritingsByYear.map((entry, idx) => (
-          <li
-            class:list={{
-              "bg-sky": idx % 2 === 0,
-            }}
-          >
+          <li class="odd:bg-sky">
             <a
               class="grid-index min-h-28 no-underline outline-none focus:bg-black focus:text-white hover:bg-black hover:text-white"
               href={`/writing/${entry.id}`}
@@ -29,7 +21,7 @@ const sortedWritingsByYear = sortedCollectionByYear(writings);
               <span class="col-start-2">{`${idx + 1}`.padStart(2, "0")}</span>
               <span class="col-span-2">{formatLongDate(entry.data.date)}</span>
               <span class="col-start-6 underline">
-                {entry.data.title || "Journal"}
+                {entry.data.title || "(Anonymous content)"}
               </span>
               <p>{entry.data.draft}</p>
             </a>

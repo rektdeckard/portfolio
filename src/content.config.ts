@@ -7,7 +7,6 @@ const READING_ISBNS = [
   9783982016108, // Writing A Compiler In Go
   9781878574510, // Tank Girl
   9780333781746,
-  9780063111318,
 ] as const;
 
 const projects = defineCollection({

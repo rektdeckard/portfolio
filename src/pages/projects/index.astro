@@ -13,18 +13,14 @@ const sortedProjects = sortedCollectionByYear(projects);
     <ol>
       {
         sortedProjects.map((project, idx) => (
-          <li
-            class:list={{
-              "bg-beige": idx % 2 === 0,
-            }}
-          >
+          <li class="odd:bg-beige">
             <a
               class="grid-index min-h-28 no-underline outline-none focus:bg-black focus:text-white hover:bg-black hover:text-white"
               href={`/projects/${project.id}`}
             >
               <span class="col-start-2">{`${idx + 1}`.padStart(2, "0")}</span>
-              <span>{formatYearOrRange(project.data.year)}</span>
               <span class="col-span-2 underline">{project.data.title}</span>
+              <span>{formatYearOrRange(project.data.year)}</span>
               <p>{project.data.description}</p>
             </a>
           </li>

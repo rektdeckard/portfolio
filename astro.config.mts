@@ -14,12 +14,11 @@ export default defineConfig({
     syntaxHighlight: "shiki",
     shikiConfig: {
       themes: {
-        light: "one-light",
-        dark: "ayu-dark",
+        light: "github-light",
+        dark: "snazzy-light",
       },
     },
   },
   output: "server",
   adapter: netlify(),
 });
-

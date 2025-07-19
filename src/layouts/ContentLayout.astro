@@ -4,10 +4,19 @@ import "@styles/global.css";
 
 interface Props {
   pageTitle?: string;
+  contentTitle?: string;
+  contentDate?: string;
+  contentLength?: string;
   class?: string;
 }
 
-const { pageTitle, class: className } = Astro.props;
+const {
+  pageTitle,
+  contentTitle,
+  contentDate,
+  contentLength,
+  class: className,
+} = Astro.props;
 const { pathname } = Astro.url;
 const segments = pathname.split("/").filter(Boolean);
 ---
@@ -21,20 +30,22 @@ const segments = pathname.split("/").filter(Boolean);
     <title>TF{pathname === "/" ? "" : `::${pageTitle}`}</title>
   </head>
   <body class="relative min-h-svh font-mono">
-    <div class="absolute inset-0 grid-index pointer-events-none z-0">
-      <div class="border-r border-dashed"></div>
+    <div class="absolute inset-0 grid-home pointer-events-none z-10">
       <div class="border-r border-dashed"></div>
       <div class="border-r border-dashed"></div>
       <div class="border-r border-dashed"></div>
       <div class="border-r border-dashed"></div>
       <div class="border-r border-dashed"></div>
     </div>
-    <header class="grid-index pt-28 pb-24 uppercase whitespace-nowrap">
+
+    <header class="grid-home pt-28 pb-24 uppercase whitespace-nowrap relative">
+      <div class="bg-sky absolute top-28 left-0 right-0 h-[332px] -z-10"></div>
       <nav class="col-start-2 col-span-2">
-        <a href="/">Home</a> &gt; {segments[0]}
+        <a href="/">Home</a> &gt; <a href={`/${segments[0]}`}>{segments[0]}</a>
       </nav>
-      <span class="col-start-5 text-right">00:18:41</span>
-      <span>Choose a project</span>
+      <span>{contentTitle ?? "Anonymous content"}</span>
+      <span class="text-right">{contentDate ?? "Undated"}</span>
+      <span class="text-right">{contentLength}</span>
       <ActionButton
         client:load
         key="t"
@@ -42,7 +53,7 @@ const segments = pathname.split("/").filter(Boolean);
         label="Change theme"
       />
     </header>
-    <main class="w-full">
+    <main class:list={["w-full", className]}>
       <slot />
     </main>
     <footer></footer>

@@ -27,15 +27,17 @@ const { pathname } = Astro.url;
       <div class="border-r border-dashed"></div>
       <div class="border-r border-dashed"></div>
     </div>
-    <header class="grid-home pt-28 pb-24 whitespace-nowrap">
-      <span class="col-start-2">HOME</span>
+    <header class="grid-home pt-28 pb-24 uppercase whitespace-nowrap">
+      <nav class="col-start-2">
+        <span>HOME</span>
+      </nav>
       <span>MACRO V04.00.03</span>
       <span class="text-right">00:18:41</span>
       <span>INTRODUCTION</span>
       <ActionButton
         client:load
         key="t"
-        class="col-span-2 justify-self-start"
+        class="col-span-2 col-start-6 justify-self-end"
         label="Change theme"
       />
     </header>
