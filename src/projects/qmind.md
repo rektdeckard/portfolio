@@ -6,7 +6,7 @@ year: 2020
 tags: ["ai", "ml", "language", "cognition"]
 ---
 
-## What is it?
+# What is it?
 
 qMind is a research platform for building a more individual model of intelligence and mental fitness via language. The core concept is that ideas are defined in relation to one another; words can only be defined in terms of other words, therefore our understanding can be represented by a directed graph of word meanings. By asking people to define different phrases in their own terms, we build a weighted network of meaning and word association.
 
@@ -16,7 +16,7 @@ Current language models are based on statistical prediction methods, whereby vas
 
 Ours is based on self-reported definitions and associations provided by real people in their own words, and in the moment.
 
-## Building realtime tools
+# Building realtime tools
 
 One of the requirements was that the portal be not only a means for collecting data, but also serve as an exploration tool for both participants and researchers to look deeply into the data. This meant having interactive data visualizations, search, sort, filter and transforms of the underlying data, and realtime analysis on it.
 
@@ -66,6 +66,6 @@ Providing these slices of information on-the-fly is a tough target to hit. The d
 
 Finding path lengths between specific nodes, for example, could be done on demand by the client, since it would be relevant only at that time. Calculating the graph's Eigenvector centralities, on the other hand, would be precomputed by batch processes.
 
-## What's next?
+# What's next?
 
 The platform will use participant datasets to build language models that are both generalizable, and tuneable. Eventually, the plan is to use the model to help identify cognitive deficiencies in youth and elderly, to recommend areas of focus for school-aged children, and potentially as an early-warning indicator for neurological disease.

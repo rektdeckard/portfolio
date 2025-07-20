@@ -1,6 +1,6 @@
 ---
 import { getCollection } from "astro:content";
-import BaseLayout from "@layouts/BaseLayout.astro";
+import IndexLayout from "@layouts/IndexLayout.astro";
 import {
   getPostName,
   omitDraftEntries,
@@ -11,7 +11,7 @@ const writings = await getCollection("writings", omitDraftEntries);
 const writingsByTag = sortedCollectionByTag(writings);
 ---
 
-<BaseLayout pageTitle="Writing::Tags">
+<IndexLayout pageTitle="Writing::Tags">
   <ul>
     {
       writingsByTag.map(([tag, entries]) => (
@@ -26,4 +26,4 @@ const writingsByTag = sortedCollectionByTag(writings);
       ))
     }
   </ul>
-</BaseLayout>
+</IndexLayout>

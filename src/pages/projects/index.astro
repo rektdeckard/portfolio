@@ -13,9 +13,9 @@ const sortedProjects = sortedCollectionByYear(projects);
     <ol>
       {
         sortedProjects.map((project, idx) => (
-          <li class="odd:bg-beige">
+          <li class="odd:bg-project">
             <a
-              class="grid-index min-h-28 no-underline outline-none focus:bg-black focus:text-white hover:bg-black hover:text-white"
+              class="grid-index min-h-28 no-underline outline-none focus:bg-primary focus:text-surface hover:bg-primary hover:text-surface"
               href={`/projects/${project.id}`}
             >
               <span class="col-start-2">{`${idx + 1}`.padStart(2, "0")}</span>

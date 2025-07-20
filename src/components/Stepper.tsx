@@ -82,7 +82,7 @@ export function Stepper(props: StepperProps) {
       [props.class || ""]: !!props.class,
     }}>
       <button
-        class="appearance-none outline-1 focus:outline-dashed disabled:bg-warning disabled:text-black disabled:cursor-not-allowed active:text-black active:bg-success"
+        class="appearance-none outline-1 focus:outline-dashed disabled:bg-warning disabled:text-primary disabled:cursor-not-allowed active:text-surface active:bg-primary"
         onClick={decrement}
         disabled={value() <= min}
       >
@@ -108,7 +108,7 @@ export function Stepper(props: StepperProps) {
         onPointerDown={enableDrag}
       />
       <button
-        class="appearance-none focus:outline-1 focus:outline-dashed disabled:bg-warning disabled:text-black disabled:cursor-not-allowed active:text-black active:bg-success"
+        class="appearance-none focus:outline-1 focus:outline-dashed disabled:bg-warning disabled:text-primary disabled:cursor-not-allowed active:text-surface active:bg-primary"
         onClick={increment}
         disabled={props.disabled || (props.max !== undefined && value() >= props.max)}
       >

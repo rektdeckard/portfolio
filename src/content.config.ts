@@ -25,6 +25,16 @@ const projects = defineCollection({
   }),
 });
 
+const writings = defineCollection({
+  loader: glob({ pattern: "**/[^_]*.{md,mdx}", base: "./src/writing" }),
+  schema: z.object({
+    title: z.string().optional(),
+    date: z.date().transform(shiftUTCToMDT),
+    tags: z.array(z.string()).optional(),
+    draft: z.boolean().optional(),
+  }),
+});
+
 const readings = defineCollection({
   loader: async () =>
     Promise.all(
@@ -70,16 +80,6 @@ const readings = defineCollection({
       created: z.object({ type: z.string(), value: z.string() }),
       last_modified: z.object({ type: z.string(), value: z.string() }),
     }),
-    draft: z.boolean().optional(),
-  }),
-});
-
-const writings = defineCollection({
-  loader: glob({ pattern: "**/[^_]*.{md,mdx}", base: "./src/writing" }),
-  schema: z.object({
-    title: z.string().optional(),
-    date: z.date().transform(shiftUTCToMDT),
-    tags: z.array(z.string()).optional(),
     draft: z.boolean().optional(),
   }),
 });

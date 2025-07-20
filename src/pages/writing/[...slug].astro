@@ -1,6 +1,8 @@
 ---
-import ContentLayout from "@layouts/ContentLayout.astro";
 import { getCollection, render } from "astro:content";
+
+import ContentLayout from "@layouts/ContentLayout.astro";
+import TableOfContents from "@components/TableOfContents.astro";
 import { getPostName, omitDraftEntries } from "@utils/content";
 import { formatLongDate } from "@utils/datetime";
 
@@ -28,43 +30,26 @@ const contentLength = entry.body
   contentTitle={entry.data.title}
   contentDate={contentDate}
   contentLength={contentLength}
+  accentClass="bg-writing"
+  containerClass="grid-home"
 >
-  <div class="grid-home">
-    <div class="self-start sticky top-[1ch] left-[1ch] col-span-3 text-sm">
-      <ol>
-        <li><a class="uppercase" href="#top">[top]</a></li>
-        {
-          headings.map((heading) => (
-            <li>
-              <a href={`#${heading.slug}`}>
-                {"#".repeat(heading.depth)} {heading.text}
-              </a>
-            </li>
-          ))
-        }
-      </ol>
+  <TableOfContents {headings} />
+  <article class="col-start-4 col-span-3 flex flex-col gap-4 z-10">
+    <hgroup id="top">
+      <h1 class="font-bold text-xl">{getPostName(entry)}</h1>
+      <p>
+        {entry.data.title ? formatLongDate(entry.data.date) : "A daily journal"}
+      </p>
+    </hgroup>
+    <div class="tags">
+      {
+        entry.data.tags?.map((tag: string) => (
+          <p class="tag">
+            <a href={`/writing/tags/#tag-${tag}`}>{tag}</a>
+          </p>
+        ))
+      }
     </div>
-    <article class="col-start-4 col-span-3 flex flex-col gap-4 z-10">
-      <hgroup id="top">
-        <h1 class="font-bold text-xl">{getPostName(entry)}</h1>
-        <p>
-          {
-            entry.data.title
-              ? formatLongDate(entry.data.date)
-              : "A daily journal"
-          }
-        </p>
-      </hgroup>
-      <div class="tags">
-        {
-          entry.data.tags?.map((tag: string) => (
-            <p class="tag">
-              <a href={`/writing/tags/#tag-${tag}`}>{tag}</a>
-            </p>
-          ))
-        }
-      </div>
-      <Content />
-    </article>
-  </div>
+    <Content />
+  </article>
 </ContentLayout>

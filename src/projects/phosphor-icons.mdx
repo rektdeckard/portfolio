@@ -10,7 +10,7 @@ import AppWindow from "@components/AppWindow.astro";
 import ThemedImage from "@components/ThemedImage.astro";
 import phosphorSiteImage from "@assets/images/phosphor_site.png";
 
-## An obsession
+# An obsession
 
 A few years ago I made the switch from iPhone to Android. I wanted to escape Apple's walled garden and start using technology that permitted me to modify and customize it to my liking, to make my own. I made a [techy dashboard](/projects/cockpit) for my phone, with design help from my partner [Helena Zhang](https://helenazhang.com). She designed around 40 custom, minimal icons to replace the common utility app icons and fit in with the hacker aesthetic.
 
@@ -20,7 +20,7 @@ Over time that seed grew, eventually becoming a complete set of icons [for Andro
 
 Eventually we realized that all this effort could serve a much larger audience of digital designers and engineers of all walks, not just the Android enthusiasts. We decided to create a library of general-purpose user interface icons for modern web, desktop, and mobile platforms — and [Phosphor Icons](https://phosphoricons.com) was born.
 
-## Providing great DX
+# Providing great DX
 
 I knew that its success would not come down to the design of the icons alone. We wanted to make an icon library that was as easy to learn as it was to use, covered the vast majority of platforms, and just worked. We needed to provide a top-tier developer experience to those using the icons. This meant not only supporting the most common frameworks, with packages for [React](http://github.com/phosphor-icons/react), [Vue](https://github.com/phosphor-icons/vue), and [vanilla JS](https://github.com/phosphor-icons/web), but also exposing an intuitive API and writing great documentation.
 
@@ -55,7 +55,7 @@ const App = () => {
 createRoot(document.getElementById('root')!).render(<App />);
 ```
 
-## Automate the fragile stuff, test everything
+# Automate the fragile stuff, test everything
 
 When working with large component libraries, it's important to factor out sources of human error. Mistakes crop up inevitably at scale, and with `9072` icons and their corresponding implementations — packages in 5 javascript frameworks, a Figma plugin and library, and other things I'm forgetting — we had a lot of complexity to manage by hand. This led me to build custom internal tooling to support our efforts from the design process all the way through to production, including:
 
@@ -69,7 +69,7 @@ A small battery of unit and integration tests ensured that our automated approac
 
 > Aside from reducing carpal tunnel risks for my partner and myself, the automation and testing processes gave us a confidence we couldn't get doing all of this manually.
 
-## Giving Phosphor a home
+# Giving Phosphor a home
 
 Naturally, we needed a fun and functional site to house the project. We wanted a searchable interface for the icon library that showcased each icon variant, along with code snippets for developers to quickly reference. And to show off a bit with sleek, snappy animations and strong visual demonstrations of the icons in use.
 
@@ -90,6 +90,6 @@ Ultimately, we managed to pack a ton of ergonomic features into a simple and str
 - [User Experience Database](https://www.uxdatabase.io/issue-26)
 - [One Page Love](https://onepagelove.com/phosphor-icons)
 
-## Looking ahead
+# Looking ahead
 
 We continue to grow the library, using analytics and feedback from the community to add the most-needed icons first. We hope to expand to support more use-cases for developers and designers alike. A [Flutter library](https://github.com/phosphor-icons/flutter), along with a number of other third-party ports, have since been added, and we have plans for more down the road.

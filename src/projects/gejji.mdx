@@ -11,7 +11,7 @@ import ThemedImage from "@components/ThemedImage.astro";
 import gejjiImage from "@assets/images/gejji3d.svg";
 import gejjiHistImage from "@assets/images/gejji3d_hist.svg";
 
-## Retro is beautiful
+# Retro is beautiful
 
 In my weekend forays into embedded systems, I came up with the idea to build a dedicated hardware system resource monitor to always show the CPU, Memory, and I/O utilization of my computer in a beautiful phyisical device. Who doesn't like a retro techy gadget?
 
@@ -29,7 +29,7 @@ things like display update interval and display brightness, and the
 ability to run the host as a daemon so it could be started on boot
 with no interaction and run completely in the background.
 
-## Redesign
+# Redesign
 
 I chose a 128x32 pixel monochrome OLED display, and wrote a primitive
 but effective graphing library to render pretty histograms. The end
@@ -74,7 +74,7 @@ void drawHistogram(&Adafruit_GFX display, int *data, int offset, Edge edge)
 
 With the help of the [sysinfo](https://crates.io/crates/sysinfo) crate and some handy macros, we could now build and run cross-platform, and even daemonize the host to make it simple to start at boot.
 
-## Detour into Rust for embedded
+# Detour into Rust for embedded
 
 Given that the host code was already written in Rust, and seeing the opportunity for a challenge, I decided to rewrite the microcontroller code in Rust as well. Using [espflash](https://github.com/esp-rs/espflash) and [this lovely guide by Scott Mabin](https://mabez.dev/blog/posts/esp-rust-ecosystem), I was able to compile Rust for the ESP32 board. But while ultimately possible, I found few benefits — and a number of difficulties around the tooling needed to get it working. I eventually went back to C++ for the microcontroller code, but hope to see progress in this space in the future.
 

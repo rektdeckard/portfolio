@@ -1,10 +1,28 @@
 ---
-import BaseLayout from "@layouts/BaseLayout.astro";
+import ContentLayout from "@layouts/ContentLayout.astro";
 ---
 
-<BaseLayout pageTitle="GL Static">
-  <canvas id="gl-static" class="absolute w-screen h-screen inset-0"></canvas>
-</BaseLayout>
+<ContentLayout
+  pageTitle="WebGL Static"
+  contentTitle="WebGL TV Static"
+  accentClass="bg-experiment"
+  containerClass="grid-home"
+>
+  <article class="col-start-4 col-span-3">
+    <canvas id="gl-static" class="absolute w-screen h-screen inset-0 -z-20"
+    ></canvas>
+    <hgroup id="top">
+      <h1 class="font-bold text-xl">WebGL TV Static</h1>
+      <p>Exploring analog-like signal processing through shaders</p>
+    </hgroup>
+    <p>
+      the beloved <a href="https://thebookofshaders.com/">Book of Shaders</a> by
+      <a href="http://patriciogonzalezvivo.com/">Particio Gonzales Vivo</a> and <a
+        href="http://jenlowe.net/">Jen Lowe</a
+      >
+    </p>
+  </article>
+</ContentLayout>
 
 <script>
   import GlslCanvas from "glslCanvas";

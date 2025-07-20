@@ -1,5 +1,6 @@
 ---
-import { ActionButton } from "@components/ActionButton";
+import { ThemeButton } from "@components/ThemeButton.tsx";
+import ThemeInit from "@components/ThemeInit.astro";
 import "@styles/global.css";
 
 interface Props {
@@ -7,7 +8,8 @@ interface Props {
   contentTitle?: string;
   contentDate?: string;
   contentLength?: string;
-  class?: string;
+  containerClass?: string;
+  accentClass?: string;
 }
 
 const {
@@ -15,7 +17,8 @@ const {
   contentTitle,
   contentDate,
   contentLength,
-  class: className,
+  containerClass,
+  accentClass,
 } = Astro.props;
 const { pathname } = Astro.url;
 const segments = pathname.split("/").filter(Boolean);
@@ -28,8 +31,9 @@ const segments = pathname.split("/").filter(Boolean);
     <meta name="viewport" content="width=device-width" />
     <meta name="generator" content={Astro.generator} />
     <title>TF{pathname === "/" ? "" : `::${pageTitle}`}</title>
+    <ThemeInit />
   </head>
-  <body class="relative min-h-svh font-mono">
+  <body class="relative min-h-svh font-mono text-primary bg-surface">
     <div class="absolute inset-0 grid-home pointer-events-none z-10">
       <div class="border-r border-dashed"></div>
       <div class="border-r border-dashed"></div>
@@ -39,21 +43,25 @@ const segments = pathname.split("/").filter(Boolean);
     </div>
 
     <header class="grid-home pt-28 pb-24 uppercase whitespace-nowrap relative">
-      <div class="bg-sky absolute top-28 left-0 right-0 h-[332px] -z-10"></div>
+      <div
+        class:list={[
+          "absolute top-28 left-0 right-0 h-[332px] -z-10",
+          accentClass,
+        ]}
+      >
+      </div>
       <nav class="col-start-2 col-span-2">
         <a href="/">Home</a> &gt; <a href={`/${segments[0]}`}>{segments[0]}</a>
       </nav>
       <span>{contentTitle ?? "Anonymous content"}</span>
       <span class="text-right">{contentDate ?? "Undated"}</span>
       <span class="text-right">{contentLength}</span>
-      <ActionButton
+      <ThemeButton
         client:load
-        key="t"
-        class="col-span-2 col-start-7 justify-self-end"
-        label="Change theme"
+        class="col-span-2 col-start-6 justify-self-end"
       />
     </header>
-    <main class:list={["w-full", className]}>
+    <main class:list={["w-full", containerClass]}>
       <slot />
     </main>
     <footer></footer>

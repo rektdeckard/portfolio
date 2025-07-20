@@ -11,13 +11,13 @@ import ThemeFilter from "@components/ThemeFilter.astro";
 import ThemedImage from "@components/ThemedImage.astro";
 import yReaderVideo from "@assets/images/y-reader-video-crop-tc.mp4";
 
-## The gap
+# The gap
 
 If you're reading this, you have probably found yourself on [Hacker News](https://news.ycombinator.com) once or twice. It's a simple, beloved site where users share tech-related links and <em>always<sup><a id="ref-1" href="#footnote-1">1</a></sup> have civil discussions about them</em>. But the UX is dated, and it is not so enjoyable to browse via the official website.
 
 I am far from the first person to come to this conclusion, as there are literally thousands of <abbr title="Hacker News">HN</abbr> clients out there. But I took this opportunity to explore cross-platform graphical application development in Rust, and resolved to write my own client.
 
-## Decisions
+# Decisions
 
 The Rust community has been asking itself for a while now, ["Are we GUI yet?"](https://www.areweguiyet.com)
 and at this point, the answer is decidedly YES. I decided to go with [egui](https://github.com/emilk/egui): an opinionated, declarative, immediate-mode GUI library with backends for both web and native.
@@ -30,7 +30,7 @@ and at this point, the answer is decidedly YES. I decided to go with [egui](http
   </ThemeFilter>
 </AppWindow>
 
-## Limitations and workarounds
+# Limitations and workarounds
 
 The Hacker News website is impressive in this day and age, in that it still [runs on a single, on-prem server](https://news.ycombinator.com/item?id=16076041) and has a very simple architecture. But the official Hacker News API is not great, and is ["essentially a dump of \[their\] in-memory data structures"](https://github.com/HackerNews/API#design) — making certain common actions (like listing entities) quite cumbersome. You cannot fetch a list of posts; instead, you fetch a list of post IDs, then fetch each post in separate requests. Same goes for comments and other entities.
 
@@ -88,7 +88,7 @@ impl YReader {
 }
 ```
 
-## Still to come
+# Still to come
 
 While the client is already a great way to browse the content, I have yet to implement a few features before considering this project ready for public consumption:
 
@@ -97,7 +97,7 @@ While the client is already a great way to browse the content, I have yet to imp
 - Voting
 - Job boards
 
-## Footnotes
+# Footnotes
 
 <ol>
   <li>

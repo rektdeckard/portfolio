@@ -75,7 +75,7 @@ export function Slider(props: SliderProps) {
         </svg>
 
         <div
-          class="absolute top-0 bottom-0 bg-brightYellow text-black w-12 pointer-events-none flex items-center justify-center leading-none"
+          class="absolute top-0 bottom-0 bg-primary text-surface w-12 pointer-events-none flex items-center justify-center leading-none"
           style={{
             left: `calc(${thumbPosition()}px)`,
           }}

@@ -1,0 +1,24 @@
+---
+import type { MarkdownHeading } from "astro";
+
+interface Props {
+  headings: MarkdownHeading[];
+}
+
+const { headings } = Astro.props;
+---
+
+<div class="self-start sticky top-[1ch] left-[1ch] col-span-3 text-sm">
+  <ol>
+    <li><a class="uppercase" href="#top">[top]</a></li>
+    {
+      headings.map((heading) => (
+        <li>
+          <a href={`#${heading.slug}`}>
+            {"#".repeat(heading.depth)} {heading.text}
+          </a>
+        </li>
+      ))
+    }
+  </ol>
+</div>

@@ -1,0 +1,15 @@
+---
+import ContentLayout from "@layouts/ContentLayout.astro";
+import LoopsExperiment from "./_fourier-loops.tsx";
+---
+
+<ContentLayout
+  pageTitle="Fourier Loops"
+  contentTitle="Fourier Loops"
+  accentClass="bg-experiment"
+  containerClass="grid-home"
+>
+  <article class="col-start-4 col-span-3">
+    <LoopsExperiment client:load />
+  </article>
+</ContentLayout>

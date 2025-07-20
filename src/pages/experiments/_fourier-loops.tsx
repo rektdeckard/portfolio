@@ -1,4 +1,4 @@
-import { onMount, createSignal, createEffect } from "solid-js";
+import { onMount, createEffect } from "solid-js";
 
 import { Slider } from "@components/Slider";
 import { Stepper } from "@components/Stepper";
@@ -93,7 +93,7 @@ export default function LoopsExperiment() {
   return (
     <>
       <div id="container" class="relative">
-        <canvas ref={(el) => canvas = el} id="canvas" width="600" height="600"></canvas>
+        <canvas class="bg-experiment" ref={(el) => canvas = el} id="canvas" width="600" height="600"></canvas>
         <div
           id="layer"
           class="absolute inset-0 opacity-60 bg-[20px 20px] mix-blend-multiply"

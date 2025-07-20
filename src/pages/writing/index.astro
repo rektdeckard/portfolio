@@ -13,9 +13,9 @@ const sortedWritingsByYear = sortedCollectionByYear(writings);
     <ol>
       {
         sortedWritingsByYear.map((entry, idx) => (
-          <li class="odd:bg-sky">
+          <li class="odd:bg-writing">
             <a
-              class="grid-index min-h-28 no-underline outline-none focus:bg-black focus:text-white hover:bg-black hover:text-white"
+              class="grid-index min-h-28 no-underline outline-none focus:bg-primary focus:text-surface hover:bg-primary hover:text-surface"
               href={`/writing/${entry.id}`}
             >
               <span class="col-start-2">{`${idx + 1}`.padStart(2, "0")}</span>

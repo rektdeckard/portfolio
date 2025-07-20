@@ -11,11 +11,11 @@ import ThemedImage from "@components/ThemedImage.astro";
 import cockpitImage from "@assets/images/cockpit.png";
 import cockpitGaugesImage from "@assets/images/cockpit-gauges.png";
 
-## Digital detox...lite
+# Digital detox...lite
 
 Our phones are basically digital drugs. Colorful app icons, badges and notifications vying for our attention at every minute. It's tough to resist, and I'd be the first to admit I have a problem. So when I discovered that with an Android phone and some special tools I could entirely replace the addictive homescreen paradigm with whatever I could dream up, I decided to make something that would, hopefully, help institute some harm-reduction with in phone habits. And maybe look kinda cool in the process.
 
-## Heads up
+# Heads up
 
 Cockpit is a data-rich homescreen replacement for Android phones inspired by (surprise) aircraft cockpit design. The HUD style interface surfaces useful information like recent messages, nearby transit and weather, and device resource utilization to keep you in the know without hijacking your attention.
 
@@ -36,7 +36,7 @@ ever-present notification shade in favor of four content areas:
 
 > I found that this interface significantly reduced the amount of time I spent mindlessly browsing my phone.
 
-## Functional bits
+# Functional bits
 
 While the framework API exposes some device vitals and notifications, generating the map view and nearby transit visualizations was a bit more of a challenge. I relied on Google's [Static Maps](https://developers.google.com/maps/documentation/maps-static/overview) and [GTFS Realtime](https://developers.google.com/transit/gtfs-realtime) REST APIs to put it all together. For the map, we would construct a complex query using device GPS coordinates and user-set variables like the current dashboard theme and map zoom level, request a static map image with the appropriate style parameters, then apply post-processing and layer it into the dashboard UI.
 
@@ -69,7 +69,7 @@ At the time, I was on a less-than-ideal phone plan with exhorbitant data costs, 
 
 I found that this interface significantly reduced the amount of time I spent mindlessly browsing my phone; native notifications were silenced by default with this setup, and the loud, colorful icons and badges were no longer calling to be checked constantly. My data and usage was in check. And it made my feel like a character in Westworld when I used it.
 
-## Variations on a theme
+# Variations on a theme
 
 The custom icons designed for Cockpit sowed the seed for a complete set of app icons became a complete set of icons [for Android home screens](https://github.com/phosphor-icons/android) and ultimately an [open-source resource](/projects/phosphor-icons) for designers and developers of all kinds. My partner Helena even wrote [several articles](https://medium.com/@minoraxis) on the subject of icon design and history.
 

@@ -12,7 +12,7 @@ import ThemedImage from "@components/ThemedImage.astro";
 import helenaImage from "@assets/images/helenazhang.png";
 import helenaSpecImage from "@assets/images/helenazhang-spec.webp";
 
-## The brief
+# The brief
 
 My partner Helena and I have a soft spot for the early days of the internet, when sites were unique, experimental, and performant. We wanted to build her a portfolio that was all of these things — but with modern web conventions at the core: responsive design, lazy loading, interactions that felt dynamic and tactile.
 
@@ -25,13 +25,13 @@ Helena put together a design inspired by newspapers, with dense columns of conte
   />
 </AppWindow>
 
-## Laying the foundation
+# Laying the foundation
 
 I knew that using a popular framework like React or Vue.js went against the vibe for the site. It had to load fast, in mere kilobytes, and degrade gracefully in cases of poor bandwidth or lack of JavaScript — none of which are possible with typical SPAs today. This would be a regular old HTML/CSS/JS site. But since it's not 2003 any more, it needed to have some panache, too.
 
 Since most of the content would follow a grid-like pattern, I first laid out a scaffold using CSS `grid` layouts. After some experimentation with different breakpoints (mobile in particular), I pivoted to a `flexbox` based layout to simplify things. I borrowed some ideas (and code) from the [Bulma](https://bulma.io/) CSS framework to achieve good reusability on the column components.
 
-## Arguing semantics
+# Arguing semantics
 
 A requirement of the portfolio site was that is should be simple enough for Helena to update herself with new content and projects. HTML5 Semantic Elements helped make the markup read like an outline, and massively aided comprehension. No `&lt;div&gt;` soup for you!
 
@@ -69,7 +69,7 @@ A requirement of the portfolio site was that is should be simple enough for Hele
 
 Perhaps the two greatest benefits to this approach are the impressive gains to accessibility (screen readers and assistive devices have a much easier time of parsing this type of document), and the boost it gives to webpage SEO and indexing.
 
-## Making some noise
+# Making some noise
 
 <StaticField />
 
@@ -109,6 +109,6 @@ As a further optimization, I turned to the browser's built-in [Crypto API](https
 
 There are certainly less CPU-intensive ways to create the visual effect of TV static: precomputing more noise than needed and choosing a random index into the noise to start painting from each frame, or even just using a GIF. But the fact that this implementation is truly (pseudo)random each frame and still manages to maintain 60 FPS is pretty unique.
 
-## Looking further afield
+# Looking further afield
 
 When I sat down to build this, I was expecting a familiar exercise in static site development. Through the process of playing around with a seemingly mundane aesthetic element, though, I discovered quite a bit about browser APIs, and learned to look for solutions in unexpected places. By architecting the site for future modification and code readability, we got some excellent side-benefits. The end result was exactly the type of experience we wanted to create at the start. And we brought this thing from a sketch to production in one week flat.

@@ -27,18 +27,20 @@ const colors = {
   foam: "#BBDEC0",
 } as const;
 
-const semanticColors = {
-  success: colors.brightGreen,
-  warning: colors.brightYellow,
-  error: colors.brightRed,
-};
-
 export default {
   content: ["./src/**/*.{astro,html,js,jsx,md,mdx,svelte,ts,tsx,vue}"],
   theme: {
     colors: {
-      ...colors,
-      ...semanticColors,
+      primary: "rgb(var(--color-primary) / <alpha-value>)",
+      secondary: "rgb(var(--color-secondary) / <alpha-value>)",
+      surface: "rgb(var(--color-surface) / <alpha-value>)",
+      home: "rgb(var(--color-home) / <alpha-value>)",
+      project: "rgb(var(--color-project) / <alpha-value>)",
+      writing: "rgb(var(--color-writing) / <alpha-value>)",
+      experiment: "rgb(var(--color-experiment) / <alpha-value>)",
+      success: "rgb(var(--color-success) / <alpha-value>)",
+      warning: "rgb(var(--color-warning) / <alpha-value>)",
+      error: "rgb(var(--color-error) / <alpha-value>)",
     },
     fontFamily: {
       sans: ["sans-serif"],

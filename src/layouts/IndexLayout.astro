@@ -1,5 +1,6 @@
 ---
-import { ActionButton } from "@components/ActionButton";
+import { ThemeButton } from "@components/ThemeButton.tsx";
+import ThemeInit from "@components/ThemeInit.astro";
 import "@styles/global.css";
 
 interface Props {
@@ -19,8 +20,9 @@ const segments = pathname.split("/").filter(Boolean);
     <meta name="viewport" content="width=device-width" />
     <meta name="generator" content={Astro.generator} />
     <title>TF{pathname === "/" ? "" : `::${pageTitle}`}</title>
+    <ThemeInit />
   </head>
-  <body class="relative min-h-svh font-mono">
+  <body class="relative min-h-svh font-mono text-primary bg-surface">
     <div class="absolute inset-0 grid-index pointer-events-none z-0">
       <div class="border-r border-dashed"></div>
       <div class="border-r border-dashed"></div>
@@ -35,11 +37,9 @@ const segments = pathname.split("/").filter(Boolean);
       </nav>
       <span class="col-start-5 text-right">00:18:41</span>
       <span>Choose a project</span>
-      <ActionButton
+      <ThemeButton
         client:load
-        key="t"
-        class="col-span-2 col-start-7 justify-self-end"
-        label="Change theme"
+        class="col-span-2 col-start-6 justify-self-end"
       />
     </header>
     <main class="w-full">

@@ -6,14 +6,19 @@ import HomeLayout from "@layouts/HomeLayout.astro";
 import testImage from "../assets/images/toby-avatar.png";
 
 const books = await getCollection("readings");
+const secrets = [
+  "files.rektdeckard.tech",
+  "comics.rektdeckard.tech:9999",
+  "mines.rektdeckard.tech:25565",
+].map(btoa);
 ---
 
 <HomeLayout pageTitle="About">
-  <section class="grid-home bg-powder min-h-[336px]">
+  <section class="grid-home bg-home min-h-[336px]">
     <Image
       class="col-start-3 col-span-2 z-10"
       alt=""
-      width={225}
+      width={272}
       src={testImage}
     />
     <div class="space-y-4 text-xl">
@@ -27,7 +32,7 @@ const books = await getCollection("readings");
         Check out my <a href="/projects">projects</a>, read some of my <a
           href="/writing">writing</a
         >, or play with some of my
-        <a href="/experiments">experiments</a>.
+        <a href="/experiments">experiments</a>.█
       </p>
     </div>
   </section>
@@ -49,15 +54,8 @@ const books = await getCollection("readings");
       <p>CO-FOUNDER OF PHOSPHOR ICONS</p>
       <p>GIRLDAD 1X</p>
     </div>
-    <p class="col-span-2 text-sm">
-      {
-        Math.floor(Math.random() * 2 ** 30)
-          .toString(16)
-          .toUpperCase()
-      }
-    </p>
   </section>
-  <section class="grid-home min-h-28 bg-powder">
+  <section class="grid-home min-h-28 bg-home">
     <svg
       class="invisible col-start-4 justify-self-end me-2"
       xmlns="http://www.w3.org/2000/svg"
@@ -84,6 +82,9 @@ const books = await getCollection("readings");
       </div>
       <p>CURRENTLY READING</p>
     </div>
+    <ul class="col-span-2 text-sm break-all">
+      {secrets.map((s) => <li>{s}</li>)}
+    </ul>
   </section>
   <section class="grid-home min-h-28">
     <svg
@@ -119,7 +120,7 @@ const books = await getCollection("readings");
         ))
       }
     </div>
-    <p class="col-span-2 text-sm">
+    <p class="col-span-2 text-sm invisible">
       NOTE: These barcodes are rendered using <a href="/experiments/barco"
         >barco</a
       >, a handmade web component I built to render barcodes using the canvas
@@ -129,6 +130,14 @@ const books = await getCollection("readings");
 </HomeLayout>
 
 <script>
-  import { init } from "@utils/barcode";
+  import { BarcodeElement, init } from "@utils/barcode";
+  import { onThemeChange } from "@utils/theme";
+
   init();
+
+  onThemeChange(() => {
+    document.querySelectorAll<BarcodeElement>("bar-code").forEach((el) => {
+      el.render();
+    });
+  });
 </script>

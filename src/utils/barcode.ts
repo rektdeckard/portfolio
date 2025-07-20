@@ -326,134 +326,133 @@ export class EAN13 implements Renderable {
   }
 }
 
-export function init() {
-  customElements.define(
-    "bar-code",
-    class BarcodeElement extends HTMLElement {
-      static get observedAttributes() {
-        return ["type", "value", "width", "height", "scale", "hri", "qz"];
-      }
+export class BarcodeElement extends HTMLElement {
+  static get observedAttributes() {
+    return ["type", "value", "width", "height", "scale", "hri", "qz"];
+  }
 
-      #canvas: HTMLCanvasElement;
-      #ctx: CanvasRenderingContext2D;
-      #type: "upca" | "ean13" = "upca";
-      #value: string = "";
-      #scale: number = DEFAULT_RENDER_OPTIONS.scale;
-      #withHRI: RenderOptions["withHRI"] = DEFAULT_RENDER_OPTIONS.withHRI;
-      #withQuietZone: RenderOptions["withQuietZone"] =
-        DEFAULT_RENDER_OPTIONS.withQuietZone;
+  #canvas: HTMLCanvasElement;
+  #ctx: CanvasRenderingContext2D;
+  #type: "upca" | "ean13" = "upca";
+  #value: string = "";
+  #scale: number = DEFAULT_RENDER_OPTIONS.scale;
+  #withHRI: RenderOptions["withHRI"] = DEFAULT_RENDER_OPTIONS.withHRI;
+  #withQuietZone: RenderOptions["withQuietZone"] =
+    DEFAULT_RENDER_OPTIONS.withQuietZone;
 
-      constructor() {
-        super();
-        this.#canvas = document.createElement("canvas");
-        this.#canvas.style.imageRendering = "crisp-edges";
-        this.#canvas.style.verticalAlign = "middle";
-        const shadow = this.attachShadow({ mode: "open" });
-        shadow.appendChild(this.#canvas);
-        const ctx = this.#canvas.getContext("2d");
-        if (!ctx) {
-          throw new Error("Failed to get canvas context");
-        }
-        this.#ctx = ctx;
-      }
+  constructor() {
+    super();
+    this.#canvas = document.createElement("canvas");
+    this.#canvas.style.imageRendering = "crisp-edges";
+    this.#canvas.style.verticalAlign = "middle";
+    const shadow = this.attachShadow({ mode: "open" });
+    shadow.appendChild(this.#canvas);
+    const ctx = this.#canvas.getContext("2d");
+    if (!ctx) {
+      throw new Error("Failed to get canvas context");
+    }
+    this.#ctx = ctx;
+  }
 
-      attributeChangedCallback(
-        name: string,
-        oldValue: string | null,
-        newValue: string | null,
-      ) {
-        if (oldValue === newValue) return;
-        switch (name) {
-          case "type":
-            if (newValue === "upca" || newValue === "ean13") {
-              this.#type = newValue;
-            } else {
-              console.warn(`Unsupported barcode type: ${newValue}`);
-            }
-            break;
-          case "value":
-            if (newValue !== null) {
-              this.#value = newValue;
-            }
-            break;
-          case "width":
-            const width = newValue !== null ? parseInt(newValue, 10) : NaN;
-            if (!isNaN(width) && width > 0) {
-              this.#canvas.style.width = `${width}px`;
-              this.#canvas.width = width;
-            } else {
-              console.warn(`Invalid width value: ${newValue}`);
-            }
-            break;
-          case "height":
-            const height = newValue !== null ? parseInt(newValue, 10) : NaN;
-            if (!isNaN(height) && height > 0) {
-              this.#canvas.style.height = `${height}px`;
-              this.#canvas.height = height;
-            } else {
-              console.warn(`Invalid height value: ${newValue}`);
-            }
-            break;
-          case "scale":
-            const scale = newValue !== null ? parseInt(newValue, 10) : NaN;
-            if (!isNaN(scale) && scale > 0) {
-              this.#scale = scale;
-            } else {
-              console.warn(`Invalid scale value: ${newValue}`);
-            }
-            break;
-          case "hri":
-            this.#withHRI = newValue !== null;
-            break;
-          case "qz":
-            this.#withQuietZone = newValue !== null;
-            break;
-        }
-        this.#render();
-      }
-
-      #render() {
-        const ctx = this.#ctx;
-        ctx.fillStyle = "currentcolor";
-
-        let barcode;
-        const value = this.#value || this.getAttribute("value") || "0";
-        if (this.#type === "upca") {
-          barcode = new UPCA(parseInt(value, 10));
-        } else if (this.#type === "ean13") {
-          barcode = new EAN13(parseInt(value, 10));
+  attributeChangedCallback(
+    name: string,
+    oldValue: string | null,
+    newValue: string | null,
+  ) {
+    if (oldValue === newValue) return;
+    switch (name) {
+      case "type":
+        if (newValue === "upca" || newValue === "ean13") {
+          this.#type = newValue;
         } else {
-          console.error(`Unsupported barcode type: ${this.#type}`);
-          return;
+          console.warn(`Unsupported barcode type: ${newValue}`);
         }
+        break;
+      case "value":
+        if (newValue !== null) {
+          this.#value = newValue;
+        }
+        break;
+      case "width":
+        const width = newValue !== null ? parseInt(newValue, 10) : NaN;
+        if (!isNaN(width) && width > 0) {
+          this.#canvas.style.width = `${width}px`;
+          this.#canvas.width = width;
+        } else {
+          console.warn(`Invalid width value: ${newValue}`);
+        }
+        break;
+      case "height":
+        const height = newValue !== null ? parseInt(newValue, 10) : NaN;
+        if (!isNaN(height) && height > 0) {
+          this.#canvas.style.height = `${height}px`;
+          this.#canvas.height = height;
+        } else {
+          console.warn(`Invalid height value: ${newValue}`);
+        }
+        break;
+      case "scale":
+        const scale = newValue !== null ? parseInt(newValue, 10) : NaN;
+        if (!isNaN(scale) && scale > 0) {
+          this.#scale = scale;
+        } else {
+          console.warn(`Invalid scale value: ${newValue}`);
+        }
+        break;
+      case "hri":
+        this.#withHRI = newValue !== null;
+        break;
+      case "qz":
+        this.#withQuietZone = newValue !== null;
+        break;
+    }
+    this.render();
+  }
 
-        const height = ctx.canvas.height;
-        const modules = this.#withQuietZone
-          ? this.#type === "upca"
-            ? UPCA.TOTAL_WIDTH
-            : EAN13.TOTAL_WIDTH
-          : this.#type === "upca"
-            ? UPCA.TOTAL_WIDTH -
-              UPCA.QUIET_ZONE_LEFT_WIDTH -
-              UPCA.QUIET_ZONE_RIGHT_WIDTH
-            : EAN13.TOTAL_WIDTH -
-              EAN13.QUIET_ZONE_LEFT_WIDTH -
-              EAN13.QUIET_ZONE_RIGHT_WIDTH;
-        const width = modules * this.#scale;
+  render() {
+    const ctx = this.#ctx;
+    ctx.fillStyle = "currentcolor";
 
-        ctx.canvas.width = width;
-        ctx.canvas.height = height;
+    let barcode;
+    const value = this.#value || this.getAttribute("value") || "0";
+    if (this.#type === "upca") {
+      barcode = new UPCA(parseInt(value, 10));
+    } else if (this.#type === "ean13") {
+      barcode = new EAN13(parseInt(value, 10));
+    } else {
+      console.error(`Unsupported barcode type: ${this.#type}`);
+      return;
+    }
 
-        // Clear the canvas
-        ctx.clearRect(0, 0, width, height);
+    const height = ctx.canvas.height;
+    const modules = this.#withQuietZone
+      ? this.#type === "upca"
+        ? UPCA.TOTAL_WIDTH
+        : EAN13.TOTAL_WIDTH
+      : this.#type === "upca"
+        ? UPCA.TOTAL_WIDTH -
+          UPCA.QUIET_ZONE_LEFT_WIDTH -
+          UPCA.QUIET_ZONE_RIGHT_WIDTH
+        : EAN13.TOTAL_WIDTH -
+          EAN13.QUIET_ZONE_LEFT_WIDTH -
+          EAN13.QUIET_ZONE_RIGHT_WIDTH;
+    const width = modules * this.#scale;
 
-        // Draw the barcode
-        barcode.renderToCanvas(ctx.canvas, {
-          scale: this.#scale,
-          withHRI: this.#withHRI,
-          withQuietZone: this.#withQuietZone,
-        });
-      }
-    },
-  );
+    ctx.canvas.width = width;
+    ctx.canvas.height = height;
+
+    // Clear the canvas
+    ctx.clearRect(0, 0, width, height);
+
+    // Draw the barcode
+    barcode.renderToCanvas(ctx.canvas, {
+      scale: this.#scale,
+      withHRI: this.#withHRI,
+      withQuietZone: this.#withQuietZone,
+    });
+  }
+}
+
+export function init() {
+  customElements.define("bar-code", BarcodeElement);
 }

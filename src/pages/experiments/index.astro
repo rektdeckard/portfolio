@@ -2,7 +2,7 @@
 import IndexLayout from "@layouts/IndexLayout.astro";
 
 const pages = Object.keys(import.meta.glob("./*.astro")).map((path) => ({
-  name: path.replace("./", "").replace(".astro", ""),
+  name: path.replace("./", "").replace(/[-_]/, " ").replace(".astro", ""),
   url: path.replace("./", "").replace(".astro", ""),
 }));
 ---
@@ -12,9 +12,9 @@ const pages = Object.keys(import.meta.glob("./*.astro")).map((path) => ({
     <ol>
       {
         pages.map((page, idx) => (
-          <li class="odd:bg-blush">
+          <li class="odd:bg-experiment">
             <a
-              class="grid-index min-h-28 no-underline outline-none focus:bg-black focus:text-white hover:bg-black hover:text-white"
+              class="grid-index min-h-28 no-underline outline-none focus:bg-primary focus:text-surface hover:bg-primary hover:text-surface"
               href={`/experiments/${page.url}`}
             >
               <span class="col-start-2">{`${idx + 1}`.padStart(2, "0")}</span>

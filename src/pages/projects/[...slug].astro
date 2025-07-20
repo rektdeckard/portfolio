@@ -1,8 +1,12 @@
 ---
 import { getCollection, render } from "astro:content";
-import MarkdownPostLayout from "@layouts/MarkdownProjectLayout.astro";
+
+import ContentLayout from "@layouts/ContentLayout.astro";
+import TableOfContents from "@components/TableOfContents.astro";
 import { omitDraftEntries } from "@utils/content";
-import ImageGallery from "@components/ImageGallery.astro";
+import { formatYearOrRange } from "@utils/datetime";
+
+import "@styles/global.css";
 
 export const prerender = true;
 
@@ -15,10 +19,32 @@ export async function getStaticPaths() {
 }
 
 const { project } = Astro.props;
-const { Content } = await render(project);
+const { Content, headings } = await render(project);
 ---
 
-<MarkdownPostLayout frontmatter={project.data}>
-  <Content />
-  <ImageGallery />
-</MarkdownPostLayout>
+<ContentLayout
+  pageTitle={`Projects::${project.data.title}`}
+  contentTitle={project.data.title}
+  contentDate={formatYearOrRange(project.data.year)}
+  accentClass="bg-project"
+  containerClass="grid-home"
+>
+  <TableOfContents {headings} />
+  <article class="col-start-4 col-span-3 flex flex-col gap-4 z-10">
+    <hgroup>
+      <h1 id="top" class="font-bold text-xl">{project.data.title}</h1>
+      <p>{project.data.description}</p>
+    </hgroup>
+    <p>{formatYearOrRange(project.data.year)}</p>
+    <div class="tags">
+      {
+        project.data.tags?.map((tag: string) => (
+          <p class="tag">
+            <a href={`/tags/${tag}`}>{tag}</a>
+          </p>
+        ))
+      }
+    </div>
+    <Content />
+  </article>
+</ContentLayout>
