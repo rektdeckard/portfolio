@@ -32,9 +32,9 @@
   --color-project: 225 224 208;
   --color-writing: 203 226 238;
   --color-experiment: 237 231 234;
-  --color-success: 22 128 0;
-  --color-warning: 202 138 0;
-  --color-error: 220 38 38;
+  --color-success: 154 169 147;
+  --color-warning: 193 155 78;
+  --color-error: 198 112 96;
 }
 
 [data-theme="console"] {
@@ -93,6 +93,7 @@
   ::selection {
     background-color: rgb(from currentcolor r g b / var(--standard-opacity));
   }
+
 }
 
 @layer utilities {
@@ -130,6 +131,14 @@
 
   input[type='range']::-moz-range-track {
     @apply h-full bg-[transparent];
+  }
+
+  img, pre {
+    @apply outline outline-1 outline-primary outline-dashed;
+  }
+
+  pre {
+    @apply p-[2ch];
   }
 }
 

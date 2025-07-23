@@ -37,12 +37,9 @@ const segments = pathname.split("/").filter(Boolean);
       </nav>
       <span class="col-start-5 text-right">00:18:41</span>
       <span>Choose a project</span>
-      <ThemeButton
-        client:load
-        class="col-span-2 col-start-6 justify-self-end"
-      />
+      <ThemeButton client:load class="col-start-8 justify-self-end" />
     </header>
-    <main class="w-full">
+    <main class="w-full pb-16">
       <slot />
     </main>
     <footer></footer>

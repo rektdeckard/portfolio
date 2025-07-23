@@ -19,7 +19,7 @@ export type SliderProps = {
 
 export function Slider(props: SliderProps) {
   const [value, setValue] = props.state ?? createSignal(props.defaultValue || 0);
-  const [rezises, resize] = createSignal();
+  const [resizes, resize] = createSignal();
 
   const min = props.min || 0;
   const step = props.step ?? 1;
@@ -48,7 +48,7 @@ export function Slider(props: SliderProps) {
 
   // Position the label above the thumb
   const thumbPosition = () => {
-    const _ = rezises();
+    const _ = resizes();
     const el = trackRef.current;
     if (!el) return 0;
     const percent = (value() - min) / ((props.max ?? 100) - min);
@@ -61,6 +61,7 @@ export function Slider(props: SliderProps) {
 
   return (
     <div classList={{ "flex items-center font-mono focus-within:outline-1 focus-within:outline-offset-4 focus-within:outline-dashed": true, [props.class || ""]: !!props.class }}>
+      {props.label && <label for={props.id} class="pe-4 uppercase">{props.label}</label>}
       <div class="relative grow h-6">
         <svg
           xmlns="http://www.w3.org/2000/svg"
@@ -98,8 +99,6 @@ export function Slider(props: SliderProps) {
           aria-label={props.label}
         />
       </div>
-
-      {props.label && <label for={props.id} class="ps-4 uppercase">{props.label}</label>}
     </div>
   );
 }

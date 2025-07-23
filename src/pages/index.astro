@@ -16,7 +16,7 @@ const secrets = [
 <HomeLayout pageTitle="About">
   <section class="grid-home bg-home min-h-[336px]">
     <Image
-      class="col-start-3 col-span-2 z-10"
+      class="col-start-3 col-span-2 !px-0 z-10"
       alt=""
       width={272}
       src={testImage}
@@ -120,11 +120,10 @@ const secrets = [
         ))
       }
     </div>
-    <p class="col-span-2 text-sm invisible">
-      NOTE: These barcodes are rendered using <a href="/experiments/barco"
-        >barco</a
-      >, a handmade web component I built to render barcodes using the canvas
-      API.
+    <p class="col-span-2 text-sm">
+      NOTE: These barcodes are rendered using <a
+        href="https://github.com/rektdeckard/barco">barco</a
+      >, a tiny library I am working on for rendering barcodes of various types.
     </p>
   </section>
 </HomeLayout>

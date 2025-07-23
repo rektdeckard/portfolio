@@ -2,7 +2,7 @@ import { onCleanup } from "solid-js";
 
 export const THEME_STORAGE_KEY = "tf_theme";
 
-export const THEMES = ["paper", "console", "stone"] as const;
+export const THEMES = ["paper", "console"] as const;
 export type Theme = (typeof THEMES)[number];
 
 export function initializeTheme() {

@@ -41,19 +41,32 @@ ever-present notification shade in favor of four content areas:
 While the framework API exposes some device vitals and notifications, generating the map view and nearby transit visualizations was a bit more of a challenge. I relied on Google's [Static Maps](https://developers.google.com/maps/documentation/maps-static/overview) and [GTFS Realtime](https://developers.google.com/transit/gtfs-realtime) REST APIs to put it all together. For the map, we would construct a complex query using device GPS coordinates and user-set variables like the current dashboard theme and map zoom level, request a static map image with the appropriate style parameters, then apply post-processing and layer it into the dashboard UI.
 
 ```js
-let mapQueryUrl = \`https://maps.googleapis.com/maps/api/staticmap?\` +
-  \`center=\${lat},\${lon}\` +
-  \`&maptype=\${mapType}\` +
-  \`&size=\${Math.round(height)}&scale=\${scale}&zoom=\${zoom}\` +
-  \`&style=feature:all|element:labels|visibility\${
-    labels ? "simplified" : "off"
-  }\` +
-  \`&style=feature:administrative|element:labels|visibility\${
-    labels && cityLabels ? "simplified" : "off"
-  }|color:\${labelColor}\` +
-  \`&style=feature:road.highway|element:geometry.fill|color:\${highwayColor}\` +
-  // ...About 40 more repetitive style parameters... 
-  \`&key\${API_KEY}\`;\
+function generateMapURL(attrs) {
+  let url = new URL(BASE_URL);
+  let params = new URLSearchParams({
+    mapType: "roadmap",
+    lat: `${attrs.lat}`,
+    lon: `${attrs.lon}`,
+    size: Math.round(attrs.height ?? 600).toString(),
+    scale: `${attrs.scale ?? 1}`,
+    zoom: `${attrs.zoom ?? 10}`,
+    key: API_KEY,
+  });
+  params.append(
+    "style",
+    `feature:all|element:labels|visibility:${
+      attrs.labels ? "simplified" : "off"
+    }`,
+  );
+  params.append(
+    "style",
+    `feature:administrative|element:labels|visibility:${
+      attrs.labels && attrs.administrtativeLabels ? "simplified" : "off"
+    }|color:${attrs.labelColor}`,
+  );
+  url.search = params.toString();
+  return url;
+}
 ```
 
 The transit stations would be a bit simpler, requiring just a simple API query and some parsing of the response, before displaying the transit modes on screen. Both the map and transit components could be customized to deep-link into the preferred navigation app with some of the navigation context pre-filled.

@@ -1,7 +1,6 @@
 import { onMount, createEffect } from "solid-js";
 
 import { Slider } from "@components/Slider";
-import { Stepper } from "@components/Stepper";
 import { useStateParam } from "@utils/state";
 
 const INITIAL_FOURIER_TERMS = 4;
@@ -93,14 +92,14 @@ export default function LoopsExperiment() {
   return (
     <>
       <div id="container" class="relative">
-        <canvas class="bg-experiment" ref={(el) => canvas = el} id="canvas" width="600" height="600"></canvas>
+        <canvas class="bg-experiment outline outline-1 outline-primary outline-dashed relative z-10" ref={(el) => canvas = el} id="canvas" width="600" height="600"></canvas>
         <div
           id="layer"
           class="absolute inset-0 opacity-60 bg-[20px 20px] mix-blend-multiply"
         >
         </div>
         <svg
-          class="absolute inset-0 opacity-40"
+          class="absolute inset-0 opacity-40 z-20"
           xmlns="http://www.w3.org/2000/svg"
           version="1.1"
           xmlns:xlink="http://www.w3.org/1999/xlink"
@@ -152,15 +151,21 @@ export default function LoopsExperiment() {
             >
               <feTurbulence
                 type="fractalNoise"
-                baseFrequency="0.67"
-                numOctaves="2"
-                seed="2"
+                baseFrequency="0.44"
+                numOctaves="3"
+                seed="0"
                 stitchTiles="stitch"
                 x="0%"
                 y="0%"
                 width="100%"
                 height="100%"
-                result="turbulence"></feTurbulence>
+                result="turbulence">
+                <animate attributeName="seed"
+                  values="0;1;2;3;4;5;6;7;8;9"
+                  dur="200ms"
+                  repeatCount="indefinite"
+                  calcMode="discrete" />
+              </feTurbulence>
               <feColorMatrix
                 type="saturate"
                 values="0"
@@ -220,7 +225,7 @@ export default function LoopsExperiment() {
           min={1} max={20}
           state={[fourierTerms, setFourierTerms]}
           onChange={setFourierTerms}
-          class="grid grid-cols-[minmax(200px,1fr)_1fr] items-center gap-4"
+          class="grid grid-cols-[18ch_48ch] gap-2"
         />
         <Slider
           id="period"
@@ -228,7 +233,7 @@ export default function LoopsExperiment() {
           min={1} max={100}
           state={[period, setPeriod]}
           onChange={setPeriod}
-          class="grid grid-cols-[minmax(200px,1fr)_1fr] items-center gap-4"
+          class="grid grid-cols-[18ch_48ch] gap-2"
         />
         <Slider
           id="color"
@@ -236,15 +241,16 @@ export default function LoopsExperiment() {
           min={0.1} max={4} step={0.01}
           state={[colorPeriod, setColorPeriod]}
           onChange={setColorPeriod}
-          class="grid grid-cols-[minmax(200px,1fr)_1fr] items-center gap-4"
+          class="grid grid-cols-[18ch_48ch] gap-2"
         />
-        <Stepper
+        <Slider
           id="seed"
           label="Seed"
           min={0} max={100}
           step={1}
           state={[seed, setSeed]}
           onChange={setSeed}
+          class="grid grid-cols-[18ch_48ch] gap-2"
         />
       </div>
     </>

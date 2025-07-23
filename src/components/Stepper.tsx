@@ -81,8 +81,9 @@ export function Stepper(props: StepperProps) {
       "inline-flex items-center gap-2 font-mono": true,
       [props.class || ""]: !!props.class,
     }}>
+      {props.label && <label for={props.id} class="pe-4 uppercase">{props.label}</label>}
       <button
-        class="appearance-none outline-1 focus:outline-dashed disabled:bg-warning disabled:text-primary disabled:cursor-not-allowed active:text-surface active:bg-primary"
+        class="appearance-none outline-1 focus:outline-dashed disabled:bg-warning disabled:text-surface disabled:cursor-not-allowed active:text-surface active:bg-primary"
         onClick={decrement}
         disabled={value() <= min}
       >
@@ -108,13 +109,12 @@ export function Stepper(props: StepperProps) {
         onPointerDown={enableDrag}
       />
       <button
-        class="appearance-none focus:outline-1 focus:outline-dashed disabled:bg-warning disabled:text-primary disabled:cursor-not-allowed active:text-surface active:bg-primary"
+        class="appearance-none focus:outline-1 focus:outline-dashed disabled:bg-warning disabled:text-surface disabled:cursor-not-allowed active:text-surface active:bg-primary"
         onClick={increment}
         disabled={props.disabled || (props.max !== undefined && value() >= props.max)}
       >
         [+]
       </button>
-      {props.label && <label for={props.id} class="ps-4 uppercase">{props.label}</label>}
     </div>
   );
 }

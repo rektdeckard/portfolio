@@ -14,6 +14,7 @@ import { Slider } from "@components/Slider.tsx";
 >
   <TableOfContents
     headings={[
+      { depth: 1, slug: "colors", text: "Colors" },
       { depth: 1, slug: "actionbutton", text: "ActionButton" },
       { depth: 1, slug: "stepper", text: "Stepper" },
       { depth: 1, slug: "slider", text: "Slider" },
@@ -23,14 +24,48 @@ import { Slider } from "@components/Slider.tsx";
     <hgroup id="top">
       <h1 class="font-bold text-xl">Deckmate UI</h1>
       <p>
-        A simple UI component library created for this site, inspired by the
-        lined-paper code listing printouts of the 60s and 70s, by way of a neat <a
-          href="https://www.unifoundry.com/deckmate/index.html">utility</a
-        > created by Paul Hardy of <a
-          href="https://www.unifoundry.com/index.html">Unifoundry</a
-        > for simulating this effect in PostScript.
+        A simple UI component library created for this site, inspired by the <a
+          href="https://www.unifoundry.com/deckmate/index.html">Deckmate</a
+        > utility for pretty-printing code listings to PostScript in a style that
+        resembles the striped tractor-feed printouts of the 70s and 80s.
       </p>
     </hgroup>
+    <hr />
+    <h2 id="colors">Colors</h2>
+    <div
+      class="relative z-20 flex flex-wrap gap-4 *:size-24 *:outline *:outline-1 *:outline-dashed *:flex *:items-center *:justify-center"
+    >
+      <div class="bg-primary">
+        <span class="uppercase text-surface">primary</span>
+      </div>
+      <div class="bg-secondary">
+        <span class="uppercase text-surface">secondary</span>
+      </div>
+      <div class="bg-surface">
+        <span class="uppercase">surface</span>
+      </div>
+      <div class="bg-home">
+        <span class="uppercase">home</span>
+      </div>
+      <div class="bg-project">
+        <span class="uppercase">project</span>
+      </div>
+      <div class="bg-writing">
+        <span class="uppercase">writing</span>
+      </div>
+      <div class="bg-experiment">
+        <span class="uppercase">experiment</span>
+      </div>
+      <div class="bg-success">
+        <span class="uppercase text-surface">success</span>
+      </div>
+      <div class="bg-warning">
+        <span class="uppercase text-surface">warning</span>
+      </div>
+      <div class="bg-error">
+        <span class="uppercase text-surface">error</span>
+      </div>
+    </div>
     <hr />
     <h2 id="actionbutton">ActionButton</h2>
     <p>
@@ -39,22 +74,21 @@ import { Slider } from "@components/Slider.tsx";
     </p>
     <div class="flex flex-col items-start gap-2">
       <ActionButton client:load label="Randomize Parameters" key="r" />
-      <ActionButton client:load label="Save GIF" key="s" />
-      <ActionButton client:load label="No shortcut" />
-      <ActionButton client:load label="Illegal Action" key="i" disabled />
+      <ActionButton client:load label="Expand horizon" key="e" />
+      <ActionButton client:load label="Reconceptualize" />
+      <ActionButton client:load label="Divide by zero" key="d" disabled />
     </div>
     <hr />
     <h2 id="stepper">Stepper</h2>
     <p>A number input with some quality-of-life improvements.</p>
-    <div class="grid grid-cols-[28px_60px_28px_1fr] gap-1">
+    <div class="grid grid-cols-[24ch_3ch_7ch_3ch] gap-1">
       <Stepper
         client:load
         defaultValue={5}
         min={1}
         max={20}
-        id="fourier"
-        name="fourier"
-        label="Fourier Terms"
+        id="dimensions"
+        label="Dimensionality"
         class="contents"
       />
       <Stepper
@@ -64,9 +98,8 @@ import { Slider } from "@components/Slider.tsx";
         max={10}
         step={0.1}
         precision={2}
-        id="period"
-        name="period"
-        label="Period"
+        id="peando"
+        label="Peano number"
         class="contents"
       />
       <Stepper
@@ -76,18 +109,16 @@ import { Slider } from "@components/Slider.tsx";
         max={10}
         step={0.1}
         precision={2}
-        id="color-period"
-        name="color-period"
-        label="Color Period"
+        id="variance"
+        label="Phase variance"
         class="contents"
       />
       <Stepper
         client:load
         min={0}
         max={100}
-        id="seed"
-        name="seed"
-        label="Seed"
+        id="mantissa"
+        label="Mantissa"
         class="contents"
       />
     </div>
@@ -101,10 +132,9 @@ import { Slider } from "@components/Slider.tsx";
         max={20}
         step={1}
         defaultValue={5}
-        label="Fourier Terms"
-        id="fourier-slider"
-        name="fourier-slider"
-        class="grid grid-cols-[400px_1fr] gap-1"
+        label="Liminality"
+        id="liminality"
+        class="grid grid-cols-[24ch_48ch] gap-1"
       />
       <Slider
         client:load
@@ -114,8 +144,7 @@ import { Slider } from "@components/Slider.tsx";
         defaultValue={2.35}
         label="Spline Reticulation"
         id="spline-reticulation-slider"
-        name="spline-reticulation-slider"
-        class="grid grid-cols-[400px_1fr] gap-1"
+        class="grid grid-cols-[24ch_48ch] gap-1"
       />
     </div>
   </article>

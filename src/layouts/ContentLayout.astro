@@ -56,12 +56,9 @@ const segments = pathname.split("/").filter(Boolean);
       <span>{contentTitle ?? "Anonymous content"}</span>
       <span class="text-right">{contentDate ?? "Undated"}</span>
       <span class="text-right">{contentLength}</span>
-      <ThemeButton
-        client:load
-        class="col-span-2 col-start-6 justify-self-end"
-      />
+      <ThemeButton client:load class="col-start-7 justify-self-end" />
     </header>
-    <main class:list={["w-full", containerClass]}>
+    <main class:list={["w-full pb-16", containerClass]}>
       <slot />
     </main>
     <footer></footer>

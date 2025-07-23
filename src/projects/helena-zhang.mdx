@@ -64,7 +64,7 @@ A requirement of the portfolio site was that is should be simple enough for Hele
   </body>
   <script src="/js/static.js"></script>
   <script src="/js/quote.js"></script>
-</html>\
+</html>
 ```
 
 Perhaps the two greatest benefits to this approach are the impressive gains to accessibility (screen readers and assistive devices have a much easier time of parsing this type of document), and the boost it gives to webpage SEO and indexing.
@@ -100,7 +100,7 @@ if (canvas) {
     noise(context);
     requestAnimationFrame(loop);
   })();
-};\
+};
 ```
 
 As a further optimization, I turned to the browser's built-in [Crypto API](https://developer.mozilla.org/en-US/docs/Web/API/Crypto) to get random bits even faster, with less overhead. The `window.crypto` object exposes a single method, `getRandomValues(typedArray)`, which will fill a passed `TypedArray` with cryptographically strong random bits via a PRNG seeded by a system-level entropy source. Similar to how we went from `n` paint events down to `1`, we were now getting our random bits wholesale.

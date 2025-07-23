@@ -66,7 +66,7 @@ export function ActionButton(props: ActionButtonProps) {
       name={props.name}
       type={props.type || "button"}
       classList={{
-        "appearance-none focus:outline-1 focus:outline-dashed active:bg-primary active:text-surface disabled:bg-warning disabled:text-primary disabled:cursor-not-allowed uppercase font-mono px-1": true,
+        "appearance-none focus:outline-1 focus:outline-dashed active:bg-primary active:text-surface disabled:bg-warning disabled:text-surface disabled:cursor-not-allowed uppercase font-mono px-1": true,
         "bg-primary text-surface": keyActive(),
         [props.class || ""]: !!props.class,
       }}

@@ -4,14 +4,12 @@
 
 <script is:inline>
   const THEME_STORAGE_KEY = "tf_theme";
-  console.log(localStorage.getItem(THEME_STORAGE_KEY));
   const theme =
     localStorage.getItem(THEME_STORAGE_KEY) ||
     (window.matchMedia("(prefers-color-scheme: dark)").matches
       ? "console"
       : "paper");
   const html = document.documentElement;
-  console.log(theme);
   html.dataset.theme = theme;
   localStorage.setItem(THEME_STORAGE_KEY, theme);
 </script>
