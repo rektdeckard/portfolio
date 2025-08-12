@@ -30,6 +30,7 @@ const writings = defineCollection({
   schema: z.object({
     title: z.string().optional(),
     date: z.date().transform(shiftUTCToMDT),
+    url: z.string().optional(),
     tags: z.array(z.string()).optional(),
     draft: z.boolean().optional(),
   }),

@@ -29,6 +29,11 @@ export function toggleTheme() {
   applyTheme(nextTheme);
 }
 
+export function getCurrentTheme(): Theme {
+  if (typeof window === "undefined") return "paper";
+  return (document.documentElement.dataset.theme as Theme) || "paper";
+}
+
 export function onThemeChange(callback: (theme: Theme) => void) {
   if (typeof window === "undefined") return;
   const observer = new MutationObserver((mutations) => {

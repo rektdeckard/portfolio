@@ -1,30 +1,30 @@
 import type { Config } from "tailwindcss";
 
-const colors = {
-  black: "#1a1a1a",
-  red: "#d29393",
-  green: "#b3b393",
-  yellow: "#cbaa89",
-  blue: "#a8a1be",
-  purple: "#b39fb0",
-  cyan: "#c0af8c",
-  white: "#dadada",
-  brightBlack: "#5b5b5b",
-  brightRed: "#c95954",
-  brightGreen: "#828040",
-  brightYellow: "#a6794c",
-  brightBlue: "#5a6599",
-  brightPurple: "#9c6995",
-  brightCyan: "#74a39e",
-  brightWhite: "#ffffff",
-  brick: "#B24311",
-  rust: "#422115",
-  // NEW
-  powder: "#F1E8E2",
-  blush: "#EDE7EA",
-  beige: "#E1E0D0",
-  sky: "#CBE2EE",
-  foam: "#BBDEC0",
+export const COLORS = {
+  Paper: {
+    primary: "rgb(26 26 26)",
+    secondary: "rgb(91 91 91)",
+    surface: "rgb(255 255 255)",
+    home: "rgb(241 232 226)",
+    project: "rgb(225 224 208)",
+    writing: "rgb(203 226 238)",
+    experiment: "rgb(237 231 234)",
+    success: "rgb(154 169 147)",
+    warning: "rgb(193 155 78)",
+    error: "rgb(198 112 96)",
+  },
+  Console: {
+    primary: "rgb(132 182 177)",
+    secondary: "rgb(86 150 162)",
+    surface: "rgb(11 15 19)",
+    home: "rgb(9 31 46)",
+    project: "rgb(57 59 32)",
+    writing: "rgb(61 47 59)",
+    experiment: "rgb(61 46 34)",
+    success: "rgb(22 128 0)",
+    warning: "rgb(202 138 0)",
+    error: "rgb(220 38 38)",
+  },
 } as const;
 
 export default {

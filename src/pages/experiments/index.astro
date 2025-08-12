@@ -2,7 +2,7 @@
 import IndexLayout from "@layouts/IndexLayout.astro";
 
 const pages = Object.keys(import.meta.glob("./*.astro")).map((path) => ({
-  name: path.replace("./", "").replace(/[-_]/, " ").replace(".astro", ""),
+  name: path.replace("./", "").replace(".astro", ""),
   url: path.replace("./", "").replace(".astro", ""),
 }));
 ---

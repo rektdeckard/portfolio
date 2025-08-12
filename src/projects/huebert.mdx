@@ -58,7 +58,7 @@ const options = {
 fetch("http://<BRIDGE_IP>/api/groups/<GROUP_NUMBER>", options)
   .then((res) => res.json())
   // Update application state accordingly
-  .then((res) => updateLights(res));\
+  .then((res) => updateLights(res));
 ```
 
 # A deceptively simple implementation

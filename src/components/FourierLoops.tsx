@@ -1,14 +1,16 @@
-import { onMount, createEffect } from "solid-js";
+import { onMount, createEffect, batch } from "solid-js";
+import { Random } from 'kdim';
 
 import { Slider } from "@components/Slider";
 import { useStateParam } from "@utils/state";
+import { ActionButton } from "@components/ActionButton";
 
 const INITIAL_FOURIER_TERMS = 4;
 const INITIAL_PERIOD = 10;
 const INITIAL_COLOR_PERIOD = 1;
 const INITIAL_SEED = 35;
 
-export default function LoopsExperiment() {
+export function FourierLoops() {
   let canvas: HTMLCanvasElement;
   let ctx: CanvasRenderingContext2D;
 
@@ -88,6 +90,15 @@ export default function LoopsExperiment() {
 
     return () => cancelAnimationFrame(raf);
   }, null);
+
+  function randomize() {
+    batch(() => {
+      setFourierTerms(Random.dice(20));
+      setPeriod(Random.dice(20));
+      setColorPeriod(Random.float({ min: 0.1, max: 2 }));
+      setSeed(Random.dice(100));
+    });
+  }
 
   return (
     <>
@@ -252,6 +263,7 @@ export default function LoopsExperiment() {
           onChange={setSeed}
           class="grid grid-cols-[18ch_48ch] gap-2"
         />
+        <ActionButton key="r" label="Randomize" action={randomize} />
       </div>
     </>
   );

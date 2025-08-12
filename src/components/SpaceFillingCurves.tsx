@@ -363,9 +363,6 @@ export function SpaceFillingCurves() {
         lsystem.reset();
         lsystem.execute(iterations());
       }
-      if (e.key === "c") {
-        randomizeColor();
-      }
       if (e.key === " ") {
         e.preventDefault();
         walkSVGPaths(svgRef!);
@@ -426,7 +423,7 @@ export function SpaceFillingCurves() {
           <small>Press <kbd>space</kbd> to play animation forward/reverse</small>
         </li>
         <li>
-          <small>Press <kbd>c</kbd> to randomize colors</small>
+          <small>Press <kbd>r</kbd> to randomize colors</small>
         </li>
         <li>
           <small>Press <kbd>x</kbd> to toggle smoothing</small>
@@ -458,7 +455,7 @@ export function SpaceFillingCurves() {
           id="iterations"
           min={1}
           max={maxIterations()}
-          onChange={(val) => {
+          onInput={(val) => {
             setIterations(val);
             lsystem.reset();
             lsystem.execute(val);
@@ -482,7 +479,7 @@ export function SpaceFillingCurves() {
           min={1}
           max={20}
           defaultValue={lineWidth()}
-          onChange={(val) => {
+          onInput={(val) => {
             setLineWidth(val);
             document.documentElement.style.setProperty(
               "--stroke-width",
@@ -496,14 +493,14 @@ export function SpaceFillingCurves() {
         />
         {/* STROKE COLOR */}
         <label for="strokestyle" class="uppercase">Stroke color</label>
-        <input type="color" id="strokestyle" value={strokeStyle()} onChange={(e) => {
+        <input type="color" id="strokestyle" value={strokeStyle()} onInput={(e) => {
           const color = (e.target as HTMLInputElement).value;
           setStrokeStyle(color);
           document.documentElement.style.setProperty("--stroke", color);
         }} />
         {/* FILL COLOR */}
         <label for="fillstyle" class="uppercase">Fill color</label>
-        <input type="color" id="fillstyle" value={fillStyle()} onChange={(e) => {
+        <input type="color" id="fillstyle" value={fillStyle()} onInput={(e) => {
           const color = (e.target as HTMLInputElement).value;
           setFillStyle(color);
           document.documentElement.style.setProperty("--fill", color);
@@ -543,7 +540,7 @@ export function SpaceFillingCurves() {
           link.download = filename;
           link.click();
         }} />
-        <ActionButton id="randomizebtn" label="Randomize" action={randomizeColor} />
+        <ActionButton key="r" label="Randomize" action={randomizeColor} />
       </div>
     </>
   );

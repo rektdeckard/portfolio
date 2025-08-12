@@ -53,10 +53,17 @@ const segments = pathname.split("/").filter(Boolean);
       <nav class="col-start-2 col-span-2">
         <a href="/">Home</a> &gt; <a href={`/${segments[0]}`}>{segments[0]}</a>
       </nav>
-      <span>{contentTitle ?? "Anonymous content"}</span>
-      <span class="text-right">{contentDate ?? "Undated"}</span>
+      <div class="col-span-2 flex justify-between gap-[4ch]">
+        <span class="whitespace-normal"
+          >{contentTitle ?? "Anonymous content"}</span
+        >
+        <span class="text-right">{contentDate ?? "Undated"}</span>
+      </div>
       <span class="text-right">{contentLength}</span>
-      <ThemeButton client:load class="col-start-7 justify-self-end" />
+      <ThemeButton
+        client:load
+        class="col-start-7 self-start justify-self-end"
+      />
     </header>
     <main class:list={["w-full pb-16", containerClass]}>
       <slot />

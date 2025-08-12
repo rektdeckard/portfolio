@@ -52,11 +52,11 @@ export function ActionButton(props: ActionButtonProps) {
     const index = props.label.toLowerCase().indexOf(key.toLowerCase());
 
     return (
-      <>
+      <span>
         {props.label.slice(0, index)}
-        <u>{props.label[index]}</u>
+        <span class="underline">{props.label[index]}</span>
         {props.label.slice(index + 1)}
-      </>
+      </span>
     );
   };
 
@@ -66,14 +66,14 @@ export function ActionButton(props: ActionButtonProps) {
       name={props.name}
       type={props.type || "button"}
       classList={{
-        "appearance-none focus:outline-1 focus:outline-dashed active:bg-primary active:text-surface disabled:bg-warning disabled:text-surface disabled:cursor-not-allowed uppercase font-mono px-1": true,
+        "appearance-none flex items-center justify-between focus:outline-1 focus:outline-dashed active:bg-primary active:text-surface disabled:bg-warning disabled:text-surface disabled:cursor-not-allowed uppercase font-mono px-1": true,
         "bg-primary text-surface": keyActive(),
         [props.class || ""]: !!props.class,
       }}
       onClick={props.action}
       disabled={props.disabled}
     >
-      [{renderLabel()}]
+      <span>[</span>{renderLabel()}<span>]</span>
     </button>
   );
 }

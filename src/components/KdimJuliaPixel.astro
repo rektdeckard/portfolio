@@ -39,18 +39,14 @@ const {
 
 <script>
   import { Complex, Noise } from "kdim";
-  import { INTERPOLATORS } from "@utils/color";
-  import { onColorSchemeChange, isDarkMode } from "@utils/media";
+  import { interpolatorForTheme } from "@utils/color";
+  import { getCurrentTheme, onThemeChange } from "@utils/theme";
 
   let j = new Complex(0, 0);
-  let interpolate = isDarkMode()
-    ? INTERPOLATORS.AmberDark
-    : INTERPOLATORS.MellifluousDark;
+  let interpolate = interpolatorForTheme(getCurrentTheme());
 
-  onColorSchemeChange((isDark) => {
-    interpolate = isDark
-      ? INTERPOLATORS.AmberDark
-      : INTERPOLATORS.MellifluousDark;
+  onThemeChange((theme) => {
+    interpolate = interpolatorForTheme(theme);
   });
 
   function julia(
@@ -101,8 +97,11 @@ const {
     let ax: number;
     let ay: number;
     let r: number, g: number, b: number;
+    let raf: number | null = null;
 
     function draw() {
+      if (raf) cancelAnimationFrame(raf);
+
       ax = s.xy(t, 0) * domain;
       ay = s.xy(0, t) * domain;
 
@@ -152,7 +151,9 @@ const {
 
       ctx.putImageData(i, 0, 0);
       t += rate;
-      if (loop) requestAnimationFrame(draw);
+      if (loop) {
+        raf = requestAnimationFrame(draw);
+      }
     }
 
     c.addEventListener("mouseenter", () => {
@@ -164,6 +165,6 @@ const {
     });
 
     draw();
-    onColorSchemeChange(draw);
+    onThemeChange(draw);
   }
 </script>

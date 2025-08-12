@@ -8,6 +8,7 @@ tags: ["icons", "frontend", "oss"]
 
 import AppWindow from "@components/AppWindow.astro";
 import ThemedImage from "@components/ThemedImage.astro";
+import { PhosphorDemo } from "@components/PhosphorDemo";
 import phosphorSiteImage from "@assets/images/phosphor_site.png";
 
 # An obsession
@@ -16,7 +17,7 @@ A few years ago I made the switch from iPhone to Android. I wanted to escape App
 
 Over time that seed grew, eventually becoming a complete set of icons [for Android home screens](https://github.com/phosphor-icons/android), replacing icons for over 800 of the most common apps with clean, minimalistic, monochromatic glyphs. We released different colorways, took icon suggestions, got involved in the small but active community of phone customizers. Helena even wrote [several articles](https://medium.com/@minoraxis) on the subject of icon design and history. We were eating, breathing, and sleeping icons.
 
-> TODO: IconPalette
+<PhosphorDemo client:load />
 
 Eventually we realized that all this effort could serve a much larger audience of digital designers and engineers of all walks, not just the Android enthusiasts. We decided to create a library of general-purpose user interface icons for modern web, desktop, and mobile platforms — and [Phosphor Icons](https://phosphoricons.com) was born.
 

@@ -1,3 +1,7 @@
+import tinycolor from "tinycolor2";
+import { COLORS } from "../../tailwind.config.mts";
+import type { Theme } from "./theme";
+
 export type RGB = { r: number; g: number; b: number };
 export type RGBA = RGB & { opacity: number };
 export type Interpolator = (t: number) => RGB;
@@ -56,6 +60,14 @@ export function rgbSpline(spline: (value: number[]) => (t: number) => number) {
 
 export const rgbBasis = rgbSpline(basis);
 
+export function parseColor(color: string): RGB {
+  const tc = tinycolor(color);
+  if (tc.isValid()) {
+    return tc.toRgb();
+  }
+  return { r: 0, g: 0, b: 0 };
+}
+
 export function hexToRGB(hex: string): RGB {
   if (hex.length === 4) {
     hex = hex.replace(
@@ -74,6 +86,20 @@ export function hexToRGB(hex: string): RGB {
     : { r: 0, g: 0, b: 0 };
 }
 
+export function rgbCSSToRGB(cssColor: string): RGB {
+  if (cssColor.startsWith("rgb(")) {
+    const match = cssColor.match(/rgb\(\s*(\d+)\s* \s*(\d+)\s* \s*(\d+)\s*\)/);
+    if (match) {
+      return {
+        r: parseInt(match[1], 10),
+        g: parseInt(match[2], 10),
+        b: parseInt(match[3], 10),
+      };
+    }
+  }
+  return { r: 0, g: 0, b: 0 };
+}
+
 export function ramp<T>(range: T[]) {
   const n = range.length;
   return function (t: number) {
@@ -82,9 +108,36 @@ export function ramp<T>(range: T[]) {
 }
 
 export const INTERPOLATORS = {
-  AmberDark: rgbBasis(["#1A1A1A", "#a6794c", "#cbaa89"].map(hexToRGB)),
-  MellifluousDark: rgbBasis(["#1A1A1A", "#828040", "#b3b393"].map(hexToRGB)),
+  AmberDark: rgbBasis(["#1A1A1A", "#a6794c", "#cbaa89"].map(parseColor)),
+  MellifluousDark: rgbBasis(["#1A1A1A", "#828040", "#b3b393"].map(parseColor)),
   MellifluousSpectal: rgbBasis(
-    ["#020202", "#5a6599", "#9c6995", "#c95954", "#a6794c"].map(hexToRGB),
+    ["#020202", "#5a6599", "#9c6995", "#c95954", "#a6794c"].map(parseColor),
+  ),
+  Paper: rgbBasis(
+    [
+      COLORS.Paper.primary,
+      COLORS.Paper.error,
+      COLORS.Paper.warning,
+      COLORS.Paper.project,
+    ].map(parseColor),
+  ),
+  Console: rgbBasis(
+    [
+      COLORS.Console.surface,
+      COLORS.Console.writing,
+      COLORS.Console.primary,
+      COLORS.Console.warning,
+      COLORS.Console.error,
+    ].map(parseColor),
   ),
 } as const;
+
+export function interpolatorForTheme(theme: Theme) {
+  switch (theme) {
+    case "console":
+      return INTERPOLATORS.Console;
+    case "paper":
+    default:
+      return INTERPOLATORS.Paper;
+  }
+}

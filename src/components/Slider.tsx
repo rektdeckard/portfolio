@@ -1,4 +1,4 @@
-import { createSignal, onCleanup, onMount, type Signal } from "solid-js";
+import { createEffect, createSignal, onCleanup, onMount, type Signal } from "solid-js";
 
 export type SliderProps = {
   defaultValue?: number;
@@ -11,6 +11,7 @@ export type SliderProps = {
   id?: string;
   name?: string;
   label?: string;
+  onInput?: (value: number) => void;
   onChange?: (value: number) => void;
 } & (
     { defaultValue?: number; state?: never }
@@ -43,8 +44,14 @@ export function Slider(props: SliderProps) {
     if (props.max !== undefined && newValue > props.max) newValue = props.max;
     if (newValue < min) newValue = min;
     setValue(newValue);
-    props.onChange?.(newValue);
+    props.onInput?.(newValue);
   }
+
+  createEffect(() => {
+    if (!props.onChange) return;
+    const currentValue = value();
+    props.onChange(currentValue);
+  });
 
   // Position the label above the thumb
   const thumbPosition = () => {
@@ -62,21 +69,27 @@ export function Slider(props: SliderProps) {
   return (
     <div classList={{ "flex items-center font-mono focus-within:outline-1 focus-within:outline-offset-4 focus-within:outline-dashed": true, [props.class || ""]: !!props.class }}>
       {props.label && <label for={props.id} class="pe-4 uppercase">{props.label}</label>}
-      <div class="relative grow h-6">
+      <div classList={{
+        "relative grow h-6": true,
+        "cursor-not-allowed text-warning": props.disabled,
+      }}>
         <svg
           xmlns="http://www.w3.org/2000/svg"
           class="absolute w-full h-full pointer-events-none"
         >
           <defs>
-            <pattern id="vertical-lines" patternUnits="userSpaceOnUse" width="8" height="22.5">
-              <rect x="3" y="2" width="1" height="18.5" fill="currentcolor" />
+            <pattern id="vertical-lines" patternUnits="userSpaceOnUse" width="10" height="24">
+              <rect x="3" y="2" width="1" height="20" fill="currentcolor" />
             </pattern>
           </defs>
           <rect width="100%" height="100%" fill="url(#vertical-lines)" />
         </svg>
 
         <div
-          class="absolute top-0 bottom-0 bg-primary text-surface w-12 pointer-events-none flex items-center justify-center leading-none"
+          classList={{
+            "absolute top-0 bottom-0 bg-primary text-surface w-12 pointer-events-none flex items-center justify-center leading-none": true,
+            "cursor-not-allowed bg-warning text-surface": props.disabled,
+          }}
           style={{
             left: `calc(${thumbPosition()}px)`,
           }}

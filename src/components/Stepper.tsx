@@ -10,6 +10,7 @@ export type StepperProps = {
   id?: string;
   name?: string;
   label?: string;
+  sensitivity?: number;
   onChange?: (value: number) => void;
 } & (
     { defaultValue?: number; state?: never }
@@ -21,6 +22,7 @@ export function Stepper(props: StepperProps) {
   const min = props.min || 0;
   const step = props.step ?? 1;
   const precision = props.precision ?? getPrecision(step);
+  const sensitivity = props.sensitivity ?? 50; // Distance per step in pixels
 
   let inputRef: HTMLInputElement;
 
@@ -59,7 +61,7 @@ export function Stepper(props: StepperProps) {
 
     function onPointerMove(e: PointerEvent) {
       const deltaX = e.clientX - startX;
-      const deltaValue = (deltaX / 100) * step; // Adjust sensitivity here
+      const deltaValue = (deltaX / sensitivity) * step;
       let newValue = scaleByStep(startValue + deltaValue, precision);
       if (props.max !== undefined && newValue > props.max) newValue = props.max;
       if (props.min !== undefined && newValue < props.min) newValue = props.min;

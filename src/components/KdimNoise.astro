@@ -40,17 +40,13 @@ const {
 
 <script>
   import { Noise, Random } from "kdim";
-  import { INTERPOLATORS } from "@utils/color";
-  import { onColorSchemeChange, isDarkMode } from "@utils/media";
+  import { interpolatorForTheme } from "@utils/color";
+  import { getCurrentTheme, onThemeChange } from "@utils/theme";
 
-  let interpolate = isDarkMode()
-    ? INTERPOLATORS.AmberDark
-    : INTERPOLATORS.MellifluousDark;
+  let interpolate = interpolatorForTheme(getCurrentTheme());
 
-  onColorSchemeChange((isDark) => {
-    interpolate = isDark
-      ? INTERPOLATORS.AmberDark
-      : INTERPOLATORS.MellifluousDark;
+  onThemeChange((theme) => {
+    interpolate = interpolatorForTheme(theme);
   });
 
   function getAttributes(c: HTMLCanvasElement) {
@@ -76,8 +72,13 @@ const {
 
     let z = 0;
     let loop = false;
+    let raf: number | null = null;
 
     function draw() {
+      if (raf) {
+        cancelAnimationFrame(raf);
+      }
+
       for (let y = 0; y + stride <= height; y += stride) {
         for (let x = 0; x + stride <= width; x += stride) {
           const sx = (x * freq) / d;
@@ -108,7 +109,9 @@ const {
       ctx.putImageData(img, 0, 0);
       z += rate;
 
-      if (loop) requestAnimationFrame(draw);
+      if (loop) {
+        raf = requestAnimationFrame(draw);
+      }
     }
 
     c.addEventListener("mouseenter", () => {
@@ -120,6 +123,6 @@ const {
     });
 
     draw();
-    onColorSchemeChange(draw);
+    onThemeChange(draw);
   }
 </script>
